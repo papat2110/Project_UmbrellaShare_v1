@@ -8,7 +8,7 @@ const User = require("./models/User");
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
 
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise
 mongoose.connect(mongo_uri, {useNewUrlParser: true, useUnifiedTopology: true}).then(
   () => {
     console.log("success connected database");
