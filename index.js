@@ -6,23 +6,18 @@ const bodyParser = require("body-parser");
 
 const User = require("./models/User");
 
-var mongo_uri = "mongodb+srv://admin:<1234>@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
+var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
 
 mongoose.Promise = global.Promise;
-mongoose
-  .connect(mongo_uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(
-    () => {
-      console.log("connected true");
-    },
-    (error) => {
-      console.log("connected error");
-      process.exit();
-    }
-  );
+mongoose.connect(mongo_uri, {useNewUrlParser: true, useUnifiedTopology: true}).then(
+  () => {
+    console.log("success connected database");
+  },
+  error => {
+    console.log("failed connection");
+    process.exit();
+  }
+)
 
 app.use(cors());
 app.use(express.json());
