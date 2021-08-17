@@ -54,12 +54,12 @@ app.post("/user", async (req, res) => {
   res.send(user);
 });
 
-app.post('/writestt/:id/:stt',cors(), async (req, res) =>{
-  id = strWriteReq.id
-  stt = strWriteReq.stt
-  let sstusr = await new Status({userid:id}).save()
-  console.log(sstusr);
-  res.send(sstusr);
+app.get('/writestt/:id/:stt', async (req, res) => {
+  let userid = req.params.id;
+  let status = req.params.stt;
+  let userstatus = await new Status({userid:userid,status:status}).save()
+  console.log(userstatus);
+  res.send(userstatus);
 });
 
 
