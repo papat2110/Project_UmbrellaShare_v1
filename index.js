@@ -55,11 +55,9 @@ app.post("/user", async (req, res) => {
 });
 
 app.post('/writestt/:id/:stt',cors(), async (req, res) =>{
-  var strParseWriteReq = JSON.stringify(req.params)
-  var strWriteReq = JSON.parse(strParseWriteReq)
   id = strWriteReq.id
   stt = strWriteReq.stt
-  let sstusr = await new Status({userid:id,status:stt}).save()
+  let sstusr = await new Status({userid:id}).save()
   console.log(sstusr);
   res.send(sstusr);
 });
