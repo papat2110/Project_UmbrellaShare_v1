@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 const User = require("./models/User");
+const Status = require("./models/Status");
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
 
@@ -25,10 +26,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 80;
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:8080`);
+  console.log(`Example app listening at http://localhost:80`);
 });
 
 app.get("/", (req, res) => {
@@ -51,6 +52,16 @@ app.post("/user", async (req, res) => {
   let user = await new User({name:"aaa"}).save()
   console.log(user);
   res.send(user);
+});
+
+app.post('/writestt/:id/:stt',cors(), async (req, res) =>{
+  var strParseWriteReq = JSON.stringify(req.params)
+  var strWriteReq = JSON.parse(strParseWriteReq)
+  id = strWriteReq.id
+  stt = strWriteReq.stt
+  let sstusr = await new Status({userid:id,status:stt}).save()
+  console.log(sstusr);
+  res.send(sstusr);
 });
 
 
