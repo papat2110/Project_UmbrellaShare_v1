@@ -8,6 +8,7 @@ const User = require("./models/User");
 const Status = require("./models/Status");
 const Borrow = require("./models/Borrow");
 const Deposit = require("./models/Deposit");
+const Umbrella = require("./models/Umbrella");
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
 
