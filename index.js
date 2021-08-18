@@ -9,6 +9,7 @@ const Status = require("./models/Status");
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
 
+
 mongoose.Promise = global.Promise
 mongoose.connect(mongo_uri, {useNewUrlParser: true, useUnifiedTopology: true}).then(
   () => {
@@ -48,11 +49,17 @@ app.get("/user", async (req, res) => {
   res.send(user);
 });
 
-app.post("/user", async (req, res) => {
-  let user = await new User({name:"aaa"}).save()
-  console.log(user);
-  res.send(user);
+app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
+  let name = req.params.name;
+  let email = req.params.email;
+  let tel = req.params.tel;
+  let password = req.params.password;
+  let p_id = req.params.pid;
+  let adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
+  console.log(adduser);
+  res.send(adduser);
 });
+
 
 app.get('/writestt/:id/:stt', async (req, res) => {
   let userid = req.params.id;
@@ -60,6 +67,9 @@ app.get('/writestt/:id/:stt', async (req, res) => {
   let userstatus = await new Status({userid:userid,status:status}).save()
   console.log(userstatus);
   res.send(userstatus);
+  let user = await User.find();
+  console.log(user);
+  res.send(user);
 });
 
 
