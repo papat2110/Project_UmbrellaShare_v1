@@ -65,12 +65,10 @@ app.get('/writestt/:id/:stt', async (req, res) => {
   let userid = req.params.id;
   let status = req.params.stt;
   let user = await User.find(pid);
-  if(userid==user){
-    console.log("checked");
-    let userstatus = await new Status({userid:userid,status:status}).save()
-    console.log(userstatus);
-    res.send(userstatus);
-  }
+  console.log("checked");
+  let userstatus = await new Status({userid:userid,status:status}).save()
+  console.log(userstatus);
+  res.send(userstatus);
 });
 
 
