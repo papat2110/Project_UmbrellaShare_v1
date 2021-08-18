@@ -69,6 +69,10 @@ app.get('/writestt/:id/:stt', async (req, res) => {
     let userstatus = await new Status({userid:userid,status:status}).save()
     console.log(userstatus);
     res.send(userstatus);
+  }else{
+    var err = new error("sorry don't find path");
+    err.status = 404;
+    next(err);
   }
 });
 
