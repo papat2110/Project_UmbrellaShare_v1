@@ -50,18 +50,21 @@ app.get("/user", async (req, res) => {
 });
 
 app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
-  let name = req.params.name;
-  let email = req.params.email;
-  let tel = req.params.tel;
-  let password = req.params.password;
-  let p_id = req.params.pid;
-  let adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
+  var name = req.params.name;
+  var email = req.params.email;
+  var tel = req.params.tel;
+  var password = req.params.password;
+  var p_id = req.params.pid;
+  var adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
   console.log(adduser);
   res.send(adduser);
 });
 
-
 app.get('/writestt/:id/:stt', async (req, res) => {
+  let user = await User.find();
+  console.log(user);
+  res.send(user);
+  
   let userid = req.params.id;
   let status = req.params.stt;
   let userstatus = await new Status({userid:userid,status:status}).save()
