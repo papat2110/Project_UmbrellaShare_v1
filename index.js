@@ -63,9 +63,9 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
 app.get('/writestt/:id/:stt', async (req, res) => {
   let userid = req.params.id;
   let status = req.params.stt;
-  let user = await User.find({p_id:userid});
+  let user = await User.findOne({p_id:userid});
   res.send(user);
-  if(user!=[ ]){
+  if(!user){
     let userstatus = await new Status({userid:userid,status:status}).save()
   }
   console.log(userstatus);
