@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 
 const User = require("./models/User");
 const Status = require("./models/Status");
+const Borrow = require("./models/Borrow");
+const Deposit = require("./models/Deposit");
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
 
@@ -73,6 +75,38 @@ app.get('/writestt/:id/:stt', async (req, res) => {
   if(!user){
     res.send(user);
   }
+});
+
+app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/:getting_place/:time/:status', async (req, res) => {
+  let user_id = req.params.user_id;
+  let umbrella_id = req.params.umbrella_id;
+  let borrow_time = req.params.borrow_time;
+  let borrow_place = req.params.borrow_place;
+  let getting_time = req.params.getting_time;
+  let getting_place = req.params.getting_place;
+  let time = req.params.time;
+  let status = req.params.status;
+
+  let borrow = await new Borrow({user_id:user_id,umbrella_id:umbrella_id,borrow_time:borrow_time,
+    borrow_place:borrow_place,getting_time:getting_time,getting_place:getting_place,time:time,status:status}).save()
+  console.log(borrow);
+  res.send(borrow);
+});
+
+app.get('/deposit/:user_id/:locker/:deposit_time/:deposit_place/:return_time/:return_place/:time/:status', async (req, res) => {
+  let user_id = req.params.user_id;
+  let locker = req.params.locker;
+  let deposit_time = req.params.deposit_time;
+  let deposit_place = req.params.deposit_place;
+  let return_time = req.params.return_time;
+  let return_place = req.params.return_place;
+  let time = req.params.time;
+  let status = req.params.status;
+
+  let deposit = await new Deposit({user_id:user_id,locker:locker,deposit_time:deposit_time,
+    deposit_place:deposit_place,return_time:return_time,return_place:return_place,time:time,status:status}).save()
+  console.log(deposit);
+  res.send(deposit);
 });
 
 
