@@ -106,7 +106,7 @@ app.get('/getstt/:id/:stt/:place', async (req, res) => {
   // res.send(user);
   if(user){
     console.log(user);
-    res.send(user.userid,user.status,user.place);
+    res.send(user.userid+"\n"+user.status+"\n"+user.place);
   }
   if(!user){
     res.send(user);
