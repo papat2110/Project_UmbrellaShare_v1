@@ -63,7 +63,7 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   res.send(adduser);
 });
 
-app.get("/login/:email/:password", async (req, res) => {
+app.post("/login/:email/:password", async (req, res) => {
   var email = req.params.email;
   var password = req.params.password;
   let email_c = await User.findOne({email:email});
