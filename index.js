@@ -101,11 +101,11 @@ app.get('/writestt/:id/:stt/:place', async (req, res) => {
 app.get('/getstt/:id/:stt', async (req, res) => {
   let userid = req.params.id;
   let status = req.params.stt;
-  let user = await Status.findOne({userid:userid,status:status,place:place});
+  let user = await Status.findOne({userid:userid,status:status});
   // res.send(user);
   if(user){
     console.log(user);
-    res.send(user.userid+"\n"+user.status+"\n"+user.place);
+    res.send(user);
   }
   if(!user){
     res.send(user);
