@@ -82,15 +82,30 @@ app.post("/login/:email/:password", async (req, res) => {
   }
 });
 
-app.get('/writestt/:id/:stt', async (req, res) => {
+app.get('/writestt/:id/:stt/:place', async (req, res) => {
   let userid = req.params.id;
   let status = req.params.stt;
+  let place = req.params.place;
   let user = await User.findOne({p_id:userid});
   // res.send(user);
   if(user){
-    let userstatus = await new Status({userid:userid,status:status}).save()
+    let userstatus = await new Status({userid:userid,status:status,place:place}).save()
     console.log(userstatus);
-    res.send(userstatus.status);
+    res.send(userstatus);
+  }
+  if(!user){
+    res.send(user);
+  }
+});
+
+app.get('/getstt/:id/:stt', async (req, res) => {
+  let userid = req.params.id;
+  let status = req.params.stt;
+  let user = await Status.findOne({userid:userid,status:status});
+  // res.send(user);
+  if(user){
+    console.log(user);
+    res.send(user.userid+"\n"+user.status+"\n"+user.place);
   }
   if(!user){
     res.send(user);
