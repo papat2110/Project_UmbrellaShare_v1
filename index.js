@@ -98,14 +98,15 @@ app.get('/writestt/:id/:stt/:place', async (req, res) => {
   }
 });
 
-app.get('/getstt/:id/:stt', async (req, res) => {
+app.get('/getstt/:id/:stt/:place', async (req, res) => {
   let userid = req.params.id;
   let status = req.params.stt;
-  let user = await Status.findOne({userid:userid,status:status});
+  let place = req.params.place;
+  let user = await Status.findOne({userid:userid,status:status,place:place});
   // res.send(user);
   if(user){
     console.log(user);
-    res.send(user);
+    res.send(user.userid,user.status,user.place);
   }
   if(!user){
     res.send(user);
