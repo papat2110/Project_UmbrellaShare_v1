@@ -88,7 +88,6 @@ app.get('/writestt/:id/:stt', async (req, res) => {
   let user = await User.findOne({p_id:userid});
   // res.send(user);
   if(user){
-    res.send(user);
     let userstatus = await new Status({userid:userid,status:status}).save()
     console.log(userstatus);
     res.send(userstatus);
