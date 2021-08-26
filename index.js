@@ -68,7 +68,7 @@ app.post("/login/:email/:password", async (req, res) => {
   var password = req.params.password;
   let email_c = await User.findOne({email:email});
   if(email_c){
-    res.send("correct email");
+    // res.send("correct email");
     let password_c = await User.findOne({email:email,password:password});
     if(password_c){
       res.send("correct email & password");
