@@ -63,6 +63,24 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   res.send(adduser);
 });
 
+app.post("/login/:email/:password", async (req, res) => {
+  var email = req.params.email;
+  var password = req.params.password;
+  let email_c = await User.findOne({email:email});
+  if(email_c){
+    let password_c = await User.findOne({email:email,password:password});
+    if(password_c){
+      res.send("correct email & password");
+      console.log(password_c);
+    }else{
+      res.send("incorrect password");
+      console.log(password_c);
+    }
+  }else{
+    res.send("incorrect email");
+  }
+});
+
 app.get('/writestt/:id/:stt', async (req, res) => {
   let userid = req.params.id;
   let status = req.params.stt;
