@@ -106,6 +106,7 @@ app.get('/getstt/:place', async (req, res) => {
   // res.send(user);
   if(user){
     console.log(user);
+    await Status.findByIdAndDelete(user._id);
     res.send(user._id+"\n"+user.userid+"\n"+user.status+"\n"+user.place);
   }
   if(!user){
