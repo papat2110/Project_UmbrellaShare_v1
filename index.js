@@ -106,11 +106,26 @@ app.get('/getstt/:place', async (req, res) => {
   // res.send(user);
   if(user){
     console.log(user);
-    await Status.findByIdAndDelete(user._id);
     res.send(user._id+"\n"+user.userid+"\n"+user.status+"\n"+user.place);
   }
   if(!user){
     res.send(user);
+  }
+});
+
+app.get('/delete_stt/:place', async (req, res) => {
+  // let userid = req.pearams.id;
+  // let status = req.params.stt;
+  let place = req.params.place;
+  let user = await Status.findOne({place:place});
+  // res.send(user);
+  if(user){
+    console.log(user);
+    await Status.findByIdAndDelete(user._id);
+    res.send("blank");
+  }
+  if(!user){
+    res.send("error");
   }
 });
 
