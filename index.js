@@ -91,7 +91,7 @@ app.get('/writestt/:id/:stt/:place', async (req, res) => {
   if(user){
     let userstatus = await new Status({userid:userid,status:status,place:place}).save()
     console.log("correct ID");
-    res.send(userstatus);
+    res.send("correct ID");
   }
   if(!user){
     res.send(user);
