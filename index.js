@@ -52,6 +52,7 @@ app.get("/user", async (req, res) => {
   res.send(user);
 });
 
+//add user
 app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   var name = req.params.name;
   var email = req.params.email;
@@ -63,6 +64,27 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   res.send(adduser);
 });
 
+//edit password
+app.post("/change_pass/:user_id/:old_password/:new_password", async (req, res) => {
+  var user_id = req.params.user_id;
+  var old_password = req.params.old_password;
+  var new_password = req.params.new_password;
+  let user = await User.findOne({user_id:user_id});
+  let query = {_id:user._id};
+  
+  if(old_password == user.password){
+    await User.findOneAndUpdate(query,{password:new_password});
+    console.log(user);
+    res.send(user);
+  }else if(old_password != user.password){
+    res.send("old password not correct");
+  }else{
+    res.send("something wrong");
+  }
+
+});
+
+//login
 app.post("/login/:email/:password", async (req, res) => {
   var email = req.params.email;
   var password = req.params.password;
@@ -82,6 +104,7 @@ app.post("/login/:email/:password", async (req, res) => {
   }
 });
 
+//realtime request
 app.get('/writestt/:id/:stt/:place', async (req, res) => {
   let userid = req.params.id;
   let status = req.params.stt;
@@ -98,6 +121,7 @@ app.get('/writestt/:id/:stt/:place', async (req, res) => {
   }
 });
 
+//delete status
 app.get('/getstt/:place', async (req, res) => {
   // let userid = req.params.id;
   // let status = req.params.stt;
