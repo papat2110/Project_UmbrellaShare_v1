@@ -113,6 +113,20 @@ app.get('/getstt/:place', async (req, res) => {
   }
 });
 
+app.get('/getborrow/:user_id', async (req, res) => {
+  let user_id = req.params.user_id;
+  let umbrella_id = req.params.umbrella_id;
+  let borrow_data = await Borrow.findOne({user_id:user_id});
+  // res.send(user);
+  if(borrow_data){
+    console.log(borrow_data);
+    res.send(borrow_data);
+  }
+  if(!borrow_data){
+    res.send(borrow_data);
+  }
+});
+
 app.get('/delete_stt/:place', async (req, res) => {
   // let userid = req.pearams.id;
   // let status = req.params.stt;
@@ -144,6 +158,22 @@ app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/
   console.log(borrow);
   res.send(borrow);
 });
+
+
+
+// app.get('/borrow_getting/:user_id/:getting_time/:getting_place/:status', async (req, res) => {
+//   let b_id = req.params.b_id;
+//   let getting_time = req.params.getting_time;
+//   let getting_place = req.params.getting_place;
+//   let time = getting_time - borrow_time;
+//   let status = req.params.status;
+
+//   let user = await User.findOne({p_id:userid});
+
+//   let borrow_getting = await Borrow.findByIdAndUpdate({getting_time:getting_time,getting_place:getting_place,time:time,status:status}).save()
+//   console.log(borrow_getting);
+//   res.send(borrow_getting);
+// });
 
 app.get('/deposit/:user_id/:locker/:deposit_time/:deposit_place/:return_time/:return_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
