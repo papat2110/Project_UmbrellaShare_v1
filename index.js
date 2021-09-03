@@ -245,7 +245,7 @@ app.get('/getdeposit/:user_id/:locker/:return_time/:return_place/:status', async
     console.log("update success");
     res.send("update success");
   }
-  if(!borrow_data){
+  if(!deposit_data){
     res.send("update fail");
   }
 });
