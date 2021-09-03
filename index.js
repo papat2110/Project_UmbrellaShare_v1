@@ -74,7 +74,7 @@ app.get("/addumbrella/:rfid/:status", async (req, res) => {
 });
 
 //inform broken umbrella
-app.get("/addumbrella/:rfid/:status", async (req, res) => {
+app.get("/inform_umbrella/:rfid/:status", async (req, res) => {
   var rfid = req.params.rfid;
   var status = req.params.status;
   var umbrella = await Umbrella.findOne({rfid:rfid});
