@@ -113,10 +113,10 @@ app.get('/getstt/:place', async (req, res) => {
   }
 });
 
-app.get('/getborrow/:user_id', async (req, res) => {
+app.get('/getborrow/:user_id/:umbrella_id', async (req, res) => {
   let user_id = req.params.user_id;
   let umbrella_id = req.params.umbrella_id;
-  let borrow_data = await Borrow.findOne({user_id:user_id});
+  let borrow_data = await Borrow.findOne({user_id:user_id,umbrella_id:umbrella_id});
   // res.send(user);
   if(borrow_data){
     console.log(borrow_data);
