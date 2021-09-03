@@ -129,7 +129,7 @@ app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status',
     // borrow_data.getting_place = req.params.getting_place;
     // borrow_data.time = req.params.getting_time - borrow_data.borrow_time;
     // borrow_data.status = req.params.status;
-    await Borrow.findOneAndUpdate(query,{getting_time:getting_time,getting_place:getting_place,time:time,status:status}, options, callback);
+    await Borrow.findOneAndUpdate(query,{getting_time:getting_time,getting_place:getting_place,time:time,status:status});
 
     console.log("update success");
     res.send("update success");
