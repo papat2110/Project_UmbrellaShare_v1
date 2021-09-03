@@ -227,3 +227,25 @@ app.get('/deposit/:user_id/:locker/:deposit_time/:deposit_place/:return_time/:re
   res.send(deposit);
 });
 
+//return umbrella
+app.get('/getdeposit/:user_id/:locker/:return_time/:return_place/:status', async (req, res) => {
+  let user_id = req.params.user_id;
+  let locker = req.params.locker;
+  let deposit_data = await Deposit.findOne({user_id:user_id,locker:locker}).sort({ _id: -1 }).limit(10);
+  // res.send(user);
+  if(deposit_data){
+    let query = {_id:deposit_data._id};
+    let return_time = req.params.return_time;
+    let return_place = req.params.return_place;
+    let time = return_time - deposit_data.deposit_time;
+    let status = req.params.status;
+    
+    await Deposit.findOneAndUpdate(query,{return_time:return_time,return_place:return_place,time:time,status:status});
+
+    console.log("update success");
+    res.send("update success");
+  }
+  if(!borrow_data){
+    res.send("update fail");
+  }
+});
