@@ -113,12 +113,24 @@ app.get('/getstt/:place', async (req, res) => {
   }
 });
 
-app.get('/getborrow/:user_id/:umbrella_id', async (req, res) => {
+app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
   let umbrella_id = req.params.umbrella_id;
   let borrow_data = await Borrow.findOne({user_id:user_id,umbrella_id:umbrella_id}).sort({ _id: -1 }).limit(10);
   // res.send(user);
   if(borrow_data){
+
+    // let getting_time = req.params.getting_time;
+    // let getting_place = req.params.getting_place;
+    // let time = getting_time - borrow_data.borrow_time;
+    // let status = req.params.status;
+    
+    borrow_data.getting_time = req.params.getting_time;
+    borrow_data.getting_place = req.params.getting_place;
+    borrow_data.time = req.params.getting_time - borrow_data.borrow_time;
+    borrow_data.status = req.params.status;
+    await Borrow.save();
+
     console.log(borrow_data);
     res.send(borrow_data);
   }
