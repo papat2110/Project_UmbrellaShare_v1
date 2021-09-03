@@ -131,11 +131,11 @@ app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status',
     // borrow_data.status = req.params.status;
     await Borrow.findOneAndUpdate(query,{$set:{getting_time:getting_time,getting_place:getting_place,time:time,status:status}}, options, callback);
 
-    console.log(borrow_data);
-    res.send(borrow_data);
+    console.log("update success");
+    res.send("update success");
   }
   if(!borrow_data){
-    res.send(borrow_data);
+    res.send("update fail");
   }
 });
 
