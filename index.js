@@ -69,7 +69,7 @@ app.post("/change_pass/:user_id/:old_password/:new_password", async (req, res) =
   var user_id = req.params.user_id;
   var old_password = req.params.old_password;
   var new_password = req.params.new_password;
-  let user = await User.findOne({user_id:user_id});
+  let user = await User.findOne({p_id:user_id});
   let query = {_id:user._id};
   
   if(old_password == user.password){
