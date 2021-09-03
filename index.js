@@ -64,6 +64,30 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   res.send(adduser);
 });
 
+//add umbrella
+app.get("/addumbrella/:rfid/:status", async (req, res) => {
+  var rfid = req.params.rfid;
+  var status = req.params.status;
+  var addumbrella = await new Umbrella({rfid:rfid,status:status}).save()
+  console.log(addumbrella);
+  res.send(addumbrella);
+});
+
+//inform broken umbrella
+app.get("/addumbrella/:rfid/:status", async (req, res) => {
+  var rfid = req.params.rfid;
+  var status = req.params.status;
+  var umbrella = await Umbrella.findOne({rfid:rfid});
+  if(umbrella){
+    var query = {_id:umbrella._id};
+    await Umbrella.findOneAndUpdate(query,{status:status});
+    console.log(umbrella);
+    res.send(umbrella);
+  }else if(!umbrella){
+    res.send("something wrong");
+  }
+});
+
 //edit password
 app.post("/change_pass/:user_id/:old_password/:new_password", async (req, res) => {
   var user_id = req.params.user_id;
