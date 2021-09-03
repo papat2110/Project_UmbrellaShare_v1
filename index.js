@@ -74,8 +74,8 @@ app.post("/change_pass/:user_id/:old_password/:new_password", async (req, res) =
   
   if(old_password == user.password){
     await User.findOneAndUpdate(query,{password:new_password});
-    console.log(user);
-    res.send(user);
+    console.log("changed password");
+    res.send("changed password");
   }else if(old_password != user.password){
     res.send("old password not correct");
   }else{
