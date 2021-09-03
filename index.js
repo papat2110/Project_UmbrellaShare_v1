@@ -113,32 +113,6 @@ app.get('/getstt/:place', async (req, res) => {
   }
 });
 
-app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status', async (req, res) => {
-  let user_id = req.params.user_id;
-  let umbrella_id = req.params.umbrella_id;
-  let borrow_data = await Borrow.findOne({user_id:user_id,umbrella_id:umbrella_id}).sort({ _id: -1 }).limit(10);
-  // res.send(user);
-  if(borrow_data){
-    let query = {_id:borrow_data._id};
-    let getting_time = req.params.getting_time;
-    let getting_place = req.params.getting_place;
-    let time = getting_time - borrow_data.borrow_time;
-    let status = req.params.status;
-    
-    // borrow_data.getting_time = req.params.getting_time;
-    // borrow_data.getting_place = req.params.getting_place;
-    // borrow_data.time = req.params.getting_time - borrow_data.borrow_time;
-    // borrow_data.status = req.params.status;
-    await Borrow.findOneAndUpdate(query,{getting_time:getting_time,getting_place:getting_place,time:time,status:status});
-
-    console.log("update success");
-    res.send("update success");
-  }
-  if(!borrow_data){
-    res.send("update fail");
-  }
-});
-
 app.get('/delete_stt/:place', async (req, res) => {
   // let userid = req.pearams.id;
   // let status = req.params.stt;
@@ -155,6 +129,7 @@ app.get('/delete_stt/:place', async (req, res) => {
   }
 });
 
+//borrow umbrella
 app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/:getting_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
   let umbrella_id = req.params.umbrella_id;
@@ -171,22 +146,48 @@ app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/
   res.send(borrow);
 });
 
+//getting umbrella
+app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status', async (req, res) => {
+  let user_id = req.params.user_id;
+  let umbrella_id = req.params.umbrella_id;
+  let borrow_data = await Borrow.findOne({user_id:user_id,umbrella_id:umbrella_id}).sort({ _id: -1 }).limit(10);
+  // res.send(user);
+  if(borrow_data){
+    let query = {_id:borrow_data._id};
+    let getting_time = req.params.getting_time;
+    let getting_place = req.params.getting_place;
+    let time = getting_time - borrow_data.borrow_time;
+    let status = req.params.status;
+    
+    await Borrow.findOneAndUpdate(query,{getting_time:getting_time,getting_place:getting_place,time:time,status:status});
 
+    console.log("update success");
+    res.send("update success");
+  }
+  if(!borrow_data){
+    res.send("update fail");
+  }
+});
 
-// app.get('/borrow_getting/:user_id/:getting_time/:getting_place/:status', async (req, res) => {
-//   let b_id = req.params.b_id;
-//   let getting_time = req.params.getting_time;
-//   let getting_place = req.params.getting_place;
-//   let time = getting_time - borrow_time;
-//   let status = req.params.status;
+//show borrow history
+app.get('/history/:type/:user_id', async (req, res) => {
+  let user_id = req.params.user_id;
+  let type = req.params.type;
+  if(type == "borrow"){
+    let borrow_history = await Borrow.find({user_id:user_id});
+    console.log(borrow_history);
+    res.send(borrow_history);
+  }
+  else if(type == "deposit"){
+    let deposit_history = await Deposit.find({user_id:user_id});
+    console.log(deposit_history);
+    res.send(deposit_history);
+  }else{
+    res.send("can't find information");
+  }
+});
 
-//   let user = await User.findOne({p_id:userid});
-
-//   let borrow_getting = await Borrow.findByIdAndUpdate({getting_time:getting_time,getting_place:getting_place,time:time,status:status}).save()
-//   console.log(borrow_getting);
-//   res.send(borrow_getting);
-// });
-
+//deposit umbrella
 app.get('/deposit/:user_id/:locker/:deposit_time/:deposit_place/:return_time/:return_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
   let locker = req.params.locker;
@@ -201,5 +202,4 @@ app.get('/deposit/:user_id/:locker/:deposit_time/:deposit_place/:return_time/:re
   console.log(deposit);
   res.send(deposit);
 });
-
 
