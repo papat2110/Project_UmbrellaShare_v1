@@ -196,7 +196,7 @@ app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/
 
 //send umbrella_id
 app.get('/umbrella/:node_ip/:umbrella_id', async (req, res) => {
-  let node_ip= req.pearams.node_ip;
+  let node_ip= req.params.node_ip;
   let umbrella_id = req.params.umbrella_id;
   res.send("@node : "+node_ip+"\n#umbrella_id : "+umbrella_id);
 });
