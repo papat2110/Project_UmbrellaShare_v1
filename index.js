@@ -194,6 +194,13 @@ app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/
   res.send(borrow);
 });
 
+//send umbrella_id
+app.get('/umbrella/:node_ip/:umbrella_id', async (req, res) => {
+  let node_ip= req.pearams.node_ip;
+  let umbrella_id = req.params.umbrella_id;
+  res.send("@node : "+node_ip+"\n#umbrella_id : "+umbrella_id);
+});
+
 //getting umbrella
 app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
