@@ -222,7 +222,7 @@ app.get('/delete_realtime/:node_ip', async (req, res) => {
     await Realtime.findByIdAndDelete(realtime._id);
     res.send("blank");
   }
-  if(!user){
+  if(!realtime){
     res.send("error");
   }
 });
