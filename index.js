@@ -216,7 +216,7 @@ app.get('/umbrella/:node_ip/:umbrella_id/:request', async (req, res) => {
 //get umbrella_id
 app.get('/get_umbrella/:node', async (req, res) => {
   let node_ip = req.params.node;
-  let umbrella = await Realtime.findOne({node_ip:node_ip});
+  let umbrella = await Realtime.findOne({node_ip:node_ip}).sort({ _id: -1 }).limit(10);
   if(umbrella){
     res.send("@node : "+node_ip+"\n#"+umbrella.umbrella_id+"\n%%"+umbrella.request);
   }else{
