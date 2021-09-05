@@ -230,7 +230,7 @@ app.get('/delete_realtime/:node_ip', async (req, res) => {
 //get umbrella_id
 app.get('/get_umbrella/:node_ip', async (req, res) => {
   let node_ip= req.params.node_ip;
-  let umbrella = await Realtime.findOne({node_ip:node_ip}).sort({ _id: -1 }).limit(10);
+  let umbrella = await Realtime.findOne({node_ip:node_ip});
   res.send("@node : "+node_ip+"\n#"+umbrella.umbrella_id+"\n%%"+umbrella.request);
   // await Realtime.findByIdAndDelete(umbrella._id);
 });
