@@ -317,11 +317,13 @@ app.get("/addlocker/:node_ip/:locker/:degree/:locker_status", async (req, res) =
 app.get("/getlocker/:node_ip", async (req, res) => {
   var node_ip = req.params.node_ip;
   var getlocker = await Locker.find({node_ip:node_ip});
-  var locker = getlocker.locker;
-  var degree = getlocker.degree;
-  var locker_status = getlocker.locker_status;
-  var show = locker+":"+degree+":"+locker_status;
-  console.log(show);
+  for(1 in getlocker.length){
+    var locker = getlocker.locker;
+    var degree = getlocker.degree;
+    var locker_status = getlocker.locker_status;
+    var show = locker+":"+degree+":"+locker_status;
+    console.log(show);
+    res.send(show);
+  }
   // res.send(getlocker.locker);
-  res.send(show);
 });
