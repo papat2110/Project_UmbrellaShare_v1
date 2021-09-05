@@ -222,19 +222,19 @@ app.get('/get_umbrella/:node_ip', async (req, res) => {
 });
 
 //delete realtime
-app.get('/delete_realtime/:node_ip', async (req, res) => {
-  let node_ip = req.params.node_ip;
-  let realtime = await Realtime.findOne({node_ip:node_ip});
-  // res.send(user);
-  if(realtime){
-    console.log(realtime);
-    await Realtime.findByIdAndDelete(realtime._id);
-    res.send("blank");
-  }
-  if(!realtime){
-    res.send("error");
-  }
-});
+// app.get('/delete_realtime/:node_ip', async (req, res) => {
+//   let node_ip = req.params.node_ip;
+//   let realtime = await Realtime.findOne({node_ip:node_ip});
+//   // res.send(user);
+//   if(realtime){
+//     console.log(realtime);
+//     await Realtime.findByIdAndDelete(realtime._id);
+//     res.send("blank");
+//   }
+//   if(!realtime){
+//     res.send("error");
+//   }
+// });
 
 //getting umbrella
 app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status', async (req, res) => {
