@@ -318,6 +318,6 @@ app.get("/getlocker/:node_ip", async (req, res) => {
   var node_ip = req.params.node_ip;
   var getlocker = await Locker.find({node_ip:node_ip});
   console.log(getlocker);
-  res.send(getlocker.locker);
-  // res.send(getlocker.locker+":"+getlocker.degree+":"+getlocker.locker_status);
+  // res.send(getlocker.locker);
+  res.send(getlocker.locker+":"+getlocker.degree+":"+getlocker.locker_status);
 });
