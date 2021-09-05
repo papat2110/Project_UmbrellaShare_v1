@@ -223,7 +223,7 @@ app.get('/get_umbrella/:node_ip', async (req, res) => {
 
 
 app.get('/get_umbrellaa', async (req, res) => {
-  let node_ip = req.params.node_ip;
+  // let node_ip = req.params.node_ip;
   let umbrella = await Realtime.find();
   res.send(umbrella);
   // await Realtime.findByIdAndDelete(umbrella._id);
