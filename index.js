@@ -197,13 +197,14 @@ app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/
 });
 
 //checked umbrella_id
-app.get('/umbrella/:node_ip/:umbrella_id', async (req, res) => {
+app.get('/umbrella/:node_ip/:umbrella_id/:request', async (req, res) => {
   let node_ip= req.params.node_ip;
   let umbrella_id = req.params.umbrella_id;
+  let request = req.params.request;
   let umbrella = await Umbrella.findOne({rfid:umbrella_id});
   // res.send(user);
   if(umbrella){
-    let realtime = await new Realtime({node_ip:node_ip,umbrella_id:umbrella_id}).save()
+    let realtime = await new Realtime({node_ip:node_ip,umbrella_id:umbrella_id,request:request}).save()
     console.log(realtime);
     res.send(realtime);
   }
