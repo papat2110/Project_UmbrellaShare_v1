@@ -321,9 +321,9 @@ app.get("/getlocker/:node_ip", async (req, res) => {
     var locker = await Locker.findOne({node_ip:node_ip,locker:i});
     var degree = locker.degree;
     var locker_status = locker.locker_status;
-    var show = locker.locker+":"+degree+":"+locker_status;
-    console.log(show);
-    res.send(show);
+    var show = locker.locker+":"+degree+":"+locker_status+"\n";
   }
   // res.send(getlocker.locker);
+  console.log(show);
+  res.send(show);
 });
