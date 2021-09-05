@@ -213,6 +213,20 @@ app.get('/umbrella/:node_ip/:umbrella_id/:request', async (req, res) => {
   }
 });
 
+app.get('/delete_realtime/:node_ip', async (req, res) => {
+  let node_ip = req.params.node_ip;
+  let realtime = await Realtime.findOne({node_ip:node_ip});
+  // res.send(user);
+  if(realtime){
+    console.log(realtime);
+    await Realtime.findByIdAndDelete(realtime._id);
+    res.send("blank");
+  }
+  if(!user){
+    res.send("error");
+  }
+});
+
 //get umbrella_id
 app.get('/get_umbrella/:node_ip', async (req, res) => {
   let node_ip= req.params.node_ip;
