@@ -217,7 +217,11 @@ app.get('/umbrella/:node_ip/:umbrella_id/:request', async (req, res) => {
 app.get('/get_umbrella/:node', async (req, res) => {
   let node_ip = req.params.node;
   let umbrella = await Realtime.findOne({node_ip:node_ip});
-  res.send("@node : "+node_ip+"\n#"+umbrella.umbrella_id+"\n%%"+umbrella.request);
+  if(umbrella){
+    res.send("@node : "+node_ip+"\n#"+umbrella.umbrella_id+"\n%%"+umbrella.request);
+  }else{
+    res.send("error get umbrella id");
+  }
   // let umbrella = await Realtime.find();
 });
 
