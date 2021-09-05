@@ -316,12 +316,12 @@ app.get("/addlocker/:node_ip/:locker/:degree/:locker_status", async (req, res) =
 //add locker
 app.get("/getlocker/:node_ip", async (req, res) => {
   var node_ip = req.params.node_ip;
-  var getlocker = await Locker.find({node_ip:node_ip});
-  if(getlocker.locker <=8){
-    var locker = getlocker.locker;
-    var degree = getlocker.degree;
-    var locker_status = getlocker.locker_status;
-    var show = locker+":"+degree+":"+locker_status;
+  // var getlocker = await Locker.find({node_ip:node_ip});
+  for(let i = 1; i <= 8; i++){
+    var locker = await Locker.findOne({node_ip:node_ip,locker:locker});
+    var degree = locker.degree;
+    var locker_status = locker.locker_status;
+    var show = locker.locker+":"+degree+":"+locker_status;
     console.log(show);
     res.send(show);
   }
