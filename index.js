@@ -10,6 +10,7 @@ const Borrow = require("./models/Borrow");
 const Deposit = require("./models/Deposit");
 const Umbrella = require("./models/Umbrella");
 const Realtime = require("./models/RealtimeUmbrella");
+const Locker = require("./models/Locker");
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
 
@@ -299,4 +300,15 @@ app.get('/getdeposit/:user_id/:locker/:return_time/:return_place/:status', async
   if(!deposit_data){
     res.send("update fail");
   }
+});
+
+//add locker
+app.get("/addlocker/:node_ip/:locker/:degree/:locker_status", async (req, res) => {
+  var node_ip = req.params.node_ip;
+  var locker = req.params.locker;
+  var degree = req.params.degree;
+  var locker_status = req.params.locker_status;
+  var addlocker = await new Locker({node_ip:node_ip,locker:locker,degree:degree,locker_status:locker_status}).save()
+  console.log(addlocker);
+  res.send(addlocker);
 });
