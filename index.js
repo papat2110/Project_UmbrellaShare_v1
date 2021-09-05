@@ -213,6 +213,14 @@ app.get('/umbrella/:node_ip/:umbrella_id/:request', async (req, res) => {
   }
 });
 
+//get umbrella_id
+app.get('/get_umbrella/:node_ip', async (req, res) => {
+  let node_ip= req.params.node_ip;
+  let umbrella = await Realtime.findOne({node_ip:node_ip});
+  res.send("@node : "+node_ip+"\n#"+umbrella.umbrella_id+"\n%%"+umbrella.request);
+  // await Realtime.findByIdAndDelete(umbrella._id);
+});
+
 app.get('/delete_realtime/:node_ip', async (req, res) => {
   let node_ip = req.params.node_ip;
   let realtime = await Realtime.findOne({node_ip:node_ip});
@@ -226,16 +234,6 @@ app.get('/delete_realtime/:node_ip', async (req, res) => {
     res.send("error");
   }
 });
-
-//get umbrella_id
-app.get('/get_umbrella/:node_ip', async (req, res) => {
-  let node_ip= req.params.node_ip;
-  let umbrella = await Realtime.findOne({node_ip:node_ip});
-  res.send("@node : "+node_ip+"\n#"+umbrella.umbrella_id+"\n%%"+umbrella.request);
-  // await Realtime.findByIdAndDelete(umbrella._id);
-});
-
-
 
 //getting umbrella
 app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status', async (req, res) => {
