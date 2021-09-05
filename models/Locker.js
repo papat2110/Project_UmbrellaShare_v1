@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const lockerSchema = new mongoose.Schema({
     node_ip: String,
-    loker: String,
+    locker: String,
     degree: Number,
     locker_status: String
   });
