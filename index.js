@@ -120,13 +120,6 @@ app.post("/login/:email/:password", async (req, res) => {
     // res.send("correct email");
     let password_c = await User.findOne({email:email,password:password});
     if(password_c){
-      //creat token
-      // const token = jwt.sign(
-      //   { user_id: password_c._id,
-      //     email: password_c.email,
-      //     password: password_c.password
-      //   }
-      // )
       res.send(password_c);
       console.log(password_c);
     }else{
@@ -135,6 +128,17 @@ app.post("/login/:email/:password", async (req, res) => {
     }
   }else{
     res.send("incorrect email");
+  }
+});
+
+//get user
+app.post("/login/:user_id", async (req, res) => {
+  var user_id = req.params.user_id;
+  let user = await User.findOne({_id:user_id});
+  if(user){
+    res.send(user);
+  }else{
+    res.send("incorrect user id");
   }
 });
 
