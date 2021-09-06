@@ -11,6 +11,7 @@ const Deposit = require("./models/Deposit");
 const Umbrella = require("./models/Umbrella");
 const Realtime = require("./models/RealtimeUmbrella");
 const Locker = require("./models/Locker");
+const jwt = require('jsonwebtoken');
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
 
@@ -119,6 +120,13 @@ app.post("/login/:email/:password", async (req, res) => {
     // res.send("correct email");
     let password_c = await User.findOne({email:email,password:password});
     if(password_c){
+      //creat token
+      // const token = jwt.sign(
+      //   { user_id: password_c._id,
+      //     email: password_c.email,
+      //     password: password_c.password
+      //   }
+      // )
       res.send(password_c);
       console.log(password_c);
     }else{
