@@ -288,12 +288,12 @@ app.get('/history/:type/:user_id', async (req, res) => {
   let user_id = req.params.user_id;
   let type = req.params.type;
   if(type == "borrow"){
-    let borrow_history = await Borrow.find({user_id:user_id});
+    let borrow_history = await Borrow.find({_id:user_id});
     console.log(borrow_history);
     res.send(borrow_history);
   }
   else if(type == "deposit"){
-    let deposit_history = await Deposit.find({user_id:user_id});
+    let deposit_history = await Deposit.find({_id:user_id});
     console.log(deposit_history);
     res.send(deposit_history);
   }else{
