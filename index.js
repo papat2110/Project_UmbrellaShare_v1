@@ -195,7 +195,8 @@ app.get('/delete_stt/:place', async (req, res) => {
 app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/:getting_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
   let umbrella_id = req.params.umbrella_id;
-  let borrow_time = req.params.borrow_time;
+  // let borrow_time = req.params.borrow_time;
+  let borrow_time = Date.now();
   let borrow_place = req.params.borrow_place;
   let getting_time = req.params.getting_time;
   let getting_place = req.params.getting_place;
@@ -269,6 +270,7 @@ app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status',
   if(borrow_data){
     let query = {_id:borrow_data._id};
     let getting_time = req.params.getting_time;
+    let getting_time = Date.now();
     let getting_place = req.params.getting_place;
     let time = getting_time - borrow_data.borrow_time;
     let status = req.params.status;
