@@ -134,7 +134,7 @@ app.post("/login/:email/:password", async (req, res) => {
 //get user
 app.post("/user/:user_id", async (req, res) => {
   var user_id = req.params.user_id;
-  let user = await User.findOne({_id:user_id});
+  let user = await User.findOne({p_id:user_id});
   if(user){
     res.send(user);
   }else{
