@@ -11,6 +11,7 @@ const Deposit = require("./models/Deposit");
 const Umbrella = require("./models/Umbrella");
 const Realtime = require("./models/RealtimeUmbrella");
 const Locker = require("./models/Locker");
+const Place = require("./models/Place");
 const jwt = require('jsonwebtoken');
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
@@ -65,6 +66,16 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   var adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
   console.log(adduser);
   res.send(adduser);
+});
+
+//add place
+app.post("/addplace/:location/:place/:node_ip", async (req, res) => {
+  var location = req.params.location;
+  var place = req.params.place;
+  var node_ip = req.params.node_ip;
+  var addplace = await new Place({location:location,place:place,node_ip:node_ip}).save()
+  console.log(addplace);
+  res.send(addplace);
 });
 
 //add umbrella
