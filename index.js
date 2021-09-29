@@ -77,13 +77,15 @@ app.get("/addumbrella/:rfid/:status", async (req, res) => {
 });
 
 //inform broken umbrella
-app.get("/inform_umbrella/:rfid/:status", async (req, res) => {
+app.get("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
   var rfid = req.params.rfid;
   var status = req.params.status;
+  var place = req.params.place;
+  var user = req.params.user_id;
   var umbrella = await Umbrella.findOne({rfid:rfid});
   if(umbrella){
     var query = {_id:umbrella._id};
-    await Umbrella.findOneAndUpdate(query,{status:status});
+    await Umbrella.findOneAndUpdate(query,{status:status,place:place,user:user});
     console.log(umbrella);
     res.send(umbrella);
   }else if(!umbrella){
