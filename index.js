@@ -126,6 +126,21 @@ app.get("/recieve_noti", async (req, res) => {
   }
 });
 
+//admin read notifications
+app.get("/read/:umbrella_id", async (req, res) => {
+  var umbrella_id = req.params.umbrella_id;
+  var read = "read";
+  var umbrella = await Umbrella.findOne({_id:umbrella_id});
+  if(umbrella){
+    var query = {_id:umbrella._id};
+    await Umbrella.findOneAndUpdate(query,{noti_sst:read});
+    console.log(umbrella);
+    res.send(umbrella);
+  }else if(!umbrella){
+    res.send("something wrong");
+  }
+});
+
 //edit password
 app.post("/change_pass/:user_id/:old_password/:new_password", async (req, res) => {
   var user_id = req.params.user_id;
