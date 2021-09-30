@@ -78,7 +78,7 @@ app.post("/addplace/:location/:place/:node_ip", async (req, res) => {
   res.send(addplace);
 });
 
-app.get("/place", async (req, res) => {
+app.get("/um_place", async (req, res) => {
   let place = await Place.find();
   console.log(place);
   res.send(place);
