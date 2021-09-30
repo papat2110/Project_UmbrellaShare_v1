@@ -114,6 +114,18 @@ app.get("/inform_umbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, 
   }
 });
 
+//addmin recieve noti broken
+app.get("/recieve_noti", async (req, res) => {
+  var send = "send";
+  var inform = await Umbrella.find({noti_sst:send});
+  if(inform){
+    console.log(inform);
+    res.send(inform);
+  }else if(!inform){
+    res.send("no notification");
+  }
+});
+
 //edit password
 app.post("/change_pass/:user_id/:old_password/:new_password", async (req, res) => {
   var user_id = req.params.user_id;
