@@ -4,7 +4,8 @@ const umbrellaSchema = new mongoose.Schema({
     rfid: String,
     status: String,
     place: String,
-    user: String
+    user: String,
+    noti_sst: String
   });
 
   const Umbrella = mongoose.model('Umbrella', umbrellaSchema);
