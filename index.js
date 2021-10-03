@@ -91,22 +91,24 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
   var place = req.params.place;
   var user = req.params.user_id;
   var noti_sst = req.params.noti_sst;
-  var addumbrella = await new Umbrella({rfid:rfid,status:status,place:place,user:user,noti_sst:noti_sst}).save()
+  var photo = "none";
+  var addumbrella = await new Umbrella({rfid:rfid,status:status,place:place,user:user,noti_sst:noti_sst,photo:photo}).save()
   console.log(addumbrella);
   res.send(addumbrella);
 });
 
 //inform broken umbrella
-app.get("/inform_umbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res) => {
+app.get("/inform_umbrella/:user_id/:rfid/:status/:place/:noti_sst/:photo", async (req, res) => {
   var rfid = req.params.rfid;
   var status = req.params.status;
   var place = req.params.place;
   var user = req.params.user_id;
   var noti_sst = req.params.noti_sst;
+  var photo = req.params.photo;
   var umbrella = await Umbrella.findOne({rfid:rfid});
   if(umbrella){
     var query = {_id:umbrella._id};
-    await Umbrella.findOneAndUpdate(query,{status:status,place:place,user:user,noti_sst:noti_sst});
+    await Umbrella.findOneAndUpdate(query,{status:status,place:place,user:user,noti_sst:noti_sst,photo:photo});
     console.log(umbrella);
     res.send(umbrella);
   }else if(!umbrella){

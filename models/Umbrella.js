@@ -5,7 +5,8 @@ const umbrellaSchema = new mongoose.Schema({
     status: String,
     place: String,
     user: String,
-    noti_sst: String
+    noti_sst: String,
+    photo: String
   });
 
   const Umbrella = mongoose.model('Umbrella', umbrellaSchema);
