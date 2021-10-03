@@ -98,7 +98,7 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 });
 
 //inform broken umbrella
-app.get("/inform_umbrella/:user_id/:rfid/:status/:place/:photo", async (req, res) => {
+app.post("/inform_umbrella/:user_id/:rfid/:status/:place/:photo", async (req, res) => {
   var rfid = req.params.rfid;
   var status = req.params.status;
   var place = req.params.place;
