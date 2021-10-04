@@ -223,7 +223,7 @@ app.get('/getstt/:place', async (req, res) => {
     res.send(user._id+"\n$$"+user.userid+"\n"+user.status+"\n"+user.place);
   }
   if(!user){
-    res.send(user);
+    res.send("error");
   }
 });
 
