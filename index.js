@@ -359,7 +359,7 @@ app.get('/history/:type/:user_id', async (req, res) => {
 app.get('/deposit/:user_id/:locker/:deposit_time/:deposit_place/:return_time/:return_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
   let locker = req.params.locker;
-  let deposit_time = req.params.deposit_time;
+  let deposit_time = Date.now();
   let deposit_place = req.params.deposit_place;
   let return_time = req.params.return_time;
   let return_place = req.params.return_place;
@@ -379,7 +379,7 @@ app.get('/getdeposit/:user_id/:locker/:return_time/:return_place/:status', async
   // res.send(user);
   if(deposit_data){
     let query = {_id:deposit_data._id};
-    let return_time = req.params.return_time;
+    let return_time = Date.now();
     let return_place = req.params.return_place;
     let time = return_time - deposit_data.deposit_time;
     let status = req.params.status;
