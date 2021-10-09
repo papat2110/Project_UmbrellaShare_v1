@@ -257,8 +257,8 @@ app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/
 
   let borrow = await new Borrow({user_id:user_id,umbrella_id:umbrella_id,borrow_time:borrow_time,
     borrow_place:borrow_place,getting_time:getting_time,getting_place:getting_place,time:time,status:status}).save()
-  console.log(borrow);
-  res.send(borrow);
+  console.log("การยืมสำเร็จ");
+  res.send("การยืมสำเร็จ");
 });
 
 //checked umbrella_id
