@@ -267,8 +267,8 @@ app.get('/send_to_app/:user_id', async (req, res) => {
   let status = "borrowing";
   let noti = await Borrow.findOne({user_id:user_id,status:status}).sort({ _id: -1 }).limit(10);
   if(noti){
-    console.log("การยืมสำเร็จ");
-    res.send("การยืมสำเร็จ");
+    console.log(noti);
+    res.send(noti);
   }else{
     console.log("กำลังดำเนินการ");
     res.send("กำลังดำเนินการ");
