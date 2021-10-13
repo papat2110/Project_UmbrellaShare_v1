@@ -261,6 +261,20 @@ app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/
   res.send("การยืมสำเร็จ");
 });
 
+//send status to take photo
+app.get('/send_to_app/:user_id', async (req, res) => {
+  let user_id = req.params.user_id;
+  let status = "borrowing";
+  let noti = await Borrow.findOne({user_id:user_id,status:status}).sort({ _id: -1 }).limit(10);
+  if(noti){
+    console.log("การยืมสำเร็จ");
+    res.send("การยืมสำเร็จ");
+  }else{
+    console.log("กำลังดำเนินการ");
+    res.send("กำลังดำเนินการ");
+  }
+});
+
 //checked umbrella_id
 app.get('/umbrella/:node_ip/:umbrella_id/:request', async (req, res) => {
   let node_ip= req.params.node_ip;
