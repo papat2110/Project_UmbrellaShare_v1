@@ -4,6 +4,7 @@ var cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const multer = require('multer');
 
 const User = require("./models/User");
 const Status = require("./models/Status");
@@ -35,9 +36,20 @@ app.use(cors());
 app.use(express.json());
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json({ limit: '15MB' }));
+app.use(bodyParser.json());
 
 var port = process.env.PORT || 80;
+
+const storage = multer.diskStorage({
+  destination(req, file, callback) {
+    callback(null, './picture');
+  },
+  filename(req, file, callback) {
+    callback(null, `${file.fieldname}_${Date.now()}_${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:80`);
@@ -439,7 +451,12 @@ app.get("/getlocker/:node_ip", async (req, res) => {
 });
 
 //add picture
-app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
+app.post("/picture/:user_id/:borrow_id/:status", upload.array('photo', 3), async (req, res) => {
+  console.log('file', req.files);
+  console.log('body', req.body);
+  res.status(200).json({
+    message: 'success!',
+  });
   var user_id = req.params.user_id;
   var borrow_id = req.params.borrow_id;
   var status = req.params.status;
