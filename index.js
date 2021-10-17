@@ -447,16 +447,20 @@ app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
   var name = Date.now()+".png";
   fs.writeFile('./picture/'+name, req.body.imgsource, 'base64', (err) => {
 		if (err) throw err
+    else{
+      console.log("success");
+      res.send("success");
+    }
 	})
-  if(status=="bb"){
-    var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:name}).save()
-    console.log(addpicture);
-    res.send(addpicture);
-  }else if(status=="bg"){
-    var picture_update = await Picture.findOne({borrow_id:borrow_id});
-    var query = {_id:picture_update._id};
-    await Picture.findOneAndUpdate(query,{getting_pic:name});
-    console.log("success");
-    res.send("success");
-  }
+  // if(status=="bb"){
+  //   var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:name}).save()
+  //   console.log(addpicture);
+  //   res.send(addpicture);
+  // }else if(status=="bg"){
+  //   var picture_update = await Picture.findOne({borrow_id:borrow_id});
+  //   var query = {_id:picture_update._id};
+  //   await Picture.findOneAndUpdate(query,{getting_pic:name});
+  //   console.log("success");
+  //   res.send("success");
+  // }
 });
