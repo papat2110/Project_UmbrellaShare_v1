@@ -445,13 +445,10 @@ app.get("/picture/:user_id/:borrow_id/:status/:picture", async (req, res) => {
   var borrow_id = req.params.borrow_id;
   var status = req.params.status;
   var picture = req.params.picture;
-  const url = "https://umbrellashareserver.herokuapp.com/picture/"+user_id+"/"+borrow_id+"/"+status+"/"+picture;
-  async function download() {
-    const response = await fetch(url);
-    const buffer = await response.buffer();
-    fs.writeFile(`./picture/`+picture, buffer, () => 
-      console.log('finished downloading!'));
-  }
+  var path = "./picture/"+picture;
+  fs.writeFile(path, req.body.imgsource, 'base64', (err) => {
+		if (err) throw err
+	})
   if(status=="bb"){
     var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:picture}).save()
     console.log(addpicture);
