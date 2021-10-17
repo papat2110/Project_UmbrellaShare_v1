@@ -40,17 +40,6 @@ app.use(bodyParser.json());
 
 var port = process.env.PORT || 80;
 
-const storage = multer.diskStorage({
-  destination(req, file, callback) {
-    callback(null, './picture');
-  },
-  filename(req, file, callback) {
-    callback(null, `${file.fieldname}_${Date.now()}_${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage });
-
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:80`);
 });
@@ -451,12 +440,7 @@ app.get("/getlocker/:node_ip", async (req, res) => {
 });
 
 //add picture
-app.post("/picture/:user_id/:borrow_id/:status", upload.array('photo', 3), async (req, res) => {
-  console.log('file', req.files);
-  console.log('body', req.body);
-  res.status(200).json({
-    message: 'success!',
-  });
+app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
   var user_id = req.params.user_id;
   var borrow_id = req.params.borrow_id;
   var status = req.params.status;
@@ -465,7 +449,6 @@ app.post("/picture/:user_id/:borrow_id/:status", upload.array('photo', 3), async
   fs.writeFile('./picture/'+name, req.body.imgsource, 'base64', (err) => {
     if (err) throw err
 	})
-  res.status(200)
   // if(status=="bb"){
   //   var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:name}).save()
   //   console.log(addpicture);
