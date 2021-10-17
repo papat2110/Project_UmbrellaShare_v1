@@ -439,7 +439,7 @@ app.get("/getlocker/:node_ip", async (req, res) => {
 
 //add picture
 app.get("/picture/:user_id/:borrow_id/:status/:picture", async (req, res) => {
-  var user = req.params.user_id;
+  var user_id = req.params.user_id;
   var borrow_id = req.params.borrow_id;
   var status = req.params.status;
   var picture = req.params.picture;
