@@ -4,6 +4,7 @@ var cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const fetch = require("node-fetch");
 
 const User = require("./models/User");
 const Status = require("./models/Status");
@@ -15,6 +16,7 @@ const Locker = require("./models/Locker");
 const Place = require("./models/Place");
 const Picture = require("./models/Picture");
 const jwt = require('jsonwebtoken');
+
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
 
@@ -443,6 +445,13 @@ app.get("/picture/:user_id/:borrow_id/:status/:picture", async (req, res) => {
   var borrow_id = req.params.borrow_id;
   var status = req.params.status;
   var picture = req.params.picture;
+  const url = "https://umbrellashareserver.herokuapp.com/picture/"+user_id+"/"+borrow_id+"/"+status+"/"+picture;
+  async function download() {
+    const response = await fetch(url);
+    const buffer = await response.buffer();
+    fs.writeFile(`./picture/`+picture, buffer, () => 
+      console.log('finished downloading!'));
+  }
   if(status=="bb"){
     var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:picture}).save()
     console.log(addpicture);
