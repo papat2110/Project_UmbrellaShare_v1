@@ -446,15 +446,9 @@ app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
   var picture = req.body.imgsource;
   var name = Date.now()+".png";
   fs.writeFile('./picture/'+name, req.body.imgsource, 'base64', (err) => {
-		if (err){
-      console.log("error");
-      res.send("error");
-    }
-    else{
-      console.log("picture");
-      res.send("picture");
-    }
+    if (err) throw err
 	})
+  res.status(200)
   // if(status=="bb"){
   //   var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:name}).save()
   //   console.log(addpicture);
