@@ -3,6 +3,7 @@ const app = express();
 var cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const fs = require("fs");
 
 const User = require("./models/User");
 const Status = require("./models/Status");
@@ -12,6 +13,7 @@ const Umbrella = require("./models/Umbrella");
 const Realtime = require("./models/RealtimeUmbrella");
 const Locker = require("./models/Locker");
 const Place = require("./models/Place");
+const Picture = require("./models/Picture");
 const jwt = require('jsonwebtoken');
 
 var mongo_uri = "mongodb+srv://admin:1234@umbrellashare01.pk99m.mongodb.net/UmbrellaShare?retryWrites=true&w=majority"
@@ -433,4 +435,23 @@ app.get("/getlocker/:node_ip", async (req, res) => {
   // res.send(getlocker.locker);
   console.log(show);
   res.send(show);
+});
+
+//add picture
+app.get("/picture/:user_id/:borrow_id/:status/:picture", async (req, res) => {
+  var user = req.params.user_id;
+  var borrow_id = req.params.borrow_id;
+  var status = req.params.status;
+  var picture = req.params.picture;
+  if(status=="bb"){
+    var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:picture}).save()
+    console.log(addpicture);
+    res.send(addpicture);
+  }else if(status=="bg"){
+    var picture_update = await Picture.findOne({borrow_id:borrow_id});
+    let query = {_id:picture_update._id};
+    await Picture.findOneAndUpdate(query,{getting_pic:getting_pic});
+    console.log("success");
+    res.send("success");
+  }
 });
