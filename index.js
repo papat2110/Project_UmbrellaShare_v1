@@ -439,17 +439,14 @@ app.get("/getlocker/:node_ip", async (req, res) => {
 });
 
 //add picture
-app.get("/picture/:user_id/:borrow_id/:status/:picture", async (req, res) => {
+app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
   var user_id = req.params.user_id;
   var borrow_id = req.params.borrow_id;
   var status = req.params.status;
-  var picture = req.params.picture;
-  fs.writeFile('../picture/', req.params.picture, 'base64', (err) => {
+  var picture = req.body.imgsource;
+  var name = Date.now()+".png";
+  fs.writeFile('./picture/'+name, req.body.imgsource, 'base64', (err) => {
 		if (err) throw err
-    else{
-      console.log("success");
-      res.send("success");
-    }
 	})
   if(status=="bb"){
     var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:picture}).save()
