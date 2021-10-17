@@ -446,6 +446,10 @@ app.get("/picture/:user_id/:borrow_id/:status/:picture", async (req, res) => {
   var picture = req.params.picture;
   fs.writeFile('../picture/', req.params.picture, 'base64', (err) => {
 		if (err) throw err
+    else{
+      console.log("success");
+      res.send("success");
+    }
 	})
   if(status=="bb"){
     var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:picture}).save()
