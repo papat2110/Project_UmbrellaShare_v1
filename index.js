@@ -448,8 +448,8 @@ app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
   fs.writeFile('./picture/'+name, req.body.imgsource, 'base64', (err) => {
 		if (err) throw err
     else{
-      console.log("success");
-      res.send("success");
+      console.log("picture");
+      res.send("picture");
     }
 	})
   // if(status=="bb"){
