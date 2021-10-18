@@ -36,7 +36,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '15MB' }));
 
 var port = process.env.PORT || 80;
 
@@ -441,12 +441,12 @@ app.get("/getlocker/:node_ip", async (req, res) => {
 
 //add picture
 app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
-  var user_id = req.params.user_id;
-  var borrow_id = req.params.borrow_id;
-  var status = req.params.status;
-  var picture = req.body.imgsource;
-  var name = Date.now()+".png";
-  fs.writeFile('./omg.png', req.body.imgsource, 'base64', (err) => {
+  // var user_id = req.params.user_id;
+  // var borrow_id = req.params.borrow_id;
+  // var status = req.params.status;
+  // var picture = req.body.imgsource;
+  // var name = Date.now()+".png";
+  fs.writeFile('./Picture/omg.png', req.body.imgsource, 'base64', (err) => {
     if (err) throw err
 	})
   res.status(200)
