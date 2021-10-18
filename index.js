@@ -47,13 +47,13 @@ const storage = multer.diskStorage({
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype.startsWith('image')) {
-    cb(null, true);
-  } else {
-    cb('invalid image file!', false);
-  }
-};
+// const fileFilter = (req, file, cb) => {
+//   if (file.mimetype.startsWith('image')) {
+//     cb(null, true);
+//   } else {
+//     cb('invalid image file!', false);
+//   }
+// };
 
 const upload = multer({ storage });
 
@@ -121,12 +121,20 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 });
 
 //inform broken umbrella
-app.post("/inform_umbrella/:user_id/:rfid/:status/:place", upload.array('photo', 3), async (req, res) => {
+app.post("/inform_umbrella/:user_id/:rfid/:status/:place", upload.single('photo'), async (req, res) => {
   console.log('file', req.files);
   console.log('body', req.body);
-  res.status(200).json({
-    message: 'success!',
+  fs.readFile(req.file.path,(err, contents)=> {
+    if (err) {
+    console.log('Error: ', err);
+   }else{
+    console.log('File contents ',contents);
+   }
   });
+
+  // res.status(200).json({
+  //   message: 'success!',
+  // });
 
   // var rfid = req.params.rfid;
   // var status = req.params.status;
