@@ -38,6 +38,17 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json({ limit: '15MB' }));
 
+const storage = multer.diskStorage({
+  destination(req, file, callback) {
+    callback(null, './picture/');
+  },
+  filename(req, file, callback) {
+    callback(null, `${file.fieldname}_${Date.now()}_${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
+
 var port = process.env.PORT || 80;
 
 app.listen(port, () => {
@@ -102,13 +113,13 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 });
 
 //inform broken umbrella
-app.post("/inform_umbrella/:user_id/:rfid/:status/:place/:photo", async (req, res) => {
+app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
   var rfid = req.params.rfid;
   var status = req.params.status;
   var place = req.params.place;
   var user = req.params.user_id;
   var noti_sst = "send";
-  var photo = req.params.photo;
+  var photo
   var umbrella = await Umbrella.findOne({rfid:rfid});
   if(umbrella){
     var query = {_id:umbrella._id};
@@ -440,27 +451,35 @@ app.get("/getlocker/:node_ip", async (req, res) => {
 });
 
 //add picture
-app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
-  var user_id = req.params.user_id;
-  var borrow_id = req.params.borrow_id;
-  var status = req.params.status;
-  var picture = req.body.imgsource;
-  var name = Date.now()+".png";
-  // var a = req.body.a;
-  // res.send(a);
-  fs.writeFile('./picture/'+name, req.body.imgsource, 'base64', function(err) {
-    res.send(req.body.imgsource);
-	})
-  res.status(200)
-  if(status=="bb"){
-    var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:name}).save()
-    console.log(addpicture);
-    res.send(addpicture);
-  }else if(status=="bg"){
-    var picture_update = await Picture.findOne({borrow_id:borrow_id});
-    var query = {_id:picture_update._id};
-    await Picture.findOneAndUpdate(query,{getting_pic:name});
-    console.log("success");
-    res.send("success");
-  }
+app.post("/picture/:user_id/:borrow_id/:status", upload.array('photo', 3), async (req, res) => {
+
+  console.log('file', req.files);
+  console.log('body', req.body);
+  res.status(200).json({
+    message: 'success!',
+  });
+
+  
+  // var user_id = req.params.user_id;
+  // var borrow_id = req.params.borrow_id;
+  // var status = req.params.status;
+  // var picture = req.body.imgsource;
+  // var name = Date.now()+".png";
+  // // var a = req.body.a;
+  // // res.send(a);
+  // fs.writeFile('./picture/'+name, req.body.imgsource, 'base64', function(err) {
+  //   res.send(req.body.imgsource);
+	// })
+  // res.status(200)
+  // if(status=="bb"){
+  //   var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:name}).save()
+  //   console.log(addpicture);
+  //   res.send(addpicture);
+  // }else if(status=="bg"){
+  //   var picture_update = await Picture.findOne({borrow_id:borrow_id});
+  //   var query = {_id:picture_update._id};
+  //   await Picture.findOneAndUpdate(query,{getting_pic:name});
+  //   console.log("success");
+  //   res.send("success");
+  // }
 });
