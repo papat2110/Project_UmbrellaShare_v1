@@ -446,10 +446,12 @@ app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
   // var status = req.params.status;
   // var picture = req.body.imgsource;
   // var name = Date.now()+".png";
-  fs.writeFile('./picture/omg.png', req.body.imgsource, 'base64', function(err) {
-    console.log(req.body.imgsource);
-	})
-  res.status(200)
+  var a = reg.body.a;
+  console.log(a);
+  // fs.writeFile('./picture/omg.png', req.body.imgsource, 'base64', function(err) {
+  //   console.log(req.body.imgsource);
+	// })
+  // res.status(200)
   // if(status=="bb"){
   //   var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:name}).save()
   //   console.log(addpicture);
