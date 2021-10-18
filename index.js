@@ -446,7 +446,7 @@ app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
   // var status = req.params.status;
   // var picture = req.body.imgsource;
   // var name = Date.now()+".png";
-  var a = reg.body;
+  var a = req.body;
   console.log(a);
   // fs.writeFile('./picture/omg.png', req.body.imgsource, 'base64', function(err) {
   //   console.log(req.body.imgsource);
