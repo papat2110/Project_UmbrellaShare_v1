@@ -4,6 +4,8 @@ var cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+var multer = require('multer');
+var upload = multer();
 
 const User = require("./models/User");
 const Status = require("./models/Status");
@@ -35,6 +37,9 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json({ limit: '15MB' }));
+
+app.use(upload.array()); 
+app.use(express.static('public'));
 
 
 var port = process.env.PORT || 80;
