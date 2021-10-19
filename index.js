@@ -129,7 +129,7 @@ app.post("/inform_umbrella/:user_id/:rfid/:status/:place",async (req, res) => {
     // const filename = pathArr[pathArr.length - 1];
 
     res.status(200).json({
-      success: true,
+      message: 'success!',
     })
   })
 
