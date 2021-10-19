@@ -123,15 +123,18 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 
 //inform broken umbrella
 app.post("/inform_umbrella/:user_id/:rfid/:status/:place",async (req, res) => {
-  const { image } = req.body.img;
-  base64Img.img(image, './picture/', Date.now(), function(err, filepath){
-    // const pathArr = filepath.split('/');
-    // const filename = pathArr[pathArr.length - 1];
-
-    res.status(200).json({
-      message: 'success!',
-    })
-  })
+  // const { image } = req.body.img;
+  // base64Img.img(image, './picture/', Date.now(), function(err, filepath){
+  //   // const pathArr = filepath.split('/');
+  //   // const filename = pathArr[pathArr.length - 1];
+  //   // res.status(200).json({
+  //   //   message: 'success!',
+  //   // })
+  // })
+  
+  fs.writeFile('./picture/'+Date.now()+".jpg", req.body.imgsource, 'base64', function(err) {
+    res.send(req.body.imgsource);
+	})
 
   // res.status(200).json({
   //   message: 'success!',
