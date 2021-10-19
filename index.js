@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const multer = require('multer');
+const base64Img = require('base64-img');
 
 const User = require("./models/User");
 const Status = require("./models/Status");
@@ -34,9 +35,9 @@ mongoose.connect(mongo_uri, {useNewUrlParser: true, useUnifiedTopology: true}).t
 
 app.use(cors());
 app.use(express.json());
-
+app.use(express.static('./picture/'))
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json({ limit: '15MB' }));
+app.use(bodyParser.json({ limit: '50MB' }));
 
 const storage = multer.diskStorage({
   destination(req, file, callback) {
@@ -121,16 +122,16 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 });
 
 //inform broken umbrella
-app.post("/inform_umbrella/:user_id/:rfid/:status/:place", upload.single('photo'), async (req, res) => {
-  console.log('file', req.files);
-  console.log('body', req.body);
-  fs.readFile(req.file.path,(err, contents)=> {
-    if (err) {
-    console.log('Error: ', err);
-   }else{
-    console.log('File contents ',contents);
-   }
-  });
+app.post("/inform_umbrella/:user_id/:rfid/:status/:place",async (req, res) => {
+  const { image } = req.body;
+  base64Img.img(image, './picture/', Date.now(), function(err, filepath){
+    // const pathArr = filepath.split('/');
+    // const filename = pathArr[pathArr.length - 1];
+
+    res.status(200).json({
+      success: true,
+    })
+  })
 
   // res.status(200).json({
   //   message: 'success!',
