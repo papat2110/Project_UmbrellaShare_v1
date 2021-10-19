@@ -4,8 +4,6 @@ var cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-const multer = require('multer');
-const base64Img = require('base64-img');
 
 const User = require("./models/User");
 const Status = require("./models/Status");
@@ -105,8 +103,8 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 });
 
 //inform broken umbrella
-app.post("/inform_umbrella/:user_id/:rfid/:status/:place",async (req, res) => {
-  
+app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
+
   fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
     res.send(req.body.imgsource);
 	})
