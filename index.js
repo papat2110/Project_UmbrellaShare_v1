@@ -105,10 +105,10 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 //inform broken umbrella
 app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
 
-  fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
-    res.send(req.body.imgsource);
-	})
-
+  // fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
+  //   res.send(req.body.imgsource);
+	// })
+  res.send(req.body.imgsource);
   // res.status(200).json({
   //   message: 'success!',
   // });
