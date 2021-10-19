@@ -36,7 +36,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json({ limit: '15MB' }));
 
-const upload = multer({ storage });
 
 var port = process.env.PORT || 80;
 
