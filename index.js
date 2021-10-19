@@ -106,7 +106,7 @@ app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
   // fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
   //   res.send(req.body.imgsource);
 	// })
-  var b = req.body;
+  var b = req.body.a;
   res.send(b);
   // res.status(200).json({
   //   message: 'success!',
@@ -451,8 +451,6 @@ app.get("/getlocker/:node_ip", async (req, res) => {
 //add picture
 app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
 
-  var b = req.body.a;
-  res.send(b);
   // var user_id = req.params.user_id;
   // var borrow_id = req.params.borrow_id;
   // var status = req.params.status;
