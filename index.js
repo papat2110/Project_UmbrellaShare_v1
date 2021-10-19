@@ -103,11 +103,11 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 //inform broken umbrella
 app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
 
-  // fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
-  //   res.send(req.body.imgsource);
-	// })
-  var b = req.body.a;
-  res.send(b);
+  fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
+    res.send(req.body.imgsource);
+	})
+  // var b = req.body.a;
+  // res.send(b);
   // res.status(200).json({
   //   message: 'success!',
   // });
