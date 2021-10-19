@@ -106,8 +106,8 @@ app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
   // fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
   //   res.send(req.body.imgsource);
 	// })
-  var a = req.body.a;
-  res.send("dfsdfd");
+  var b = req.body.a;
+  res.send(b);
   // res.status(200).json({
   //   message: 'success!',
   // });
