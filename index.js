@@ -33,7 +33,6 @@ mongoose.connect(mongo_uri, {useNewUrlParser: true, useUnifiedTopology: true}).t
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('./picture/'))
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json({ limit: '15MB' }));
 
