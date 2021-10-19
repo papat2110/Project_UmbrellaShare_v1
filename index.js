@@ -37,7 +37,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('./picture/'))
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json({ limit: '50MB' }));
+app.use(bodyParser.json({ limit: '15MB' }));
 
 const storage = multer.diskStorage({
   destination(req, file, callback) {
@@ -132,7 +132,7 @@ app.post("/inform_umbrella/:user_id/:rfid/:status/:place",async (req, res) => {
   //   // })
   // })
   
-  fs.writeFile('./picture/'+Date.now()+".jpg", req.body.imgsource, 'base64', function(err) {
+  fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
     res.send(req.body.imgsource);
 	})
 
