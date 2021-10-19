@@ -104,7 +104,7 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
 
   fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
-    res.send(req.body.imgsource);
+    res.send("success");
 	})
   // var b = req.body.a;
   // res.send(b);
