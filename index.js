@@ -107,7 +107,7 @@ app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
   //   res.send(req.body.imgsource);
 	// })
   var a = req.body.a;
-  res.send(a);
+  res.send("dfsdfd");
   // res.status(200).json({
   //   message: 'success!',
   // });
