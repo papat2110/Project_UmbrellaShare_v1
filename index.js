@@ -104,15 +104,15 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   // res.send('verify error');
 });
 
-app.post("/verify_email/:name/:email/:tel/:password/:pid", async (req, res) => {
+app.get("/verify_email/:name/:email/:tel/:password/:pid", async (req, res) => {
   var name = req.params.name;
   var email = req.params.email;
   var tel = req.params.tel;
   var password = req.params.password;
   var p_id = req.params.pid;
   var adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
-  console.log(adduser);
-  res.send(adduser);
+  console.log("verify success");
+  res.send("verify success");
 });
 
 //add place
