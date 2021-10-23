@@ -96,6 +96,9 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
     // console.log(adduser);
     res.send('Message sent: %s', info.messageId);
   }
+  console.log('verify error');
+  // console.log(adduser);
+  res.send('verify error');
 });
 
 //add place
