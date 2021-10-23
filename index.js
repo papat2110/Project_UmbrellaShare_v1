@@ -81,7 +81,6 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   var tel = req.params.tel;
   var password = req.params.password;
   var p_id = req.params.pid;
-  var adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
   // เริ่มทำการส่งอีเมล
   let info = await transporter.sendMail({
     from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
@@ -91,9 +90,12 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
     html: '<button>Verify</button>' // html body
   });
   // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
-  console.log('Message sent: %s', info.messageId);
-  console.log(adduser);
-  res.send(adduser);
+  if(info.messageId){
+    var adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
+    console.log('Message sent: %s', info.messageId);
+    // console.log(adduser);
+    res.send('Message sent: %s', info.messageId);
+  }
 });
 
 //add place
