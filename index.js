@@ -90,15 +90,18 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
     html: '<button>Verify</button>' // html body
   });
   // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
-  if(info.messageId){
-    var adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
-    console.log('Message sent: %s', info.messageId);
-    // console.log(adduser);
-    res.send('Message sent: %s', info.messageId);
-  }
-  console.log('verify error');
+  console.log('Message sent: %s', info.messageId);
   // console.log(adduser);
-  res.send('verify error');
+  res.send('Message sent: %s', info.messageId);
+  // if(info.messageId){
+  //   var adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
+  //   // console.log('Message sent: %s', info.messageId);
+  //   // // console.log(adduser);
+  //   // res.send('Message sent: %s', info.messageId);
+  // }
+  // console.log('verify error');
+  // // console.log(adduser);
+  // res.send('verify error');
 });
 
 //add place
