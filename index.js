@@ -87,7 +87,7 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
     to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
     subject: 'Verify your email address', // หัวข้ออีเมล
     text: 'Please verify your email address', // plain text body
-    html: '<a href="https://umbrellashareserver.herokuapp.com/verify_email/'+name+'/'+email+'/'+tel+'/'+password+'/'+p_id+'">verify</a>' // html body
+    html: '<h2>click link to verify your email address</h2><br><a href="https://umbrellashareserver.herokuapp.com/verify_email/'+name+'/'+email+'/'+tel+'/'+password+'/'+p_id+'">verify</a>' // html body
   });
   // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
   console.log('Message sent: %s', info.messageId);
