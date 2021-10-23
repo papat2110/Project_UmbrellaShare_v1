@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const fs = require("fs");
 var multer = require('multer');
 var upload = multer();
+const nodemailer = require('nodemailer');
 
 const User = require("./models/User");
 const Status = require("./models/Status");
@@ -41,8 +42,17 @@ app.use(bodyParser.json({ limit: '15MB' }));
 app.use(upload.array()); 
 app.use(express.static('public'));
 
-
 var port = process.env.PORT || 80;
+
+let transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: { // ข้อมูลการเข้าสู่ระบบ
+    user: 'umbrellasharekku@gmail.com', // email user ของเรา
+    pass: 'umbrellashareproject' // email password
+  }
+ });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:80`);
@@ -72,6 +82,16 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   var password = req.params.password;
   var p_id = req.params.pid;
   var adduser = await new User({name:name,email:email,tel:tel,password:password,p_id:p_id}).save()
+  // เริ่มทำการส่งอีเมล
+  let info = await transporter.sendMail({
+    from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
+    to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
+    subject: 'Verify your email address', // หัวข้ออีเมล
+    text: 'Please verify your email address', // plain text body
+    html: '<button>Verify</button>' // html body
+  });
+  // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
+  console.log('Message sent: %s', info.messageId);
   console.log(adduser);
   res.send(adduser);
 });
