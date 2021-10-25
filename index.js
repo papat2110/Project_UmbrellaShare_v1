@@ -528,8 +528,9 @@ app.get("/time/:time1", async (req, res) => {
 });
 
 //แจ้งเตือนยืมเกินเวลา
-app.get("/timeover", async (req, res) => {
-  var borrow = await Borrow.find();
+app.get("/timeover/:id", async (req, res) => {
+  var id = req.params.id;
+  var borrow = await Borrow.find({_id:id});
   console.log(borrow.borrow_time);
   res.send(borrow.borrow_time);
   // var borrow_time = Number(borrow.borrow_time);
