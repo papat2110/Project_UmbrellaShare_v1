@@ -522,7 +522,7 @@ app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
 //test change time to date
 app.get("/time/:time1", async (req, res) => {
   var time = req.params.time1;
-  var day = new Date(time).toString();
+  var day = new Date(time);
   console.log(day);
   res.send(day);
 });
