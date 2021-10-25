@@ -526,3 +526,19 @@ app.get("/time/:time1", async (req, res) => {
   console.log(day);
   res.send(day);
 });
+
+//แจ้งเตือนยืมเกินเวลา
+app.get("/timeover", async (req, res) => {
+  var borrow = await Borrow.find();
+  var borrow_time = Number(borrow.borrow_time);
+  var getting_time = Number(borrow.getting_time);
+  var count_time = getting_time - borrow_time;
+  if((count_time/(1000*60*60*24*3))){
+    var borrow_id = borrow._id;
+    console.log(borrow_id);
+    res.send(borrow_id);
+  }else{
+    console.log("notting");
+    res.send("notting");
+  }
+});
