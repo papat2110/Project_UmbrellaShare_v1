@@ -523,6 +523,6 @@ app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
 app.get("/time/:time1", async (req, res) => {
   var time = req.params.time1;
   day = new Date(time).toString();
-  console.log(day);
-  res.send(day);
+  console.log(time);
+  res.send(time);
 });
