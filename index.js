@@ -531,8 +531,7 @@ app.get("/time/:time1", async (req, res) => {
 app.get("/timeover/:id", async (req, res) => {
   var id = req.params.id;
   var status = "borrowing"
-  // var borrow = await Borrow.find({user_id:id,status:status});
-  var borrow = await Borrow.find({user_id:id});
+  var borrow = await Borrow.find({user_id:id,status:status});
   // console.log(borrow.borrow_time);
   // res.send(borrow.borrow_time);
 
@@ -549,8 +548,8 @@ app.get("/timeover/:id", async (req, res) => {
         subject: 'expired borrrow status', // หัวข้ออีเมล
         text: 'Now umbrella code ' + borrow[i]._id +' is expired' // plain text body
       });
-      console.log(a);
-      res.send(a);
+      console.log("expire");
+      res.send("expire");
     }
 
     // console.log(1000000 - 1000);
