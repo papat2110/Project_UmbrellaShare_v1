@@ -542,9 +542,11 @@ app.get("/timeover/:id", async (req, res) => {
     var valid = (now - t)/(1000*60*60*24);
     var a = valid.toString();
     if(a>1){
+      var user = await User.find({user_id:borrow[i].user_id});
+      var email = user.email;
       let info = await transporter.sendMail({
         from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
-        to: 'papatsorndawthaisong@kkumail.com', // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
+        to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
         subject: 'expired borrrow status', // หัวข้ออีเมล
         text: 'Now umbrella code ' + borrow[i]._id +' is expired' // plain text body
       });
