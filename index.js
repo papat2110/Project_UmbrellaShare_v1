@@ -531,7 +531,8 @@ app.get("/time/:time1", async (req, res) => {
 app.get("/timeover/:id", async (req, res) => {
   var id = req.params.id;
   var status = "borrowing"
-  var borrow = await Borrow.find({user_id:id,status:status});
+  // var borrow = await Borrow.find({user_id:id,status:status});
+  var borrow = await Borrow.find({user_id:id});
   // console.log(borrow.borrow_time);
   // res.send(borrow.borrow_time);
 
@@ -546,7 +547,7 @@ app.get("/timeover/:id", async (req, res) => {
         from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
         to: 'papatsorndawthaisong@kkumail.com', // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
         subject: 'expired borrrow status', // หัวข้ออีเมล
-        text: 'Now borrow umbrella is expired' // plain text body
+        text: 'Now umbrella code ' + borrow[i]._id +' is expired' // plain text body
       });
       console.log(a);
       res.send(a);
