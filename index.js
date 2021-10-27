@@ -541,8 +541,17 @@ app.get("/timeover/:id", async (req, res) => {
     var now = Date.now();
     var valid = (now - t)/(1000*60*60*24);
     var a = valid.toString();
-    console.log(a);
-    res.send(a);
+    if(a>1){
+      let info = await transporter.sendMail({
+        from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
+        to: 'papatsorndawthaisong@kkumail.com', // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
+        subject: 'expired borrrow status', // หัวข้ออีเมล
+        text: 'Now borrow umbrella is expired' // plain text body
+      });
+      console.log(a);
+      res.send(a);
+    }
+
     // console.log(1000000 - 1000);
     // res.send(1000000 - 1000);
   }
