@@ -541,7 +541,7 @@ app.get("/timeover/:id", async (req, res) => {
     var now = Date.now();
     var valid = (now - t)/(1000*60*60*24);
     var a = valid.toString();
-    if(a>1){
+    if(a>3){
       var user = await User.find({user_id:borrow[i].user_id});
       var email = user.email;
       let info = await transporter.sendMail({
