@@ -535,8 +535,10 @@ app.get("/timeover/:id", async (req, res) => {
   // res.send(borrow.borrow_time);
 
   for(let i = 0; i < borrow.length; i++){
-    console.log(borrow[i].borrow_time);
-    res.send(borrow[i].borrow_time);
+    // console.log(borrow[i].borrow_time);
+    // res.send(borrow[i].borrow_time);
+    console.log(i);
+    res.send(i);
   }
   // var borrow_time = Number(borrow.borrow_time);
   // var getting_time = Date.now();
