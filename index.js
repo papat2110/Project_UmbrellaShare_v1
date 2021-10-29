@@ -364,7 +364,8 @@ app.get('/get_umbrella/:node', async (req, res) => {
 //get recently borrow
 app.get('/recent_borrow/:user_id', async (req, res) => {
   let user_id = req.params.user_id;
-  let recent = await Borrow.findOne({user_id:user_id}).sort({ _id: -1 }).limit(10);
+  let stt = "borrowing";
+  let recent = await Borrow.findOne({user_id:user_id,status:stt}).sort({ _id: -1 }).limit(10);
   console.log(recent);
   res.send(recent);
 });
