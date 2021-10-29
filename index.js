@@ -146,31 +146,21 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 
 //inform broken umbrella
 app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
-
-  fs.writeFile('./picture/weo.jpg', req.body.imgsource, 'base64', function(err) {
-    res.send("success");
-	})
-  // var b = req.body.a;
-  // res.send(b);
-  // res.status(200).json({
-  //   message: 'success!',
-  // });
-
-  // var rfid = req.params.rfid;
-  // var status = req.params.status;
-  // var place = req.params.place;
-  // var user = req.params.user_id;
-  // var noti_sst = "send";
-  // var photo
-  // var umbrella = await Umbrella.findOne({rfid:rfid});
-  // if(umbrella){
-  //   var query = {_id:umbrella._id};
-  //   await Umbrella.findOneAndUpdate(query,{status:status,place:place,user:user,noti_sst:noti_sst,photo:photo});
-  //   console.log(umbrella);
-  //   res.send(umbrella);
-  // }else if(!umbrella){
-  //   res.send("something wrong");
-  // }
+  var rfid = req.params.rfid;
+  var status = req.params.status;
+  var place = req.params.place;
+  var user = req.params.user_id;
+  var noti_sst = "send";
+  var photo
+  var umbrella = await Umbrella.findOne({rfid:rfid});
+  if(umbrella){
+    var query = {_id:umbrella._id};
+    await Umbrella.findOneAndUpdate(query,{status:status,place:place,user:user,noti_sst:noti_sst,photo:photo});
+    console.log(umbrella);
+    res.send(umbrella);
+  }else if(!umbrella){
+    res.send("something wrong");
+  }
 });
 
 //addmin recieve noti broken
