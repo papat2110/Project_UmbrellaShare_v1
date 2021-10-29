@@ -497,7 +497,7 @@ app.post("/picture/:user_id/:borrow_id/:status/:img", async (req, res) => {
   var user_id = req.params.user_id;
   var borrow_id = req.params.borrow_id;
   var status = req.params.status;
-  var picture = req.body.img;
+  var picture = req.params.img;
   // var name = Date.now()+".png";
   // // var a = req.body.a;
   // // res.send(a);
