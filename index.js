@@ -493,12 +493,11 @@ app.get("/getlocker/:node_ip", async (req, res) => {
 });
 
 //add picture
-app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
-
-  // var user_id = req.params.user_id;
-  // var borrow_id = req.params.borrow_id;
-  // var status = req.params.status;
-  // var picture = req.body.imgsource;
+app.post("/picture/:user_id/:borrow_id/:status/:img", async (req, res) => {
+  var user_id = req.params.user_id;
+  var borrow_id = req.params.borrow_id;
+  var status = req.params.status;
+  var picture = req.body.img;
   // var name = Date.now()+".png";
   // // var a = req.body.a;
   // // res.send(a);
@@ -506,17 +505,17 @@ app.post("/picture/:user_id/:borrow_id/:status", async (req, res) => {
   //   res.send(req.body.imgsource);
 	// })
   // res.status(200)
-  // if(status=="bb"){
-  //   var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:name}).save()
-  //   console.log(addpicture);
-  //   res.send(addpicture);
-  // }else if(status=="bg"){
-  //   var picture_update = await Picture.findOne({borrow_id:borrow_id});
-  //   var query = {_id:picture_update._id};
-  //   await Picture.findOneAndUpdate(query,{getting_pic:name});
-  //   console.log("success");
-  //   res.send("success");
-  // }
+  if(status=="bb"){
+    var addpicture = await new Picture({user_id:user_id,borrow_id:borrow_id,borrow_pic:picture}).save()
+    console.log(addpicture);
+    res.send(addpicture);
+  }else if(status=="bg"){
+    var picture_update = await Picture.findOne({borrow_id:borrow_id});
+    var query = {_id:picture_update._id};
+    await Picture.findOneAndUpdate(query,{getting_pic:name});
+    console.log("success");
+    res.send("success");
+  }
 });
 
 //test change time to date
