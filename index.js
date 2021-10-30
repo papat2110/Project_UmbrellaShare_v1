@@ -144,19 +144,18 @@ app.post("/inform_umbrella/:user_id/:rfid/:status/:place/:img", async (req, res)
   var noti_sst = "send";
   var photo = req.params.img; 
   var umbrella = await Umbrella.findOne({rfid:rfid});
-  var email = await User.find({user_id:user});
   if(umbrella){
     var query = {_id:umbrella._id};
     await Umbrella.findOneAndUpdate(query,{status:status,place:place,user:user,noti_sst:noti_sst,photo:photo});
     let info = await transporter.sendMail({
-      from: '"Umbrella "'+ umbrella.rfid +'" is broken" <'+ email.email +'>', // อีเมลผู้ส่ง
+      from: '"Umbrella "'+ umbrella.rfid +'" is broken" <'+ user +'>', // อีเมลผู้ส่ง
       to: "papatsorndawthaisong@kkumail.com", // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
-      subject: 'New Broken from user id'+ email.p_id, // หัวข้ออีเมล
+      subject: 'New Broken from user id'+ user, // หัวข้ออีเมล
       text: 'Umbrella is broken' // plain text body
     });
-    console.log(email);
-    res.send(email);
-  }else if(!email){
+    console.log(umbrella);
+    res.send(umbrella);
+  }else if(!umbrella){
     res.send("something wrong");
   }
 });
