@@ -136,13 +136,13 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
 });
 
 //inform broken umbrella
-app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
+app.post("/inform_umbrella/:user_id/:rfid/:status/:place/:img", async (req, res) => {
   var rfid = req.params.rfid;
   var status = req.params.status;
   var place = req.params.place;
   var user = req.params.user_id;
   var noti_sst = "send";
-  var photo
+  var photo = req.params.img; 
   var umbrella = await Umbrella.findOne({rfid:rfid});
   var email = await User.find({user_id:user});
   if(umbrella){
