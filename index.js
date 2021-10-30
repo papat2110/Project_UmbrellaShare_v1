@@ -149,9 +149,9 @@ app.post("/inform_umbrella/:user_id/:rfid/:status/:place", async (req, res) => {
     var query = {_id:umbrella._id};
     await Umbrella.findOneAndUpdate(query,{status:status,place:place,user:user,noti_sst:noti_sst,photo:photo});
     let info = await transporter.sendMail({
-      from: '"Umbrella'+ umbrella.rfid +' is broken" <'+ email.email +'>', // อีเมลผู้ส่ง
+      from: '"Umbrella '+ umbrella.rfid +' is broken" <'+ email.email +'>', // อีเมลผู้ส่ง
       to: "papatsorndawthaisong@kkumail.com", // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
-      subject: 'New Broken', // หัวข้ออีเมล
+      subject: 'New Broken from user id'+ email.p_id, // หัวข้ออีเมล
       text: 'Umbrella is broken' // plain text body
     });
     console.log(umbrella);
