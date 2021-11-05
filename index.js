@@ -551,8 +551,16 @@ app.get("/timeover/:id", async (req, res) => {
       console.log(borrow[i]);
       res.send(borrow[i]);
     }
-
     // console.log(1000000 - 1000);
     // res.send(1000000 - 1000);
   }
+});
+
+//send expire notification
+app.get('/noti/:user_id', async (req, res) => {
+  let user_id = req.params.user_id;
+  let stt_exp = "expire";
+  let expire_br = await Borrow.findOne({user_id:user_id,status:stt_exp}).sort({ _id: -1 }).limit(10);
+  console.log(expire_br);
+  res.send(expire_br);
 });
