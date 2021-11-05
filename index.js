@@ -540,7 +540,8 @@ app.get("/timeover/:id", async (req, res) => {
     // console.log(a);
     // res.send(a);
     if(a>3){
-      var user = await User.find({user_id:borrow[i].user_id});
+      var usr = borrow[i].user_id
+      var user = await User.find({user_id:usr});
       console.log(user);
       res.send(user);
       // var email = user.email;
