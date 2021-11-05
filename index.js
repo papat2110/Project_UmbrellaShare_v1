@@ -541,7 +541,7 @@ app.get("/timeover/:id", async (req, res) => {
     // console.log(a);
     // res.send(a);
     if(a>0.001){
-      var user = await User.find({user_id:usr});
+      var user = await User.find({p_id:usr});
       console.log(user);
       res.send(user);
       // var email = user.email;
