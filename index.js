@@ -543,7 +543,7 @@ app.get("/timeover/:id", async (req, res) => {
         from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
         to: mail, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
         subject: 'expired borrrow status', // หัวข้ออีเมล
-        text: 'Now umbrella is expired' // plain text body
+        text: 'Now umbrella id' + borrow[i].umbrella_id +'is expired' // plain text body
       });
       console.log(borrow[i]);
       res.send(borrow[i]);
