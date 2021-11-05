@@ -545,8 +545,8 @@ app.get("/timeover/:id", async (req, res) => {
         subject: 'expired borrrow status', // หัวข้ออีเมล
         text: 'Now umbrella is expired' // plain text body
       });
-      console.log(borrow);
-      res.send(borrow);
+      console.log(borrow[i]);
+      res.send(borrow[i]);
     }
 
     // console.log(1000000 - 1000);
