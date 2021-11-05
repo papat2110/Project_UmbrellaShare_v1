@@ -533,7 +533,7 @@ app.get("/timeover/:id", async (req, res) => {
     var borrow_time = borrow[i].borrow_time;
     var t = Number(borrow_time);
     var now = Date.now();
-    var valid = (now - t)/(1000*60*60*24);
+    var valid = (now - t)/(1000*60*60*24*3);
     var a = valid.toString();
     if(a>3){
       var user = await User.find({user_id:borrow[i].user_id});
@@ -544,8 +544,8 @@ app.get("/timeover/:id", async (req, res) => {
         subject: 'expired borrrow status', // หัวข้ออีเมล
         text: 'Now umbrella code ' + borrow[i]._id +' is expired' // plain text body
       });
-      console.log("expire");
-      res.send("expire");
+      console.log(borrow);
+      res.send(borrow);
     }
 
     // console.log(1000000 - 1000);
