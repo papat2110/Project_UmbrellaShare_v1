@@ -541,15 +541,17 @@ app.get("/timeover/:id", async (req, res) => {
     // res.send(a);
     if(a>3){
       var user = await User.find({user_id:borrow[i].user_id});
-      var email = user.email;
-      let info = await transporter.sendMail({
-        from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
-        to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
-        subject: 'expired borrrow status', // หัวข้ออีเมล
-        text: 'Now umbrella code ' + borrow[i]._id +' is expired' // plain text body
-      });
-      console.log("expire");
-      res.send("expire");
+      console.log(user);
+      res.send(user);
+      // var email = user.email;
+      // let info = await transporter.sendMail({
+      //   from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
+      //   to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
+      //   subject: 'expired borrrow status', // หัวข้ออีเมล
+      //   text: 'Now umbrella code ' + borrow[i]._id +' is expired' // plain text body
+      // });
+      // console.log("expire");
+      // res.send("expire");
     }
 
     // console.log(1000000 - 1000);
