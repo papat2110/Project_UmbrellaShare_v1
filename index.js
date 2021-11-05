@@ -526,29 +526,29 @@ app.get("/timeover/:id", async (req, res) => {
   var id = req.params.id;
   var status = "borrowing"
   var borrow = await Borrow.find({user_id:id,status:status});
-  console.log(borrow);
-  res.send(borrow);
+  // console.log(borrow);
+  // res.send(borrow);
 
-  // for(let i = 0; i < borrow.length; i++){
-  //   var borrow_time = borrow[i].borrow_time;
-  //   var t = Number(borrow_time);
-  //   var now = Date.now();
-  //   var valid = (now - t)/(1000*60*60*24*3);
-  //   var a = valid.toString();
-  //   if(a>3){
-  //     var user = await User.find({user_id:borrow[i].user_id});
-  //     var email = user.email;
-  //     let info = await transporter.sendMail({
-  //       from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
-  //       to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
-  //       subject: 'expired borrrow status', // หัวข้ออีเมล
-  //       text: 'Now umbrella code ' + borrow[i]._id +' is expired' // plain text body
-  //     });
-  //     console.log(borrow);
-  //     res.send(borrow);
-  //   }
+  for(let i = 0; i < borrow.length; i++){
+    var borrow_time = borrow[i].borrow_time;
+    var t = Number(borrow_time);
+    var now = Date.now();
+    var valid = (now - t)/(1000*60*60*24);
+    var a = valid.toString();
+    if(a>3){
+      var user = await User.find({user_id:borrow[i].user_id});
+      var email = user.email;
+      let info = await transporter.sendMail({
+        from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
+        to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
+        subject: 'expired borrrow status', // หัวข้ออีเมล
+        text: 'Now umbrella code ' + borrow[i]._id +' is expired' // plain text body
+      });
+      console.log(borrow);
+      res.send(borrow);
+    }
 
-  //   // console.log(1000000 - 1000);
-  //   // res.send(1000000 - 1000);
-  // }
+    // console.log(1000000 - 1000);
+    // res.send(1000000 - 1000);
+  }
 });
