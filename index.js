@@ -531,6 +531,7 @@ app.get("/timeover/:id", async (req, res) => {
 
   for(let i = 0; i < borrow.length; i++){
     var borrow_time = borrow[i].borrow_time;
+    var usr = borrow[i].user_id;
     // console.log(borrow_time);
     // res.send(borrow_time);
     var t = Number(borrow_time);
@@ -540,7 +541,6 @@ app.get("/timeover/:id", async (req, res) => {
     // console.log(a);
     // res.send(a);
     if(a>3){
-      var usr = borrow[i].user_id
       var user = await User.find({user_id:usr});
       console.log(user);
       res.send(user);
