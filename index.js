@@ -543,8 +543,8 @@ app.get("/timeover/:id", async (req, res) => {
     if(a>0.001){
       var user = await User.find({p_id:usr});
       var email = user.email;
-      console.log(email);
-      res.send(email);
+      console.log(user.email);
+      res.send(user.email);
       // let info = await transporter.sendMail({
       //   from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
       //   to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
