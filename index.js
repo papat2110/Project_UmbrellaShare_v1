@@ -539,16 +539,14 @@ app.get("/timeover/:id", async (req, res) => {
     if(a>0.001){
       var user = await User.findOne({p_id:usr});
       var mail = user.email;
-      console.log(mail);
-      res.send(mail);
-      // let info = await transporter.sendMail({
-      //   from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
-      //   to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
-      //   subject: 'expired borrrow status', // หัวข้ออีเมล
-      //   text: 'Now umbrella is expired' // plain text body
-      // });
-      // console.log(borrow);
-      // res.send(borrow);
+      let info = await transporter.sendMail({
+        from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
+        to: mail, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
+        subject: 'expired borrrow status', // หัวข้ออีเมล
+        text: 'Now umbrella is expired' // plain text body
+      });
+      console.log(borrow);
+      res.send(borrow);
     }
 
     // console.log(1000000 - 1000);
