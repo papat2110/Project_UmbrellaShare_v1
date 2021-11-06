@@ -423,6 +423,16 @@ app.get('/history/:type/:user_id', async (req, res) => {
   }
 });
 
+//show recent deposit place 
+app.get('/deposit_place/:user_id', async (req, res) => {
+  let user_id = req.params.user_id;
+  let borrow_history = await Deposit.findOne({user_id:user_id}).sort({ _id: -1 }).limit(10);
+  let place = borrow_history.deposit_place;
+  let node_ip = await Place.findOne({place:place});
+  console.log(node_ip);
+  res.send(node_ip);
+});
+
 //deposit umbrella
 app.get('/deposit/:user_id/:locker/:deposit_time/:deposit_place/:return_time/:return_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
