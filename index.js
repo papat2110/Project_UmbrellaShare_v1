@@ -522,10 +522,10 @@ app.get("/time/:time1", async (req, res) => {
 });
 
 //แจ้งเตือนยืมเกินเวลา
-app.get("/timeover/:id", async (req, res) => {
+app.get("/timeover", async (req, res) => {
   var id = req.params.id;
   var status = "borrowing"
-  var borrow = await Borrow.find({user_id:id,status:status});
+  var borrow = await Borrow.find({status:status});
   // console.log(borrow);
   // res.send(borrow);
 
