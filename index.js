@@ -256,11 +256,11 @@ app.get('/writestt/:id/:stt/:place', async (req, res) => {
 });
 
 //delete status
-app.get('/getstt/:place', async (req, res) => {
+app.get('/getstt/:node_ip', async (req, res) => {
   // let userid = req.params.id;
   // let status = req.params.stt;
-  let place = req.params.place;
-  let user = await Status.findOne({place:place});
+  let node_ip = req.params.node_ip;
+  let user = await Status.findOne({node_ip:node_ip});
   // res.send(user);
   if(user){
     console.log(user);
@@ -271,11 +271,11 @@ app.get('/getstt/:place', async (req, res) => {
   }
 });
 
-app.get('/delete_stt/:place', async (req, res) => {
+app.get('/delete_stt/:node_ip', async (req, res) => {
   // let userid = req.pearams.id;
   // let status = req.params.stt;
-  let place = req.params.place;
-  let user = await Status.findOne({place:place});
+  let node_ip = req.params.node_ip;
+  let user = await Status.findOne({node_ip:node_ip});
   // res.send(user);
   if(user){
     console.log(user);
