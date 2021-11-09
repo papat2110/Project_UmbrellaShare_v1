@@ -359,6 +359,15 @@ app.get('/recent_borrow/:user_id', async (req, res) => {
   res.send(recent);
 });
 
+//get recently borrow
+app.get('/recent_deposit/:user_id', async (req, res) => {
+  let user_id = req.params.user_id;
+  let stt = "depositing";
+  let recent = await Deposit.findOne({user_id:user_id,status:stt}).sort({ _id: -1 }).limit(10);
+  console.log(recent);
+  res.send(recent);
+});
+
 // app.get('/get_umbrellaa', async (req, res) => {
 //   // let node_ip = req.params.node_ip;
 //   let umbrella = await Realtime.find();
