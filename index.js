@@ -129,6 +129,13 @@ app.get("/borrow", async (req, res) => {
   res.send(borrow);
 });
 
+//deposit_sum
+app.get("/deposit", async (req, res) => {
+  let deposit = await Deposit.find();
+  console.log(deposit);
+  res.send(deposit);
+});
+
 //add umbrella
 app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res) => {
   var rfid = req.params.rfid;
