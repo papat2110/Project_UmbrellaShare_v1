@@ -122,6 +122,13 @@ app.get("/um_place", async (req, res) => {
   res.send(place);
 });
 
+//borrow_sum
+app.get("/borrow", async (req, res) => {
+  let borrow = await Borrow.find();
+  console.log(borrow);
+  res.send(borrow);
+});
+
 //add umbrella
 app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res) => {
   var rfid = req.params.rfid;
