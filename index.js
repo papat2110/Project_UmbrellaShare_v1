@@ -409,6 +409,8 @@ app.get('/delete_realtime/:node_ip', async (req, res) => {
 app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
   let umbrella_id = req.params.umbrella_id;
+  let noti = await Place.findOne({node_ip:getting_place});
+  let place_name = noti.place;
   let borrow_data = await Borrow.findOne({user_id:user_id,umbrella_id:umbrella_id}).sort({ _id: -1 }).limit(10);
   // res.send(user);
   if(borrow_data){
@@ -419,7 +421,7 @@ app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status',
     let time = getting_time - borrow_data.borrow_time;
     let status = req.params.status;
     
-    await Borrow.findOneAndUpdate(query,{getting_time:getting_time,getting_place:getting_place,time:time,status:status});
+    await Borrow.findOneAndUpdate(query,{getting_time:getting_time,getting_place:place_name,time:time,status:status});
 
     console.log("update success");
     res.send("update success");
