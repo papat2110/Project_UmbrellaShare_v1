@@ -409,8 +409,6 @@ app.get('/delete_realtime/:node_ip', async (req, res) => {
 app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status', async (req, res) => {
   let user_id = req.params.user_id;
   let umbrella_id = req.params.umbrella_id;
-  let noti = await Place.findOne({node_ip:getting_place});
-  let place_name = noti.place;
   let borrow_data = await Borrow.findOne({user_id:user_id,umbrella_id:umbrella_id}).sort({ _id: -1 }).limit(10);
   // res.send(user);
   if(borrow_data){
@@ -418,6 +416,8 @@ app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status',
     // let getting_time = req.params.getting_time;
     let getting_time = Date.now();
     let getting_place = req.params.getting_place;
+    let noti = await Place.findOne({node_ip:getting_place});
+    let place_name = noti.place;
     let time = getting_time - borrow_data.borrow_time;
     let status = req.params.status;
     
@@ -487,10 +487,12 @@ app.get('/getdeposit/:user_id/:locker/:return_time/:return_place/:status', async
     let query = {_id:deposit_data._id};
     let return_time = Date.now();
     let return_place = req.params.return_place;
+    let noti = await Place.findOne({node_ip:return_place});
+    let place_name = noti.place;
     let time = return_time - deposit_data.deposit_time;
     let status = req.params.status;
     
-    await Deposit.findOneAndUpdate(query,{return_time:return_time,return_place:return_place,time:time,status:status});
+    await Deposit.findOneAndUpdate(query,{return_time:return_time,return_place:place_name,time:time,status:status});
 
     console.log("update success");
     res.send("update success");
