@@ -8,5 +8,5 @@ const brokennotiSchema = new mongoose.Schema({
     noti_sst: String
   });
 
-  const Brokennoti = mongoose.model('Brokennoti', brokennoti);
+  const Brokennoti = mongoose.model('Brokennoti', brokennotiSchema);
   module.exports = Brokennoti
