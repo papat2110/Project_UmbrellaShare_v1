@@ -138,6 +138,13 @@ app.get("/deposit", async (req, res) => {
   res.send(deposit);
 });
 
+//get brokennoti
+app.get("/broken", async (req, res) => {
+  let broken = await Brokennoti.find();
+  console.log(broken);
+  res.send(broken);
+});
+
 //add umbrella
 app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res) => {
   var rfid = req.params.rfid;
