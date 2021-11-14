@@ -17,6 +17,7 @@ const Realtime = require("./models/RealtimeUmbrella");
 const Locker = require("./models/Locker");
 const Place = require("./models/Place");
 const Picture = require("./models/Picture");
+const Brokennoti = require("./models/Brokennoti");
 const jwt = require('jsonwebtoken');
 
 
@@ -158,6 +159,7 @@ app.post("/inform_umbrella/:user_id/:rfid/:status/:place/:img", async (req, res)
   var user = req.params.user_id;
   var noti_sst = "send";
   var photo = req.params.img; 
+  var sendnoti = await new Brokennoti({rfid:rfid,broken:status,place:place,user:user,noti_sst:noti_sst}).save()
   var umbrella = await Umbrella.findOne({rfid:rfid});
   if(umbrella){
     var query = {_id:umbrella._id};
@@ -178,7 +180,7 @@ app.post("/inform_umbrella/:user_id/:rfid/:status/:place/:img", async (req, res)
 //addmin recieve noti broken
 app.get("/recieve_noti", async (req, res) => {
   var send = "send";
-  var inform = await Umbrella.find({noti_sst:send});
+  var inform = await Brokennoti.find({noti_sst:send});
   if(inform){
     console.log(inform);
     res.send(inform);
