@@ -516,6 +516,19 @@ app.get('/deposit/:user_id/:locker/:deposit_time/:deposit_place/:return_time/:re
   let return_place = req.params.return_place;
   let status = req.params.status;
   let time = return_time - deposit_time;
+
+  var getlocker = await Locker.findOne({node_ip:deposit_place});
+  var query1 = {_id:getlocker._id};
+  if(getlocker.locker6 == "0"){
+    await Locker.findOneAndUpdate(query1,{locker6:user_id});
+  }
+  else if(getlocker.locker7 == "0"){
+    await Locker.findOneAndUpdate(query1,{locker7:user_id});
+  }
+  else if(getlocker.locker8 == "0"){
+    await Locker.findOneAndUpdate(query1,{locker8:user_id});
+  }
+
   let deposit = await new Deposit({user_id:user_id,locker:locker,deposit_time:deposit_time,
     deposit_place:place_name,return_time:return_time,return_place:return_place,time:time,status:status}).save()
   console.log(deposit);
@@ -537,6 +550,18 @@ app.get('/getdeposit/:user_id/:locker/:return_time/:return_place/:status', async
     let time = return_time - deposit_data.deposit_time;
     let status = req.params.status;
     
+    var getlocker = await Locker.findOne({node_ip:return_place});
+    var query1 = {_id:getlocker._id};
+    if(getlocker.locker6 == user_id){
+      await Locker.findOneAndUpdate(query1,{locker6:"0"});
+    }
+    else if(getlocker.locker7 == user_id){
+      await Locker.findOneAndUpdate(query1,{locker7:"0"});
+    }
+    else if(getlocker.locker8 == user_id){
+      await Locker.findOneAndUpdate(query1,{locker8:"0"});
+    }
+
     await Deposit.findOneAndUpdate(query,{return_time:return_time,return_place:place_name,time:time,status:status});
 
     console.log("update success");
