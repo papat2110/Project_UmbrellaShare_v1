@@ -530,7 +530,7 @@ app.get("/addlocker/:node_ip/:locker1/:locker2/:locker3/:locker4/:locker5/:locke
 //add locker
 app.get("/getlocker/:node_ip", async (req, res) => {
   var node_ip = req.params.node_ip;
-  var getlocker = await Locker.find({node_ip:node_ip});
+  var getlocker = await Locker.findOne({node_ip:node_ip});
 
   console.log(getlocker.node_ip);
   res.send(getlocker.node_ip);
