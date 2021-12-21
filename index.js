@@ -530,17 +530,11 @@ app.get("/addlocker/:node_ip/:locker1/:locker2/:locker3/:locker4/:locker5/:locke
 //add locker
 app.get("/getlocker/:node_ip", async (req, res) => {
   var node_ip = req.params.node_ip;
-  // var getlocker = await Locker.find({node_ip:node_ip});
-  var show = "";
-  for(let i = 1; i <= 8; i++){
-    var locker = await Locker.findOne({node_ip:node_ip,locker:i});
-    var degree = locker.degree;
-    var locker_status = locker.locker_status;
-    show = show + ("$"+locker.locker+":"+locker_status+"\n");
-  }
+  var getlocker = await Locker.find({node_ip:node_ip});
+
   // res.send(getlocker.locker);
-  console.log(show);
-  res.send(show);
+  console.log(getlocker);
+  res.send(getlocker);
 });
 
 //add picture
