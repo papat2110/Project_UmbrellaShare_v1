@@ -533,8 +533,22 @@ app.get("/getlocker/:node_ip", async (req, res) => {
   var getlocker = await Locker.find({node_ip:node_ip});
 
   // res.send(getlocker.locker);
-  console.log(getlocker);
-  res.send(getlocker);
+  console.log("$ip:"+getlocker.node_ip+"\nlocker1:"+getlocker.locker1
+  +"\nlocker2:"+getlocker.locker2
+  +"\nlocker3:"+getlocker.locker3
+  +"\nlocker4:"+getlocker.locker4
+  +"\nlocker5:"+getlocker.locker5
+  +"\nlocker6:"+getlocker.locker6
+  +"\nlocker7:"+getlocker.locker7
+  +"\nlocker8:"+getlocker.locker8);
+  res.send("$ip:"+getlocker.node_ip+"\nlocker1:"+getlocker.locker1
+  +"\nlocker2:"+getlocker.locker2
+  +"\nlocker3:"+getlocker.locker3
+  +"\nlocker4:"+getlocker.locker4
+  +"\nlocker5:"+getlocker.locker5
+  +"\nlocker6:"+getlocker.locker6
+  +"\nlocker7:"+getlocker.locker7
+  +"\nlocker8:"+getlocker.locker8);
 });
 
 //add picture
