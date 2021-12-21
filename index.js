@@ -339,6 +339,9 @@ app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/
   else if(getlocker.locker4 == "1"){
     await Locker.findOneAndUpdate(query,{locker4:"0"});
   }
+  else if(getlocker.locker5 == "1"){
+    await Locker.findOneAndUpdate(query,{locker5:"0"});
+  }
 
   let borrow = await new Borrow({user_id:user_id,umbrella_id:umbrella_id,borrow_time:borrow_time,
     borrow_place:place_name,getting_time:getting_time,getting_place:getting_place,time:time,status:status}).save()
@@ -434,6 +437,7 @@ app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status',
   let user_id = req.params.user_id;
   let umbrella_id = req.params.umbrella_id;
   let borrow_data = await Borrow.findOne({user_id:user_id,umbrella_id:umbrella_id}).sort({ _id: -1 }).limit(10);
+
   // res.send(user);
   if(borrow_data){
     let query = {_id:borrow_data._id};
@@ -444,9 +448,26 @@ app.get('/getborrow/:user_id/:umbrella_id/:getting_time/:getting_place/:status',
     let place_name = noti.place;
     let time = getting_time - borrow_data.borrow_time;
     let status = req.params.status;
+
+    var getlocker = await Locker.findOne({node_ip:getting_place});
+    var query1 = {_id:getlocker._id};
+    if(getlocker.locker1 == "0"){
+      await Locker.findOneAndUpdate(query1,{locker1:"1"});
+    }
+    else if(getlocker.locker2 == "0"){
+      await Locker.findOneAndUpdate(query1,{locker2:"1"});
+    }
+    else if(getlocker.locker3 == "0"){
+      await Locker.findOneAndUpdate(query1,{locker3:"1"});
+    }
+    else if(getlocker.locker4 == "0"){
+      await Locker.findOneAndUpdate(query1,{locker4:"1"});
+    }
+    else if(getlocker.locker5 == "0"){
+      await Locker.findOneAndUpdate(query1,{locker5:"1"});
+    }
     
     await Borrow.findOneAndUpdate(query,{getting_time:getting_time,getting_place:place_name,time:time,status:status});
-
     console.log("update success");
     res.send("update success");
   }
