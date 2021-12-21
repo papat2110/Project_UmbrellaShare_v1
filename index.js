@@ -512,12 +512,17 @@ app.get('/getdeposit/:user_id/:locker/:return_time/:return_place/:status', async
 });
 
 //add locker
-app.get("/addlocker/:node_ip/:locker/:degree/:locker_status", async (req, res) => {
+app.get("/addlocker/:node_ip/:locker1/:locker2/:locker3/:locker4/:locker5/:locker6/:locker7/:locker8", async (req, res) => {
   var node_ip = req.params.node_ip;
-  var locker = req.params.locker;
-  var degree = req.params.degree;
-  var locker_status = req.params.locker_status;
-  var addlocker = await new Locker({node_ip:node_ip,locker:locker,degree:degree,locker_status:locker_status}).save()
+  var locker1 = req.params.locker1;
+  var locker2 = req.params.locker2;
+  var locker3 = req.params.locker3;
+  var locker4 = req.params.locker4;
+  var locker5 = req.params.locker5;
+  var locker6 = req.params.locker6;
+  var locker7 = req.params.locker7;
+  var locker8 = req.params.locker8;
+  var addlocker = await new Locker({node_ip:node_ip,locker1:locker1,locker2:locker2,locker3:locker3,locker4:locker4,locker5:locker5,locker6:locker6,locker7:locker7,locker8:locker8}).save()
   console.log(addlocker);
   res.send(addlocker);
 });
