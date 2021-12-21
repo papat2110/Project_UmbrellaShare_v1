@@ -325,6 +325,21 @@ app.get('/borrow/:user_id/:umbrella_id/:borrow_time/:borrow_place/:getting_time/
   let time = getting_time - borrow_time;
   let status = req.params.status;
 
+  var getlocker = await Locker.findOne({node_ip:borrow_place});
+  var query = {_id:getlocker._id};
+  if(getlocker.locker1 == "1"){
+    await Locker.findOneAndUpdate(query,{locker1:"0"});
+  }
+  else if(getlocker.locker2 == "1"){
+    await Locker.findOneAndUpdate(query,{locker2:"0"});
+  }
+  else if(getlocker.locker3 == "1"){
+    await Locker.findOneAndUpdate(query,{locker3:"0"});
+  }
+  else if(getlocker.locker4 == "1"){
+    await Locker.findOneAndUpdate(query,{locker4:"0"});
+  }
+
   let borrow = await new Borrow({user_id:user_id,umbrella_id:umbrella_id,borrow_time:borrow_time,
     borrow_place:place_name,getting_time:getting_time,getting_place:getting_place,time:time,status:status}).save()
   console.log("การยืมสำเร็จ");
@@ -527,7 +542,23 @@ app.get("/addlocker/:node_ip/:locker1/:locker2/:locker3/:locker4/:locker5/:locke
   res.send(addlocker);
 });
 
-//add locker
+// //edit locker
+// app.get("/addlocker/:node_ip/:locker1/:locker2/:locker3/:locker4/:locker5/:locker6/:locker7/:locker8", async (req, res) => {
+//   var node_ip = req.params.node_ip;
+//   var locker1 = req.params.locker1;
+//   var locker2 = req.params.locker2;
+//   var locker3 = req.params.locker3;
+//   var locker4 = req.params.locker4;
+//   var locker5 = req.params.locker5;
+//   var locker6 = req.params.locker6;
+//   var locker7 = req.params.locker7;
+//   var locker8 = req.params.locker8;
+//   var addlocker = await new Locker({node_ip:node_ip,locker1:locker1,locker2:locker2,locker3:locker3,locker4:locker4,locker5:locker5,locker6:locker6,locker7:locker7,locker8:locker8}).save()
+//   console.log(addlocker);
+//   res.send(addlocker);
+// });
+
+//get locker
 app.get("/getlocker/:node_ip", async (req, res) => {
   var node_ip = req.params.node_ip;
   var getlocker = await Locker.findOne({node_ip:node_ip});
