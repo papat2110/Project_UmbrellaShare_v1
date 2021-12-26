@@ -145,6 +145,14 @@ app.get('/picture', async (req, res) => {
   res.send(picture);
 });
 
+//get picture
+app.get('/picture_1/:borrow_id', async (req, res) => {
+  var borrow_id = req.params.borrow_id;
+  let picture = await Picture.find({borrow_id:borrow_id});
+  console.log(picture);
+  res.send(picture);
+});
+
 
 //get brokennoti
 app.get("/broken", async (req, res) => {
