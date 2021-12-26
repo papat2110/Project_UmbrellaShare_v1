@@ -138,6 +138,14 @@ app.get("/deposit", async (req, res) => {
   res.send(deposit);
 });
 
+//get picture
+app.get('/picture', async (req, res) => {
+  let picture = await Picture.find();
+  console.log(picture);
+  res.send(picture);
+});
+
+
 //get brokennoti
 app.get("/broken", async (req, res) => {
   let broken = await Brokennoti.find();
@@ -271,14 +279,6 @@ app.post("/user/:user_id", async (req, res) => {
   }else{
     res.send("incorrect user id");
   }
-});
-
-
-//get picture
-app.get('/picture', async (req, res) => {
-  let picture = await Picture.find();
-  console.log(picture);
-  res.send(picture);
 });
 
 //delete status
