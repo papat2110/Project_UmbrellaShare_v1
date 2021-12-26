@@ -262,21 +262,23 @@ app.post("/user/:user_id", async (req, res) => {
   }
 });
 
-//realtime request
-app.get('/writestt/:id/:stt/:place', async (req, res) => {
-  let userid = req.params.id;
-  let status = req.params.stt;
-  let place = req.params.place;
-  let user = await User.findOne({p_id:userid});
-  // res.send(user);
+//get user
+app.post("/user/:user_id", async (req, res) => {
+  var user_id = req.params.user_id;
+  let user = await User.findOne({p_id:user_id});
   if(user){
-    let userstatus = await new Status({userid:userid,status:status,place:place}).save()
-    console.log("correct ID");
-    res.send("correct ID");
-  }
-  if(!user){
     res.send(user);
+  }else{
+    res.send("incorrect user id");
   }
+});
+
+
+//get picture
+app.get('/picture', async (req, res) => {
+  let picture = await Picture.find();
+  console.log(picture);
+  res.send(picture);
 });
 
 //delete status
