@@ -289,6 +289,16 @@ app.post("/user/:user_id", async (req, res) => {
   }
 });
 
+//up status
+app.get('/writestt/:id/:stt/:node_ip', async (req, res) => {
+  let userid = req.params.id;
+  let status = req.params.stt;
+  let node_ip = req.params.node_ip;
+  var addstatus = await new Status({userid:userid,status:status,place:node_ip}).save()
+  console.log(addstatus);
+  res.send(addstatus);
+});
+
 //delete status
 app.get('/getstt/:node_ip', async (req, res) => {
   // let userid = req.params.id;
