@@ -736,9 +736,9 @@ app.get('/rotatestt/:node_ip', async (req, res) => {
 });
 
 //edit rotation status
-app.get("/edit_rotationstt/:node_ip", async (req, res) => {
+app.get("/edit_rotationstt/:node_ip/:stt", async (req, res) => {
   let nodeip = req.params.node_ip;
-  let status = "finished";
+  let status = req.params.stt;
   var rotation = await Rotation.findOne({nodeip:nodeip});
   if(rotation){
     var query = {_id:rotation._id};
