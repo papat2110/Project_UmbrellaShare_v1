@@ -18,6 +18,7 @@ const Locker = require("./models/Locker");
 const Place = require("./models/Place");
 const Picture = require("./models/Picture");
 const Brokennoti = require("./models/Brokennoti");
+const Rotation = require("./models/Rotation");
 const jwt = require('jsonwebtoken');
 
 
@@ -723,4 +724,28 @@ app.get('/noti/:user_id', async (req, res) => {
   let expire_br = await Borrow.find({user_id:user_id,status:stt_exp});
   console.log(expire_br);
   res.send(expire_br);
+});
+
+//finished rotation status
+app.get('/rotatestt/:node_ip', async (req, res) => {
+  let nodeip = req.params.node_ip;
+  let status = "rotating";
+  var addstatus = await new Rotation({nodeip:nodeip,status:status}).save()
+  console.log(addstatus);
+  res.send(addstatus);
+});
+
+//edit rotation status
+app.get("/edit_rotationstt/:node_ip", async (req, res) => {
+  let nodeip = req.params.node_ip;
+  let status = "finished";
+  var rotation = await Rotation.findOne({nodeip:nodeip});
+  if(rotation){
+    var query = {_id:rotation._id};
+    await Rotation.findOneAndUpdate(query,{status:status});
+    console.log(rotation);
+    res.send(rotation);
+  }else if(!rotation){
+    res.send("something wrong");
+  }
 });
