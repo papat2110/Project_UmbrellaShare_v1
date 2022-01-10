@@ -731,8 +731,15 @@ app.get('/rotatestt/:node_ip', async (req, res) => {
   let nodeip = req.params.node_ip;
   let status = "rotating";
   var addstatus = await new Rotation({nodeip:nodeip,status:status}).save()
-  console.log(addstatus);
-  res.send(addstatus);
+  // console.log(addstatus);
+  // res.send(addstatus);
+  if(addstatus){
+    console.log(addstatus);
+    res.send(addstatus._id+"\n$$"+addstatus.status);
+  }
+  if(!addstatus){
+    res.send("error");
+  }
 });
 
 //edit rotation status
