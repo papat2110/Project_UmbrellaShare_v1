@@ -757,19 +757,3 @@ app.get("/edit_rotationstt/:node_ip/:stt", async (req, res) => {
   }
 });
 
-//delete realtime
-app.get('/delete/:node_ip', async (req, res) => {
-  let node_ip = req.params.node_ip;
-  let status = "rotating"
-  let realtime = await Rotation.find({nodeip:node_ip,status:status});
-  // res.send(user);
-  if(realtime){
-    console.log(realtime);
-    // await Rotation.findByIdAndDelete(realtime._id);
-    await Rotation.deleteMany({});
-    res.send("blank");
-  }
-  if(!realtime){
-    res.send("error");
-  }
-});
