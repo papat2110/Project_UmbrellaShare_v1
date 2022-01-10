@@ -730,7 +730,7 @@ app.get('/noti/:user_id', async (req, res) => {
 app.get('/rotatestt/:node_ip', async (req, res) => {
   let nodeip = req.params.node_ip;
   // let status = "rotating";
-  var addstatus = await Rotation.find({nodeip:nodeip});
+  var addstatus = await Rotation.findOne({nodeip:nodeip});
   // console.log(addstatus);
   // res.send(addstatus);
   if(addstatus){
