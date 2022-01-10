@@ -765,7 +765,7 @@ app.get('/delete/:node_ip', async (req, res) => {
   // res.send(user);
   if(realtime){
     console.log(realtime);
-    await Rotation.findByIdAndDelete(realtime._id);
+    await Rotation.findAndDelete(realtime);
     res.send("blank");
   }
   if(!realtime){
