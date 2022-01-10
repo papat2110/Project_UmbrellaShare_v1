@@ -735,7 +735,7 @@ app.get('/rotatestt/:node_ip', async (req, res) => {
   // res.send(addstatus);
   if(addstatus){
     console.log(addstatus);
-    res.send(addstatus._id+"\n$$"+addstatus.status);
+    res.send(addstatus._id+"\n"+addstatus.status);
   }
   if(!addstatus){
     res.send("error");
