@@ -762,12 +762,12 @@ app.get('/add_rotation/:node_ip', async (req, res) => {
   let nodeip = req.params.node_ip;
   let status = "stop";
   var addstatus = await new Rotation({nodeip:nodeip,status:status}).save();
-  // console.log(addstatus);
-  // res.send(addstatus);
-  if(addstatus){
-    console.log(addstatus);
-  }
-  if(!addstatus){
-    res.send("error");
-  }
+  console.log(addstatus);
+  res.send(addstatus);
+  // if(addstatus){
+  //   console.log(addstatus);
+  // }
+  // if(!addstatus){
+  //   res.send("error");
+  // }
 });
