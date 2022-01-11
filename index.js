@@ -758,7 +758,7 @@ app.get("/edit_rotationstt/:node_ip/:stt", async (req, res) => {
 });
 
 //add rotation 
-app.get('/add/:node_ip', async (req, res) => {
+app.get('/add_rotation/:node_ip', async (req, res) => {
   let nodeip = req.params.node_ip;
   let status = "stop";
   var addstatus = await new Rotation({nodeip:nodeip,status:status}).save();
