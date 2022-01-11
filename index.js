@@ -757,3 +757,17 @@ app.get("/edit_rotationstt/:node_ip/:stt", async (req, res) => {
   }
 });
 
+//add rotation 
+app.get('/add/:node_ip', async (req, res) => {
+  let nodeip = req.params.node_ip;
+  let status = "stop";
+  var addstatus = await new Rotation({nodeip:nodeip}).save();
+  // console.log(addstatus);
+  // res.send(addstatus);
+  if(addstatus){
+    console.log(addstatus);
+  }
+  if(!addstatus){
+    res.send("error");
+  }
+});
