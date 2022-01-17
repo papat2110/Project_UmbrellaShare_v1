@@ -175,6 +175,13 @@ app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res)
   res.send(addumbrella);
 });
 
+//get umbrella
+app.get("/get_umbrella", async (req, res) => {
+  let umbrella = await Umbrella.find();
+  console.log(umbrella);
+  res.send(umbrella);
+});
+
 //edit umbrella
 app.get("/edit_umbrella/:user_id/:rfid/:status/:place/:img", async (req, res) => {
   var rfid = req.params.rfid;
