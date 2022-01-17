@@ -186,8 +186,8 @@ app.get("/edit_umbrella/:user_id/:rfid/:status/:place/:img", async (req, res) =>
   if(umbrella){
     var query = {_id:umbrella._id};
     await Umbrella.findOneAndUpdate(query,{status:status,place:place,user:user,photo:photo});
-    console.log(umbrella);
-    res.send(umbrella);
+    console.log("update success");
+    res.send("update success");
   }else if(!umbrella){
     res.send("something wrong");
   }
