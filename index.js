@@ -728,20 +728,18 @@ app.get("/timeover", async (req, res) => {
   var id = req.params.id;
   var status = "borrowing"
   var borrow = await Borrow.find({status:status});
-  // console.log(borrow);
-  // res.send(borrow);
+  console.log(borrow.borrow_time);
+  res.send(borrow.borrow_time);
 
   for(let i = 0; i < borrow.length; i++){
     var borrow_time = borrow[i].borrow_time;
-    console.log(borrow_time);
-    res.send(borrow_time);
+    // console.log(borrow_time);
+    // res.send(borrow_time);
     var usr = borrow[i].user_id;
     var t = Number(borrow_time);
     var now = Date.now();
     var valid = (now - t)/(1000*60*60*24);
     var a = valid.toString();
-    // console.log(a);
-    // res.send(a);
     // if(a>0.001){
     //   let query = {_id:borrow[i]._id};
     //   let stt_expire = "expire";
