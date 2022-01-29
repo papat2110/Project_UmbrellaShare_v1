@@ -735,11 +735,13 @@ app.get("/timeover", async (req, res) => {
     var borrow_time = borrow[i].borrow_time;
     var usr = borrow[i].user_id;
     var t = Number(borrow_time);
+    console.log(t);
+    res.send(t);
     var now = Date.now();
     var valid = (now - t)/(1000*60*60*24);
     var a = valid.toString();
-    console.log(a);
-    res.send(a);
+    // console.log(a);
+    // res.send(a);
     // if(a>0.001){
     //   let query = {_id:borrow[i]._id};
     //   let stt_expire = "expire";
