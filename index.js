@@ -727,7 +727,7 @@ app.get("/time/:time1", async (req, res) => {
 app.get("/timeover", async (req, res) => {
   var id = req.params.id;
   var status = "borrowing"
-  var borrow = await Borrow.find({status:status});
+  // var borrow = await Borrow.find({status:status});
 
   var count = await Borrow.count();
   console.log(count);
