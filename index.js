@@ -891,9 +891,7 @@ app.get("/timeover", async (req, res) => {
   var borrow = await Borrow.find({ status: status });
   // const countBorrow = await Borrow.countDocuments({status:status});
 
-  for (let i = 0; i < borrow.length; i++) {
-    console.log(borrow[i]);
-    res.send(borrow[i]);
+  for (let i = 0; i < borrow.length; i++){
     var borrow_time = borrow[i].borrow_time;
     var usr = borrow[i].user_id;
     var t = Number(borrow_time);
