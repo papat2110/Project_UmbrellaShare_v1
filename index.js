@@ -729,10 +729,8 @@ app.get("/timeover", async (req, res) => {
   var status = "borrowing"
   var borrow = await Borrow.find({status:status});
 
-  borrow.count({}, function(error, numOfDocs) {
-    console.log('I have '+numOfDocs+' documents in my collection');
-    // ..
-  });
+  console.log(borrow.count());
+  res.send(borrow.count());
   // const countBorrow = await Borrow.countDocuments({status:status});
 
   // for(let i = 0; i < borrow.length; i++){
