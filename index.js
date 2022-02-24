@@ -127,25 +127,24 @@ app.get("/verify_email/:name/:email/:tel/:password/:pid", async (req, res) => {
   res.send("verify success");
 });
 
-//add place
-app.post("/addplace/:latitude/:longitude/:place/:node_ip", async (req, res) => {
-  var latitude = req.params.latitude;
-  var longitude = req.params.longitude;
-  var place = req.params.place;
-  var node_ip = req.params.node_ip;
-  var addplace = await new Place({
-    latitude: latitude,
-    longitude: longitude,
-    place: place,
-    node_ip: node_ip,
-  }).save();
-  console.log(addplace);
-  res.send(addplace);
-});
+// //add place
+// app.post("/addplace/:latitude/:longitude/:place/:node_ip", async (req, res) => {
+//   var latitude = req.params.latitude;
+//   var longitude = req.params.longitude;
+//   var place = req.params.place;
+//   var node_ip = req.params.node_ip;
+//   var addplace = await new Place({
+//     latitude: latitude,
+//     longitude: longitude,
+//     place: place,
+//     node_ip: node_ip,
+//   }).save();
+//   console.log(addplace);
+//   res.send(addplace);
+// });
 
 //edit place
-app.get("/edit_place/:lat/:long/:place/:mac_address",
-  async (req, res) => {
+app.get("/edit_place/:lat/:long/:place/:mac_address",async (req, res) => {
     var lat = req.params.lat;
     var long = req.params.long;
     var place = req.params.place;
