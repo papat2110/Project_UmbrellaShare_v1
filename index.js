@@ -144,7 +144,7 @@ app.post("/addplace/:latitude/:longitude/:place/:node_ip", async (req, res) => {
 });
 
 //edit place
-app.post("/edit_place/:lat/:long/:place/:mac_address",
+app.get("/edit_place/:lat/:long/:place/:mac_address",
   async (req, res) => {
     var lat = req.params.lat;
     var long = req.params.long;
