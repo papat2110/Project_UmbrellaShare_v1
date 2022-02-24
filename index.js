@@ -216,8 +216,7 @@ app.get("/get_umbrella", async (req, res) => {
 });
 
 //edit umbrella
-app.get(
-  "/edit_umbrella/:user_id/:rfid/:status/:place/:img",
+app.get("/edit_umbrella/:user_id/:rfid/:status/:place/:img",
   async (req, res) => {
     var rfid = req.params.rfid;
     var status = req.params.status;
