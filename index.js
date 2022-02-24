@@ -152,6 +152,8 @@ app.get("/edit_place/:lat/:long/:place/:mac_address",async (req, res) => {
     // console.log(place);
     // res.send(place);
     var place_change = await Place.findOne({ node_ip: mac_address });
+    console.log(place);
+    res.send(place);
     if (place_change) {
       var query = { _id: place_change._id };
       await Place.findOneAndUpdate(query, {
