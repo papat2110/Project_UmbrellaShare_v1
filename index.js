@@ -144,29 +144,29 @@ app.post("/addplace/:latitude/:longitude/:place/:node_ip", async (req, res) => {
 });
 
 //edit place
-app.get("/edit_place/:lat/:long/:place/:mac_address", async (req, res) => {
-    var lat = req.params.lat;
-    var long = req.params.long;
-    var place = req.params.place;
-    var mac_address = req.params.mac_address;
-    console.log(place);
-    res.send(place);
-    var place_change = await Place.findOne({ node_ip: mac_address });
-    if (place_change) {
-      var query = { _id: place_change._id };
-      await Place.findOneAndUpdate(query, {
-        latitude: lat,
-        longitude: long,
-        place: place,
-        node_ip: mac_address
-      });
-      console.log("update success");
-      res.send("update success");
-    } else if (!place_change) {
-      console.log("something wrong");
-      res.send("something wrong");
-    }
-});
+// app.get("/edit_place/:lat/:long/:place/:mac_address", async (req, res) => {
+//     var lat = req.params.lat;
+//     var long = req.params.long;
+//     var place = req.params.place;
+//     var mac_address = req.params.mac_address;
+//     console.log(place);
+//     res.send(place);
+//     var place_change = await Place.findOne({ node_ip: mac_address });
+//     if (place_change) {
+//       var query = { _id: place_change._id };
+//       await Place.findOneAndUpdate(query, {
+//         latitude: lat,
+//         longitude: long,
+//         place: place,
+//         node_ip: mac_address
+//       });
+//       console.log("update success");
+//       res.send("update success");
+//     } else if (!place_change) {
+//       console.log("something wrong");
+//       res.send("something wrong");
+//     }
+// });
 
 app.get("/um_place", async (req, res) => {
   let place = await Place.find();
@@ -211,9 +211,7 @@ app.get("/broken", async (req, res) => {
 });
 
 //add umbrella
-app.get(
-  "/addumbrella/:user_id/:rfid/:status/:place/:noti_sst",
-  async (req, res) => {
+app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res) => {
     var rfid = req.params.rfid;
     var status = req.params.status;
     var place = req.params.place;
