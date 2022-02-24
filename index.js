@@ -335,7 +335,7 @@ app.get("/recieve_noti", async (req, res) => {
 app.get("/read/:umbrella_id", async (req, res) => {
   var umbrella_id = req.params.umbrella_id;
   var read = "read";
-  var umbrella = await Umbrella.findOne({ _id: umbrella_id });
+  var umbrella = await Umbrella.findOne({ rfid: umbrella_id });
   if (umbrella) {
     var query = { _id: umbrella._id };
     await Umbrella.findOneAndUpdate(query, { noti_sst: read });
