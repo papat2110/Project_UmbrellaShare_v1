@@ -149,20 +149,22 @@ app.get("/edit_place/:lat/:long/:place/:mac_address",async (req, res) => {
     var long = req.params.long;
     var place = req.params.place;
     var mac_address = req.params.mac_address;
-    var place = await Place.findOne({ place: place });
-    if (place) {
-      var query = { _id: place._id };
-      await Place.findOneAndUpdate(query, {
-        latitude: lat,
-        longitude: long,
-        place: place,
-        node_ip: mac_address
-      });
-      console.log("update success");
-      res.send("update success");
-    } else if (!place) {
-      res.send("something wrong");
-    }
+    console.log(place);
+    res.send(place);
+    // var place = await Place.findOne({ place: place });
+    // if (place) {
+    //   var query = { _id: place._id };
+    //   await Place.findOneAndUpdate(query, {
+    //     latitude: lat,
+    //     longitude: long,
+    //     place: place,
+    //     node_ip: mac_address
+    //   });
+    //   console.log("update success");
+    //   res.send("update success");
+    // } else if (!place) {
+    //   res.send("something wrong");
+    // }
   }
 );
 
