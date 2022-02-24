@@ -168,7 +168,7 @@ app.get("/edit_place/:lat/:long/:place/:mac_address", async (req, res) => {
     //   console.log("something wrong");
     //   res.send("something wrong");
     // }
-  });
+});
 
 app.get("/um_place", async (req, res) => {
   let place = await Place.find();
