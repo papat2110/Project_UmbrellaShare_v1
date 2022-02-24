@@ -143,6 +143,33 @@ app.post("/addplace/:latitude/:longitude/:place/:node_ip", async (req, res) => {
   res.send(addplace);
 });
 
+//edit place
+app.get("/edit_place/:lat/:long/:place/:mac_address", async (req, res) => {
+    var lat = req.params.lat;
+    var long = req.params.long;
+    var place = req.params.place;
+    var mac_address = req.params.mac_address;
+    console.log(place);
+    res.send(place);
+    var place_change = await Place.findOne({ node_ip: mac_address });
+    console.log(place_change);
+    res.send(place_change);
+    if (place_change) {
+      var query = { _id: place_change._id };
+      await Place.findOneAndUpdate(query, {
+        latitude: lat,
+        longitude: long,
+        place: place,
+        node_ip: mac_address
+      });
+      // console.log("update success");
+      // res.send("update success");
+    } else if (!place_change) {
+      console.log("something wrong");
+      res.send("something wrong");
+    }
+});
+
 app.get("/um_place", async (req, res) => {
   let place = await Place.find();
   console.log(place);
@@ -216,7 +243,8 @@ app.get("/get_umbrella", async (req, res) => {
 });
 
 //edit umbrella
-app.get("/edit_umbrella/:user_id/:rfid/:status/:place/:img",
+app.get(
+  "/edit_umbrella/:user_id/:rfid/:status/:place/:img",
   async (req, res) => {
     var rfid = req.params.rfid;
     var status = req.params.status;
