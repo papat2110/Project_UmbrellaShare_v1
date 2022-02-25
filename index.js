@@ -1005,16 +1005,16 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
     if(locker.locker1 == "0"){
       count_available = count_available + 1;
     }
-    if(locker.locker2 == "0"){
+    else if(locker.locker2 == "0"){
       count_available = count_available + 1;
     }
-    if(locker.locker3 == "0"){
+    else if(locker.locker3 == "0"){
       count_available = count_available + 1;
     }
-    if(locker.locker4 == "0"){
+    else if(locker.locker4 == "0"){
       count_available = count_available + 1;
     }
-    if(locker.locker5 == "0"){
+    else if(locker.locker5 == "0"){
       count_available = count_available + 1;
     }else{
       console.log(0);
