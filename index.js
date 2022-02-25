@@ -1002,23 +1002,28 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
   var count_available = 0;
   let available = [];
   let locker = await Locker.findOne({ node_ip: mac_address });
-  if(status == "borrow"){
-    available[0] = locker.locker1;
-    available[1] = locker.locker2;
-    available[2] = locker.locker3;
-    available[3] = locker.locker4;
-    available[4] = locker.locker5;
-    console.log(available);
-    res.send(available);
-  }
-  if(status == "deposit"){
-    available[5] = locker.locker6;
-    available[6] = locker.locker7;
-    available[7] = locker.locker8;
-    console.log(available);
-    res.send(available);
+  if (locker){
+    if(status == "borrow"){
+      available[0] = locker.locker1;
+      available[1] = locker.locker2;
+      available[2] = locker.locker3;
+      available[3] = locker.locker4;
+      available[4] = locker.locker5;
+      console.log(available);
+      res.send(available);
+    }
+    if(status == "deposit"){
+      available[5] = locker.locker6;
+      available[6] = locker.locker7;
+      available[7] = locker.locker8;
+      console.log(available);
+      res.send(available);
+    }else{
+      console.log(available);
+      res.send(available);
+    }
   }else{
-    console.log(available);
-    res.send(available);
+    console.log("something wrong");
+    res.send("something wrong");
   }
 });
