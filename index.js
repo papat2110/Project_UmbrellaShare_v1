@@ -1002,7 +1002,7 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
   var count_available = 0;
   let locker = await Locker.findOne({ node_ip: mac_address });
   if(status == "borrow"){
-    const available = [];
+    let available = [];
     available[0] = locker.locker1;
     available[1] = locker.locker2;
     available[2] = locker.locker3;
