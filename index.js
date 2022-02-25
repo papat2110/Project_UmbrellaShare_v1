@@ -1006,8 +1006,8 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
     // res.send(locker.locker2);
     for (let i = 1; i <= 5; i++){
       let lk = "locker"+i;
-      console.log(locker.lk);
-      res.send(locker.lk);
+      console.log(lk);
+      res.send(lk);
       // if(locker.lk == "0"){
       //   count_available = count_available + 1;
       //   console.log(locker.lk);
