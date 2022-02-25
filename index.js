@@ -1010,7 +1010,7 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
     available[4] = locker.locker5;
     for(let i=0; i<5; i++){
       if(available[i] == "0"){
-        count_available++;
+        count_available += 1;
       }
     }
     console.log(count_available);
