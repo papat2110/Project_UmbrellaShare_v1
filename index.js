@@ -1008,15 +1008,12 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
     available[2] = locker.locker3;
     available[3] = locker.locker4;
     available[4] = locker.locker5;
-    // for(let i=0; i<5; i++){
-    //   if(available[i] == "0"){
-    //     // count_available += 1;
-    //     console.log(available[i]);
-    //     res.send(available[i]);
-    //   }
-    // }
-    var numOfTrue = available.filter(x => x === "0").length;
-    console.log(numOfTrue);
-    res.send(numOfTrue);
+    for(let i=0; i<5; i++){
+      if(available[i] == "0"){
+        count_available = count_available + 1;
+        console.log(count_available);
+        res.send(count_available);
+      }
+    }
   }
 });
