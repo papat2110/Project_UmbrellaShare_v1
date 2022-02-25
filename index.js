@@ -1013,9 +1013,9 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
       res.send(available);
     }
     if(status == "deposit"){
-      available[5] = locker.locker6;
-      available[6] = locker.locker7;
-      available[7] = locker.locker8;
+      available[0] = locker.locker6;
+      available[1] = locker.locker7;
+      available[2] = locker.locker8;
       console.log(available);
       res.send(available);
     }else{
