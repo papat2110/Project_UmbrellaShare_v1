@@ -1004,11 +1004,13 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
   if(status == "borrow"){
     for (let i = 1; i <= 5; i++){
       let lk = "locker"+i;
-      if(locker.lk == "0"){
-        count_available = count_available + 1;
-        console.log(locker.lk);
-        res.send(locker.lk);
-      }
+      console.log(locker.lk);
+      res.send(locker.lk);
+      // if(locker.lk == "0"){
+      //   count_available = count_available + 1;
+      //   console.log(locker.lk);
+      //   res.send(locker.lk);
+      // }
     }
   }
   // console.log(count_available);
