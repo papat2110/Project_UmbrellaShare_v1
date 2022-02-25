@@ -1020,6 +1020,8 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
       console.log(0);
       res.send(0);
     }
+    console.log(count_available);
+    res.send(count_available);
     // for (let i = 1; i <= 5; i++){
       
     // }
