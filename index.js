@@ -994,3 +994,11 @@ app.get("/add_rotation/:node_ip", async (req, res) => {
   //   res.send("error");
   // }
 });
+
+//count locker
+app.get("/count_locker/:mac_address", async (req, res) => {
+  let mac_address = req.params.mac_address;
+  let locker = await Locker.findOne({ node_ip: mac_address });
+  console.log(locker);
+  res.send(locker);
+});
