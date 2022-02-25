@@ -339,6 +339,7 @@ app.get("/read/:umbrella_id", async (req, res) => {
   if (umbrella) {
     var query = { _id: umbrella._id };
     await Umbrella.findOneAndUpdate(query, { noti_sst: read });
+    await Brokennoti.findOneAndUpdate(query, { noti_sst: read });
     console.log(umbrella);
     res.send(umbrella);
   } else if (!umbrella) {
