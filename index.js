@@ -996,13 +996,19 @@ app.get("/add_rotation/:node_ip", async (req, res) => {
 });
 
 //count locker
-// app.get("/count_locker/:mac_address/:status", async (req, res) => {
-//   let mac_address = req.params.mac_address;
-//   let status = req.params.status;
-//   let count_available = 0;
-//   let locker = await Locker.findOne({ node_ip: mac_address });
-//   if(status == "borrow"){
-//     console.log(count_available);
-//     res.send(count_available);
-//   }
-// });
+app.get("/count_locker/:mac_address/:status", async (req, res) => {
+  let mac_address = req.params.mac_address;
+  let status = req.params.status;
+  let count_available = 0;
+  let locker = await Locker.findOne({ node_ip: mac_address });
+  if(status == "borrow"){
+    const available = [];
+    available[0] = locker.locker1;
+    available[1] = locker.locker2;
+    available[2] = locker.locker3;
+    available[3] = locker.locker4;
+    available[4] = locker.locker5;
+    console.log(available);
+    res.send(available);
+  }
+});
