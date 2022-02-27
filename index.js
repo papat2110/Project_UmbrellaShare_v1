@@ -1019,6 +1019,7 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
       console.log(available);
       res.send(available);
     }else{
+      available = [];
       console.log("something wrong");
       res.send("something wrong");
     }
