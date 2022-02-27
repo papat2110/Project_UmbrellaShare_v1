@@ -1009,22 +1009,24 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
       available[2] = locker.locker3;
       available[3] = locker.locker4;
       available[4] = locker.locker5;
-      console.log(available);
-      res.send(available);
+      // console.log(available);
+      // res.send(available);
     }
     if(status == "deposit"){
       available[0] = locker.locker6;
       available[1] = locker.locker7;
       available[2] = locker.locker8;
-      console.log(available);
-      res.send(available);
+      // console.log(available);
+      // res.send(available);
     }else{
-      console.log(available);
-      res.send(available);
+      console.log("something wrong");
+      res.send("something wrong");
     }
   }else{
     console.log("something wrong");
     res.send("something wrong");
   }
+  console.log(available);
+  res.send(available);
   available = [];
 });
