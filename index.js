@@ -999,7 +999,7 @@ app.get("/add_rotation/:node_ip", async (req, res) => {
 app.get("/count_locker/:mac_address/:status", async (req, res) => {
   let mac_address = req.params.mac_address;
   let status = req.params.status;
-  var count_available = 0;
+  let count_available = 0;
   let available = [];
   let locker = await Locker.findOne({ node_ip: mac_address });
   if (locker) {
