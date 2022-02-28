@@ -1029,3 +1029,10 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
   }
   available = [];
 });
+
+//get locker
+app.get("/get_locker", async (req, res) => {
+  let locker = await Locker.find();
+  console.log(locker);
+  res.send(locker);
+});
