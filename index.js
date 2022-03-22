@@ -1046,3 +1046,18 @@ app.get("/add_door/:node_ip", async (req, res) => {
   console.log(adddoor);
   res.send(adddoor);
 });
+
+//edit door status
+app.get("/edit_door/:node_ip/:stt", async (req, res) => {
+  let nodeip = req.params.node_ip;
+  let status = req.params.stt;
+  var door = await Door.findOne({ serialNumber: nodeip });
+  if (door) {
+    var query = { _id: door._id };
+    await Door.findOneAndUpdate(query, { status: status });
+    console.log(door);
+    res.send(door);
+  } else if (!door) {
+    res.send("something wrong");
+  }
+});
