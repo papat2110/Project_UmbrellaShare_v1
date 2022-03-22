@@ -1042,7 +1042,7 @@ app.get("/get_locker", async (req, res) => {
 app.get("/add_door/:node_ip", async (req, res) => {
   let nodeip = req.params.node_ip;
   let status = "close";
-  var adddoor = await new Door({ nodeip: nodeip, status: status }).save();
+  var adddoor = await new Door({ serialNumber: nodeip, status: status }).save();
   console.log(adddoor);
   res.send(adddoor);
 });
