@@ -1037,3 +1037,12 @@ app.get("/get_locker", async (req, res) => {
   console.log(locker);
   res.send(locker);
 });
+
+//add door
+app.get("/add_door/:node_ip", async (req, res) => {
+  let nodeip = req.params.node_ip;
+  let status = "close";
+  var adddoor = await new Door({ nodeip: nodeip, status: status }).save();
+  console.log(adddoor);
+  res.send(adddoor);
+});
