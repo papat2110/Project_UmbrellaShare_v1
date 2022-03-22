@@ -19,6 +19,7 @@ const Place = require("./models/Place");
 const Picture = require("./models/Picture");
 const Brokennoti = require("./models/Brokennoti");
 const Rotation = require("./models/Rotation");
+const Door = require("./models/Door");
 const jwt = require("jsonwebtoken");
 
 var mongo_uri =
