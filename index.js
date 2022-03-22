@@ -1061,3 +1061,11 @@ app.get("/edit_door/:node_ip/:stt", async (req, res) => {
     res.send("something wrong");
   }
 });
+
+//get door
+app.get("/serialNumber", async (req, res) => {
+  let serialNumber = req.params.serialNumber;
+  var door = await Door.findOne({ serialNumber: serialNumber });
+  console.log(door);
+  res.send(door);
+});
