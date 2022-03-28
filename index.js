@@ -269,16 +269,14 @@ app.get(
 app.get("/delete_umbrella/:rfid", async (req, res) => {
   var rfid = req.params.rfid;
   var umbrella = await Umbrella.findOne({ rfid: rfid });
-  console.log(umbrella);
-  res.send(umbrella);
-  // if (umbrella) {
-  //   await Status.findByIdAndDelete(umbrella._id);
-  //   console.log("delete complete");
-  //   res.send("delete complete");
-  // }
-  // if (!umbrella) {
-  //   res.send("error");
-  // }
+  if (umbrella) {
+    await Umbrella.findByIdAndDelete(umbrella._id);
+    console.log("delete complete");
+    res.send("delete complete");
+  }
+  if (!umbrella) {
+    res.send("error");
+  }
 });
 
 //inform broken umbrella
