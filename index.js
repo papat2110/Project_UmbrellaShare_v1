@@ -280,7 +280,7 @@ app.get("/delete_umbrella/:rfid", async (req, res) => {
 });
 
 //inform broken umbrella
-app.post(
+app.get(
   "/inform_umbrella/:user_id/:rfid/:status/:place/:img",
   async (req, res) => {
     var rfid = req.params.rfid;
