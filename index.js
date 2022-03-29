@@ -306,12 +306,12 @@ app.get(
         noti_sst: noti_sst,
         photo: photo,
       });
-      let info = await transporter.sendMail({
-        from: '"Umbrella "' + umbrella.rfid + '" is broken" <' + user + ">", // อีเมลผู้ส่ง
-        to: "papatsorndawthaisong@kkumail.com", // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
-        subject: "New Broken from user id" + user, // หัวข้ออีเมล
-        text: "Umbrella is broken", // plain text body
-      });
+      // let info = await transporter.sendMail({
+      //   from: '"Umbrella "' + umbrella.rfid + '" is broken" <' + user + ">", // อีเมลผู้ส่ง
+      //   to: "papatsorndawthaisong@kkumail.com", // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
+      //   subject: "New Broken from user id" + user, // หัวข้ออีเมล
+      //   text: "Umbrella is broken", // plain text body
+      // });
       console.log(umbrella);
       res.send(umbrella);
     } else if (!umbrella) {
