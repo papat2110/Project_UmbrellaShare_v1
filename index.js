@@ -872,7 +872,7 @@ app.get("/getlocker/:node_ip", async (req, res) => {
 });
 
 //add picture
-app.post("/picture/:user_id/:borrow_id/:status/:img", async (req, res) => {
+app.get("/picture/:user_id/:borrow_id/:status/:img", async (req, res) => {
   var user_id = req.params.user_id;
   var borrow_id = req.params.borrow_id;
   var status = req.params.status;
