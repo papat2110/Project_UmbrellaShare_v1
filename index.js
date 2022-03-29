@@ -1063,9 +1063,9 @@ app.get("/edit_door/:node_ip/:stt", async (req, res) => {
 });
 
 //get door
-// app.get("/get_door/:serialNumber", async (req, res) => {
-//   let serialNumber = req.params.serialNumber;
-//   var door = await Door.findOne({ serialNumber: serialNumber });
-//   console.log(door.status);
-//   res.send(door.status);
-// });
+app.get("/get_door/:serialNumber", async (req, res) => {
+  let serialNumber = req.params.serialNumber;
+  var door = await Door.findOne({ serialNumber: serialNumber });
+  console.log(door.status);
+  res.send(door.status);
+});
