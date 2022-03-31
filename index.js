@@ -87,24 +87,31 @@ app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
   var password = req.params.password;
   var p_id = req.params.pid;
   // เริ่มทำการส่งอีเมล
-  let info = await transporter.sendMail({
-    from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
-    to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
-    subject: "Verify your email address", // หัวข้ออีเมล
-    text: "Please verify your email address", // plain text body
-    html:
-      '<h2>click link to verify your email address</h2><br><a href="https://umbrellashareserver.herokuapp.com/verify_email/' +
-      name +
-      "/" +
-      email +
-      "/" +
-      tel +
-      "/" +
-      password +
-      "/" +
-      p_id +
-      '">verify</a>', // html body
-  });
+  try {
+    let info = await transporter.sendMail({
+      from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
+      to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
+      subject: "Verify your email address", // หัวข้ออีเมล
+      text: "Please verify your email address", // plain text body
+      html:
+        '<h2>click link to verify your email address</h2><br><a href="https://umbrellashareserver.herokuapp.com/verify_email/' +
+        name +
+        "/" +
+        email +
+        "/" +
+        tel +
+        "/" +
+        password +
+        "/" +
+        p_id +
+        '">verify</a>', // html body
+    });
+  } catch (err) {
+    // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
+    console.log("error");
+    // console.log(adduser);
+    res.send("error");
+  }
   // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
   console.log("Message sent: %s", info.messageId);
   // console.log(adduser);
@@ -146,27 +153,27 @@ app.post("/addplace/:latitude/:longitude/:place/:node_ip", async (req, res) => {
 
 //edit place
 app.get("/edit_place/:lat/:long/:place/:mac_address", async (req, res) => {
-    var lat = req.params.lat;
-    var long = req.params.long;
-    var place = req.params.place;
-    var mac_address = req.params.mac_address;
-    // console.log(place);
-    // res.send(place);
-    var place_change = await Place.findOne({ node_ip: mac_address });
-    if (place_change) {
-      var query = { _id: place_change._id };
-      await Place.findOneAndUpdate(query, {
-        latitude: lat,
-        longitude: long,
-        place: place,
-        node_ip: mac_address
-      });
-      console.log("update success");
-      res.send("update success");
-    } else if (!place_change) {
-      console.log("something wrong");
-      res.send("something wrong");
-    }
+  var lat = req.params.lat;
+  var long = req.params.long;
+  var place = req.params.place;
+  var mac_address = req.params.mac_address;
+  // console.log(place);
+  // res.send(place);
+  var place_change = await Place.findOne({ node_ip: mac_address });
+  if (place_change) {
+    var query = { _id: place_change._id };
+    await Place.findOneAndUpdate(query, {
+      latitude: lat,
+      longitude: long,
+      place: place,
+      node_ip: mac_address,
+    });
+    console.log("update success");
+    res.send("update success");
+  } else if (!place_change) {
+    console.log("something wrong");
+    res.send("something wrong");
+  }
 });
 
 app.get("/um_place", async (req, res) => {
@@ -212,7 +219,9 @@ app.get("/broken", async (req, res) => {
 });
 
 //add umbrella
-app.get("/addumbrella/:user_id/:rfid/:status/:place/:noti_sst", async (req, res) => {
+app.get(
+  "/addumbrella/:user_id/:rfid/:status/:place/:noti_sst",
+  async (req, res) => {
     var rfid = req.params.rfid;
     var status = req.params.status;
     var place = req.params.place;
@@ -916,24 +925,24 @@ app.get("/timeover", async (req, res) => {
   var borrow = await Borrow.find({ status: status });
   // const countBorrow = await Borrow.countDocuments({status:status});
 
-  for (let i = 0; i < borrow.length; i++){
+  for (let i = 0; i < borrow.length; i++) {
     var borrow_time = borrow[i].borrow_time;
     var usr = borrow[i].user_id;
     var t = Number(borrow_time);
     var now = Date.now();
     var valid = (now - t) / (1000 * 60 * 60 * 24);
     var a = valid.toString();
-    if(a>0.001){
-      let query = {_id:borrow[i]._id};
+    if (a > 0.001) {
+      let query = { _id: borrow[i]._id };
       let stt_expire = "expire";
-      await Borrow.findOneAndUpdate(query,{status:stt_expire});
-      var user = await User.findOne({p_id:usr});
+      await Borrow.findOneAndUpdate(query, { status: stt_expire });
+      var user = await User.findOne({ p_id: usr });
       var mail = user.email;
       let info = await transporter.sendMail({
         from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
         to: mail, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
-        subject: 'expired borrrow status', // หัวข้ออีเมล
-        text: 'Now umbrella id <<' + borrow[i].umbrella_id +'>> is expired' // plain text body
+        subject: "expired borrrow status", // หัวข้ออีเมล
+        text: "Now umbrella id <<" + borrow[i].umbrella_id + ">> is expired", // plain text body
       });
       console.log(borrow[i]);
       res.send(borrow[i]);
@@ -1004,7 +1013,7 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
   let available = [];
   let locker = await Locker.findOne({ node_ip: mac_address });
   if (locker) {
-    if(status == "borrow"){
+    if (status == "borrow") {
       available[0] = locker.locker1;
       available[1] = locker.locker2;
       available[2] = locker.locker3;
@@ -1012,19 +1021,18 @@ app.get("/count_locker/:mac_address/:status", async (req, res) => {
       available[4] = locker.locker5;
       console.log(available);
       res.send(available);
-    }
-    else if(status == "deposit"){
+    } else if (status == "deposit") {
       available[0] = locker.locker6;
       available[1] = locker.locker7;
       available[2] = locker.locker8;
       console.log(available);
       res.send(available);
-    }else{
+    } else {
       available = [];
       console.log("something wrong");
       res.send("something wrong");
     }
-  }else{
+  } else {
     console.log("something wrong");
     res.send("something wrong");
   }
