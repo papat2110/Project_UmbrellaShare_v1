@@ -893,20 +893,27 @@ app.get("/picture/:user_id/:borrow_id/:status/:img", async (req, res) => {
   //   res.send(req.body.imgsource);
   // })
   // res.status(200)
-  if (status == "bb") {
-    var addpicture = await new Picture({
-      user_id: user_id,
-      borrow_id: borrow_id,
-      borrow_pic: picture,
-    }).save();
-    console.log(addpicture);
-    res.send(addpicture);
-  } else if (status == "bg") {
-    var picture_update = await Picture.findOne({ borrow_id: borrow_id });
-    var query = { _id: picture_update._id };
-    await Picture.findOneAndUpdate(query, { getting_pic: picture });
-    console.log("success");
-    res.send("success");
+  try {
+    if (status == "bb") {
+      var addpicture = await new Picture({
+        user_id: user_id,
+        borrow_id: borrow_id,
+        borrow_pic: picture,
+      }).save();
+      console.log(addpicture);
+      res.send(addpicture);
+    } else if (status == "bg") {
+      var picture_update = await Picture.findOne({ borrow_id: borrow_id });
+      var query = { _id: picture_update._id };
+      await Picture.findOneAndUpdate(query, { getting_pic: picture });
+      console.log("success");
+      res.send("success");
+    }
+  } catch (err) {
+    // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
+    console.log("error");
+    // console.log(adduser);
+    res.send("error");
   }
 });
 
