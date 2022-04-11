@@ -80,12 +80,13 @@ app.get("/user", async (req, res) => {
 });
 
 //add user
-app.post("/adduser/:name/:email/:tel/:password/:pid", async (req, res) => {
+app.post("/adduser/:name/:email/:tel/:password/:pid/:picture", async (req, res) => {
   var name = req.params.name;
   var email = req.params.email;
   var tel = req.params.tel;
   var password = req.params.password;
   var p_id = req.params.pid;
+  var picture = req.params.picture;
   // เริ่มทำการส่งอีเมล
   try {
     let info = await transporter.sendMail({
@@ -124,12 +125,14 @@ app.get("/verify_email/:name/:email/:tel/:password/:pid", async (req, res) => {
   var tel = req.params.tel;
   var password = req.params.password;
   var p_id = req.params.pid;
+  var picture = req.params.picture;
   var adduser = await new User({
     name: name,
     email: email,
     tel: tel,
     password: password,
     p_id: p_id,
+    picture: picture
   }).save();
   console.log("verify success");
   res.send("verify success");
