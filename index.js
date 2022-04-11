@@ -87,7 +87,7 @@ app.get("/adduser/:name/:email/:tel/:password/:pid/:picture", async (req, res) =
   var password = req.params.password;
   var p_id = req.params.pid;
   var picture = req.params.picture;
-  var id_check = await User.find({ p_id: p_id });
+  var id_check = await User.findOne({ p_id: p_id });
   if (!id_check) {
     var adduser = await new User({
       name: name,
