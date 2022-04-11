@@ -96,7 +96,7 @@ app.get("/adduser/:name/:email/:tel/:password/:pid/:picture", async (req, res) =
     picture: picture
   }).save();
   console.log(adduser);
-  console.log(adduser);
+  res.send(adduser);
   // เริ่มทำการส่งอีเมล
   // try {
   //   let info = await transporter.sendMail({
