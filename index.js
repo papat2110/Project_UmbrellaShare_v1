@@ -119,7 +119,7 @@ app.post("/adduser/:name/:email/:tel/:password/:pid/:picture", async (req, res) 
   res.send("Message sent: %s", info.messageId);
 });
 
-app.get("/verify_email/:name/:email/:tel/:password/:pid", async (req, res) => {
+app.get("/verify_email/:name/:email/:tel/:password/:pid/:picture", async (req, res) => {
   var name = req.params.name;
   var email = req.params.email;
   var tel = req.params.tel;
