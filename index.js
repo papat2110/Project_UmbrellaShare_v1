@@ -80,7 +80,7 @@ app.get("/user", async (req, res) => {
 });
 
 //add user
-app.post("/adduser/:name/:email/:tel/:password/:pid/:picture", async (req, res) => {
+app.get("/adduser/:name/:email/:tel/:password/:pid/:picture", async (req, res) => {
   var name = req.params.name;
   var email = req.params.email;
   var tel = req.params.tel;
