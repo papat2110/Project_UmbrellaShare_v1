@@ -176,6 +176,28 @@ app.get("/edit_place/:lat/:long/:place/:mac_address", async (req, res) => {
   }
 });
 
+//broken place
+app.get("/broken_place/:mac_address/:status", async (req, res) => {
+  var status = req.params.status;
+  var mac_address = req.params.mac_address;
+  // console.log(place);
+  // res.send(place);
+  var place_change = await Place.findOne({ node_ip: mac_address });
+  if (place_change) {
+    var query = { _id: place_change._id };
+    await Place.findOneAndUpdate(query, {
+      status: status,
+    });
+    console.log("update success");
+    res.send("update success");
+  } else if (!place_change) {
+    console.log("something wrong");
+    res.send("something wrong");
+  }
+});
+
+
+
 app.get("/um_place", async (req, res) => {
   let place = await Place.find();
   console.log(place);

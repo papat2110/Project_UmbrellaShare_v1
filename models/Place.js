@@ -4,7 +4,8 @@ const placeSchema = new mongoose.Schema({
     latitude: String,
     longitude: String,
     place: String,
-    node_ip: String
+    node_ip: String,
+    status: String
   });
 
   const Place = mongoose.model('Place', placeSchema);
