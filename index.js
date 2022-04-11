@@ -87,16 +87,23 @@ app.get("/adduser/:name/:email/:tel/:password/:pid/:picture", async (req, res) =
   var password = req.params.password;
   var p_id = req.params.pid;
   var picture = req.params.picture;
-  var adduser = await new User({
-    name: name,
-    email: email,
-    tel: tel,
-    password: password,
-    p_id: p_id,
-    picture: picture
-  }).save();
-  console.log(adduser);
-  res.send(adduser);
+  var id_check = await User.find({ p_id: p_id });
+  if (!id_check) {
+    var adduser = await new User({
+      name: name,
+      email: email,
+      tel: tel,
+      password: password,
+      p_id: p_id,
+      picture: picture
+    }).save();
+    console.log(adduser);
+    res.send(adduser);
+  } else if (id_check) {
+    console.log("id is not available");
+    res.send("id is not available");
+  }
+
   // เริ่มทำการส่งอีเมล
   // try {
   //   let info = await transporter.sendMail({
