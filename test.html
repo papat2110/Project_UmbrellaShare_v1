@@ -143,5 +143,44 @@
             </script>
         </table>
     </div>
+    <div>
+        <h4>จำนวนการใช้บริการฝากร่ม ทั้งหมด  <b class="demo4"></b> ครั้ง</h4><br>
+        <Script>
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
+                    $('.demo4').append(data.length);
+                });
+        </Script>
+        <table class="table4" style="border-collapse: collapse;">
+            <tr>
+                <th>ลำดับ</th>
+                <th>รหัสผู้ฝาก</th>
+                <th>ช่องที่ฝาก</th>
+                <th>สถานที่ฝาก</th>
+                <th>วันที่ฝาก</th>
+                <th>สถานที่คืน</th>
+                <th>วันที่คืน</th>
+            </tr>
+            <script>
+                $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
+                    var tr = data.report
+                    for (var i = 0; i < data.length; i++) {
+                        const b_day = new Date(parseInt(data[i].deposit_time));
+                        b_day.toDateString();
+                        const g_day = new Date(parseInt(data[i].return_time));
+                        g_day.toDateString();
+                        tr = $('<tr/>');
+                        tr.append("<td>"+(i+1)+"</td>");
+                        tr.append("<td>"+data[i].user_id+"</td>");
+                        tr.append("<td>"+data[i].locker+"</td>");
+                        tr.append("<td>"+data[i].deposit_place+"</td>");
+                        tr.append("<td>"+b_day.toLocaleDateString()+"</td>");
+                        tr.append("<td>"+data[i].return_place+"</td>");
+                        tr.append("<td>"+g_day.toLocaleDateString()+"</td>");
+                        $('.table4').append(tr);
+                    }
+                });
+            </script>
+        </table>
+    </div>
 </body>
 </html>
