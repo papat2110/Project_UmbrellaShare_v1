@@ -67,44 +67,6 @@
         </table>
     </div>
     <div>
-        <h4>จำนวนร่มที่ถูกยืมอยู่ ทั้งหมด  <b class="demo2"></b> คัน</h4><br>
-        <Script>
-                            $.getJSON('https://umbrellashareserver.herokuapp.com/month_borrowing', function(data) {
-                    $('.demo2').append(data.length);
-                });
-        </Script>
-        <table class="table3" style="border-collapse: collapse;">
-            <tr>
-                <th>ลำดับ</th>
-                <th>รหัสผู้ยืม</th>
-                <th>รหัสร่ม</th>
-                <th>สถานที่ยืม</th>
-                <th>วันที่ยืม</th>
-                <th>วันกำหนดคืน</th>
-            </tr>
-            <script>
-                $.getJSON('https://umbrellashareserver.herokuapp.com/month_borrowing', function(data) {
-                    var tr = data.report
-                    for (var i = 0; i < data.length; i++) {
-                        const b_day = new Date(parseInt(data[i].borrow_time));
-                        b_day.toDateString();
-                        const exp_day = new Date(parseInt(data[i].borrow_time));
-                        let expired_date = exp_day.setDate(exp_day.getDate()+3);
-                        expired_date.toDateString();
-                        tr = $('<tr/>');
-                        tr.append("<td>"+(i+1)+"</td>");
-                        tr.append("<td>"+data[i].user_id+"</td>");
-                        tr.append("<td>"+data[i].umbrella_id+"</td>");
-                        tr.append("<td>"+data[i].borrow_place+"</td>");
-                        tr.append("<td>"+data[i].borrow_place+"</td>");
-                        tr.append("<td>"+data[i].borrow_place+"</td>");
-                        $('.table3').append(tr);
-                    }
-                });
-            </script>
-        </table>
-    </div>
-    <div>
         <h4>จำนวนการใช้บริการฝากร่ม ทั้งหมด  <b class="demo1"></b> ครั้ง</h4><br>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
@@ -138,6 +100,44 @@
                         tr.append("<td>"+data[i].return_place+"</td>");
                         tr.append("<td>"+g_day.toLocaleDateString()+"</td>");
                         $('.table2').append(tr);
+                    }
+                });
+            </script>
+        </table>
+    </div>
+    <div>
+        <h4>จำนวนร่มที่ถูกยืมอยู่ ทั้งหมด  <b class="demo2"></b> คัน</h4><br>
+        <Script>
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/month_borrowing', function(data) {
+                    $('.demo2').append(data.length);
+                });
+        </Script>
+        <table class="table3" style="border-collapse: collapse;">
+            <tr>
+                <th>ลำดับ</th>
+                <th>รหัสผู้ยืม</th>
+                <th>รหัสร่ม</th>
+                <th>สถานที่ยืม</th>
+                <th>วันที่ยืม</th>
+                <th>วันกำหนดคืน</th>
+            </tr>
+            <script>
+                $.getJSON('https://umbrellashareserver.herokuapp.com/month_borrowing', function(data) {
+                    var tr = data.report
+                    for (var i = 0; i < data.length; i++) {
+                        const b_day = new Date(parseInt(data[i].borrow_time));
+                        b_day.toDateString();
+                        const exp_day = new Date(parseInt(data[i].borrow_time));
+                        let expired_date = exp_day.setDate(exp_day.getDate()+3);
+                        expired_date.toDateString();
+                        tr = $('<tr/>');
+                        tr.append("<td>"+(i+1)+"</td>");
+                        tr.append("<td>"+data[i].user_id+"</td>");
+                        tr.append("<td>"+data[i].umbrella_id+"</td>");
+                        tr.append("<td>"+data[i].borrow_place+"</td>");
+                        tr.append("<td>"+data[i].borrow_place+"</td>");
+                        tr.append("<td>"+data[i].borrow_place+"</td>");
+                        $('.table3').append(tr);
                     }
                 });
             </script>
