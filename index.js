@@ -1141,7 +1141,14 @@ app.get("/testpdf", (req, res) => {
 });
 
 app.get("/testsent", async (req, res) => {
-  let locker = await Locker.count();
-  console.log(locker);
-  res.send(locker);
+  try{
+    let locker = await Locker.count();
+    console.log(locker);
+    res.send(locker);
+  }catch (err) {
+      // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
+      console.log("error");
+      // console.log(adduser);
+      res.send("error");
+    }
 });
