@@ -1135,10 +1135,3 @@ app.get("/get_door/:serialNumber", async (req, res) => {
   console.log(door.status);
   res.send(door.status);
 });
-
-//////////////////html test////////////////////
-app.get("/testsent", (req, res) => {
-  let locker = await Locker.find();
-  console.log(locker);
-  res.send(locker);
-});
