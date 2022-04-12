@@ -127,9 +127,9 @@
                     for (var i = 0; i < data.length; i++) {
                         const b_day = new Date(parseInt(data[i].borrow_time));
                         b_day.toDateString();
-                        const exp_day = new Date(parseInt(data[i].borrow_time));
-                        let expired_date = exp_day.setDate(exp_day.getDate()+3);
-                        expired_date.toDateString();
+                        // const exp_day = new Date(parseInt(data[i].borrow_time));
+                        // let expired_date = exp_day.setDate(exp_day.getDate()+3);
+                        // expired_date.toDateString();
                         tr = $('<tr/>');
                         tr.append("<td>"+(i+1)+"</td>");
                         tr.append("<td>"+data[i].user_id+"</td>");
