@@ -53,6 +53,24 @@
                 <th>สถานที่คืน</th>
                 <th>วันที่คืน</th>
             </tr>
+            <div class="mypanel">
+            </div>
+            <script>
+                $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                    var text = `<tr>
+                                <td>${i}</td>
+                                <td>${data[i].user_id}</td>
+                                <td>${data[i].umbrella_id}</td>
+                                <td>${data[i].borrow_place}</td>
+                                <td>${data[i].borrow_time}</td>
+                                <td>${data[i].getting_place}</td>
+                                <td>${data[i].getting_time}</td>
+                                <tr>`
+                    $(".mypanel").html(text);
+                    }
+                });
+            </script>
             <tr>
                 <td>1</td>
                 <td>1</td>
@@ -64,15 +82,13 @@
             </tr>
         </table>
     </div>
-    <div class="mypanel">
-
-    </div>
     <script>
-        $.getJSON('https://umbrellashareserver.herokuapp.com/user', function(data) {
-    
+        $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
+            for (var i = 0; i < data.length; i++) {
             var text = `Date: ${data[1].name}<br>
                         Time: ${data[1].email}`
             $(".mypanel").html(text);
+            }
         });
         </script>
 </body>
