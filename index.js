@@ -1126,3 +1126,9 @@ app.get("/get_door/:serialNumber", async (req, res) => {
   console.log(door.status);
   res.send(door.status);
 });
+
+//////////////////html test////////////////////
+const Create_pdf = require("./models/Door");
+app.get("/htmlTest", (req, res, next) => {
+  res.render('Create_pdf',{title: 'hello'});
+});
