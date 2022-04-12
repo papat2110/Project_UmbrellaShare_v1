@@ -98,7 +98,7 @@
                         tr.append("<td>"+data[i].umbrella_id+"</td>");
                         tr.append("<td>"+data[i].borrow_place+"</td>");
                         tr.append("<td>"+b_day.toLocaleDateString()+"</td>");
-                        tr.append("<td>"+expired_date.toLocaleDateString()+"</td>");
+                        tr.append("<td>"+g_day.setDate(g_day.getDate()+3)+"</td>");
                         $('.table3').append(tr);
                     }
                 });
