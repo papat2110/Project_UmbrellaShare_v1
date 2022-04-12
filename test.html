@@ -57,18 +57,19 @@
             </div> -->
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
+                    var tr = data.report
                     for (var i = 0; i < data.length; i++) {
-                    var text = `<tr>
-                                <td>${i}</td>
-                                <td>${data[i].user_id}</td>
-                                <td>${data[i].umbrella_id}</td>
-                                <td>${data[i].borrow_place}</td>
-                                <td>${data[i].borrow_time}</td>
-                                <td>${data[i].getting_place}</td>
-                                <td>${data[i].getting_time}</td>
-                                <tr>`
+                        tr = $('<tr/>');
+                        tr.append("<td>"+i+"</td>");
+                        tr.append("<td>"+data[i].user_id+"</td>");
+                        tr.append("<td>"+data[i].umbrella_id+"</td>");
+                        tr.append("<td>"+data[i].borrow_place+"</td>");
+                        tr.append("<td>"+data[i].borrow_time+"</td>");
+                        tr.append("<td>"+data[i].getting_place+"</td>");
+                        tr.append("<td>"+data[i].getting_time+"</td>");
+                        $('.table1').append(tr);
                     // $(".mypanel").html(text);
-                    html(text);
+                    // html(text);
                     }
                 });
             </script>
