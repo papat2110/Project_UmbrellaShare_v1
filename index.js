@@ -1152,12 +1152,12 @@ app.get("/testsent", async (req, res) => {
 
 //borrow_sum
 app.get("/borrow_show", async (req, res) => {
-  const borrow = await Borrow.find();
-  const d = new Date();
-  const month = d.getMonth();
+  let borrow = await Borrow.find();
+  let d = new Date();
+  let month = d.getMonth();
   for (let i = 0; i < borrow.length; i++){
-    const b = parseInt(borrow.borrow_time);
-    const b_month = b.getMonth();
+    let b = parseInt(borrow[i].borrow_time);
+    let b_month = b.getMonth();
     console.log("m : "+month+"b : "+b_month);
     res.send("m : "+month+"b : "+b_month);
     // if(b_month == month){
