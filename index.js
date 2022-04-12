@@ -1141,7 +1141,11 @@ app.get("/testpdf", (req, res) => {
 });
 
 app.get("/testsent", async (req, res) => {
-  let locker = await Locker.countDocuments();
-  console.log(locker);
-  res.send(locker);
+  Borrow.count({ status: "got" }, function(err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  });
 });
