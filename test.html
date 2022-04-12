@@ -20,7 +20,7 @@
             <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         </head>
 <body>
-    <h2>สรุปการใช้งานเครื่องยืมร่มประจำเดือน </h2><h2 class="month"> </h2>
+    <h2 class="month" >สรุปการใช้งานเครื่องยืมร่มประจำเดือน </h2>
     <!-- <button type="button" onclick="myFunction()">Click Me!</button> -->
     <div>
         <h4>บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง</h4><br>
@@ -41,11 +41,11 @@
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
-                    
+                    const thai_month = ['มกราคม','กุมภาพันธุ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฏาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม',];
                     const b_m = new Date(parseInt(data[1].borrow_time));
                     const currentMonth = b_m.getMonth(); 
-                    $('.month').append(currentMonth);
-                    
+                    $('.month').append(thai_month[currentMonth]);
+
                     var tr = data.report
                     for (var i = 0; i < data.length; i++) {
                         const b_day = new Date(parseInt(data[i].borrow_time));
