@@ -1157,17 +1157,17 @@ app.get("/borrow_show", async (req, res) => {
   let month = d.getMonth();
   console.log(month);
   res.send(month);
-  for (let i = 0; i < borrow.length; i++){
-    let b = parseInt(borrow[i].borrow_time);
-    let b_month = b.getMonth();
-    // console.log(b);
-    // res.send(b);
-    // if(b_month == month){
-    //   console.log(borrow[i]);
-    //   res.send(borrow[i]);
-    // }else{
-    //   console.log("0");
-    //   console.log("0");
-    // }
-  }
+  // for (let i = 0; i < borrow.length; i++){
+  //   let b = parseInt(borrow[i].borrow_time);
+  //   let b_month = b.getMonth();
+  //   // console.log(b);
+  //   // res.send(b);
+  //   // if(b_month == month){
+  //   //   console.log(borrow[i]);
+  //   //   res.send(borrow[i]);
+  //   // }else{
+  //   //   console.log("0");
+  //   //   console.log("0");
+  //   // }
+  // }
 });
