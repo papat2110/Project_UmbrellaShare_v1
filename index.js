@@ -1158,12 +1158,14 @@ app.get("/borrow_show", async (req, res) => {
   for (let i = 0; i < borrow.length; i++){
     const b = parseInt(borrow.borrow_time);
     const b_month = b.getMonth();
-    if(b_month == month){
-      console.log(borrow[i]);
-      res.send(borrow[i]);
-    }else{
-      console.log("0");
-      console.log("0");
-    }
+    console.log("m : "+month+"b : "+b_month);
+    res.send("m : "+month+"b : "+b_month);
+    // if(b_month == month){
+    //   console.log(borrow[i]);
+    //   res.send(borrow[i]);
+    // }else{
+    //   console.log("0");
+    //   console.log("0");
+    // }
   }
 });
