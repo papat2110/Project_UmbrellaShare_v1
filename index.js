@@ -1150,6 +1150,6 @@ let fs = require("fs");
 //   });
 // };
 
-app.get("/testpdf", async (req, res) => {
+app.get('/testpdf',function(req,res) {
   res.sendFile('test.html');
 });
