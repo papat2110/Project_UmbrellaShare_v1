@@ -41,7 +41,7 @@
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
-                    const thai_month = ['มกราคม','กุมภาพันธุ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฏาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม',];
+                    const thai_month = ['มกราคม','กุมภาพันธุ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฏาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
                     const b_m = new Date(parseInt(data[1].borrow_time));
                     const currentMonth = b_m.getMonth(); 
                     $('.month').append(thai_month[currentMonth]);
