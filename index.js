@@ -1153,8 +1153,8 @@ app.get("/month", async (req, res) => {
     // console.log(month);
     // res.send(month);
     if(month == aa){
-      console.log(borrow[i]);
-      res.send(borrow[i]);
+      console.log("1");
+      res.send("1");
     }else{
       console.log("0");
       res.send("0");
