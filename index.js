@@ -1149,3 +1149,21 @@ app.get("/testsent", async (req, res) => {
     }
   });
 });
+
+//borrow_sum
+app.get("/borrow_show", async (req, res) => {
+  const borrow = await Borrow.find();
+  const d = new Date();
+  const month = d.getMonth();
+  for (let i = 0; i < borrow.length; i++){
+    const b = parseInt(borrow.borrow_time);
+    const b_month = b.getMonth();
+    if(b_month == month){
+      console.log(borrow[i]);
+      res.send(borrow[i]);
+    }else{
+      console.log("0");
+      console.log("0");
+    }
+  }
+});

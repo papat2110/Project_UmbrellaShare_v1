@@ -52,9 +52,9 @@
                         tr.append("<td>"+data[i].user_id+"</td>");
                         tr.append("<td>"+data[i].umbrella_id+"</td>");
                         tr.append("<td>"+data[i].borrow_place+"</td>");
-                        tr.append("<td>"+b_day.toDateString()+"</td>");
+                        tr.append("<td>"+b_day.toLocaleDateString()+"</td>");
                         tr.append("<td>"+data[i].getting_place+"</td>");
-                        tr.append("<td>"+g_day.toDateString()+"</td>");
+                        tr.append("<td>"+g_day.toLocaleDateString()+"</td>");
                         $('.table1').append(tr);
                     }
                 });
