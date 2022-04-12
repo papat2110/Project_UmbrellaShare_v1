@@ -1141,9 +1141,16 @@ app.get("/testpdf", (req, res) => {
 });
 
 app.get("/month", async (req, res) => {
-  let borrow11 = await User.find();
+  let borrow = await Borrow.find();
   const today = new Date();
   const aa = today.toLocaleString('default', { month: 'short' });
-  console.log(borrow11);
-  res.send(borrow11);
+  // console.log(borrow);
+  // res.send(borrow);
+
+  for (let i = 0; i < borrow.length; i++){
+    let b_day = borrow[i].borrow_time;
+    console.log(b_day);
+    res.send(b_day);
+  }
+
 });
