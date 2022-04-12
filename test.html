@@ -20,12 +20,12 @@
             <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         </head>
 <body>
-    <h2>สรุปการใช้งานเครื่องยืมร่มประจำเดือน</h2>
+    <h2>สรุปการใช้งานเครื่องยืมร่มประจำเดือน </h2><h2 class="month"> </h2>
     <!-- <button type="button" onclick="myFunction()">Click Me!</button> -->
     <div>
         <h4>บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง</h4><br>
         <Script>
-                            $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
                     $('.demo').append(data.length);
                 });
         </Script>
@@ -45,6 +45,7 @@
                     for (var i = 0; i < data.length; i++) {
                         const b_day = new Date(parseInt(data[i].borrow_time));
                         b_day.toDateString();
+                        const currentMonth = b_day.getMonth(); 
                         const g_day = new Date(parseInt(data[i].getting_time));
                         g_day.toDateString();
                         tr = $('<tr/>');
@@ -56,6 +57,7 @@
                         tr.append("<td>"+data[i].getting_place+"</td>");
                         tr.append("<td>"+g_day.toLocaleDateString()+"</td>");
                         $('.table1').append(tr);
+                        $('.month').append(currentMonth);
                     }
                 });
             </script>
