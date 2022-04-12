@@ -1156,8 +1156,8 @@ app.get("/month", (req, res) => {
   var borrow = await Borrow.find();
   // const countBorrow = await Borrow.countDocuments({status:status});
   for (let i = 0; i < borrow.length; i++) {
-    const b_day = parseInt(borrow[i].borrow_time);
-    console.log(b_day);
-    res.send(b_day);
+    // const b_day = parseInt(borrow[i].borrow_time);
+    console.log(borrow[i].borrow_time);
+    res.send(borrow[i].borrow_time);
   }
 });
