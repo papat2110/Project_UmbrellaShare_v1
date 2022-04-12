@@ -80,80 +80,86 @@ app.get("/user", async (req, res) => {
 });
 
 //add user
-app.get("/adduser/:name/:email/:tel/:password/:pid/:picture", async (req, res) => {
-  var name = req.params.name;
-  var email = req.params.email;
-  var tel = req.params.tel;
-  var password = req.params.password;
-  var p_id = req.params.pid;
-  var picture = req.params.picture;
-  var id_check = await User.findOne({ p_id: p_id });
-  if (!id_check) {
+app.get(
+  "/adduser/:name/:email/:tel/:password/:pid/:picture",
+  async (req, res) => {
+    var name = req.params.name;
+    var email = req.params.email;
+    var tel = req.params.tel;
+    var password = req.params.password;
+    var p_id = req.params.pid;
+    var picture = req.params.picture;
+    var id_check = await User.findOne({ p_id: p_id });
+    if (!id_check) {
+      var adduser = await new User({
+        name: name,
+        email: email,
+        tel: tel,
+        password: password,
+        p_id: p_id,
+        picture: picture,
+      }).save();
+      console.log(adduser);
+      res.send(adduser);
+    } else if (id_check) {
+      console.log("id is not available");
+      res.send("id is not available");
+    }
+
+    // เริ่มทำการส่งอีเมล
+    // try {
+    //   let info = await transporter.sendMail({
+    //     from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
+    //     to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
+    //     subject: "Verify your email address", // หัวข้ออีเมล
+    //     text: "Please verify your email address", // plain text body
+    //     html:
+    //       '<h2>click link to verify your email address</h2><br><a href="https://umbrellashareserver.herokuapp.com/verify_email/' +
+    //       name +
+    //       "/" +
+    //       email +
+    //       "/" +
+    //       tel +
+    //       "/" +
+    //       password +
+    //       "/" +
+    //       p_id +
+    //       '">verify</a>', // html body
+    //   });
+    // } catch (err) {
+    //   // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
+    //   console.log("error");
+    //   // console.log(adduser);
+    //   res.send("error");
+    // }
+    // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
+    // console.log("Message sent: %s", info.messageId);
+    // // console.log(adduser);
+    // res.send("Message sent: %s", info.messageId);
+  }
+);
+
+app.get(
+  "/verify_email/:name/:email/:tel/:password/:pid/:picture",
+  async (req, res) => {
+    var name = req.params.name;
+    var email = req.params.email;
+    var tel = req.params.tel;
+    var password = req.params.password;
+    var p_id = req.params.pid;
+    var picture = req.params.picture;
     var adduser = await new User({
       name: name,
       email: email,
       tel: tel,
       password: password,
       p_id: p_id,
-      picture: picture
+      picture: picture,
     }).save();
-    console.log(adduser);
-    res.send(adduser);
-  } else if (id_check) {
-    console.log("id is not available");
-    res.send("id is not available");
+    console.log("verify success");
+    res.send("verify success");
   }
-
-  // เริ่มทำการส่งอีเมล
-  // try {
-  //   let info = await transporter.sendMail({
-  //     from: '"Umbrella Share KKU" <umbrellasharekku@gmail.com>', // อีเมลผู้ส่ง
-  //     to: email, // อีเมลผู้รับ สามารถกำหนดได้มากกว่า 1 อีเมล โดยขั้นด้วย ,(Comma)
-  //     subject: "Verify your email address", // หัวข้ออีเมล
-  //     text: "Please verify your email address", // plain text body
-  //     html:
-  //       '<h2>click link to verify your email address</h2><br><a href="https://umbrellashareserver.herokuapp.com/verify_email/' +
-  //       name +
-  //       "/" +
-  //       email +
-  //       "/" +
-  //       tel +
-  //       "/" +
-  //       password +
-  //       "/" +
-  //       p_id +
-  //       '">verify</a>', // html body
-  //   });
-  // } catch (err) {
-  //   // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
-  //   console.log("error");
-  //   // console.log(adduser);
-  //   res.send("error");
-  // }
-  // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
-  // console.log("Message sent: %s", info.messageId);
-  // // console.log(adduser);
-  // res.send("Message sent: %s", info.messageId);
-});
-
-app.get("/verify_email/:name/:email/:tel/:password/:pid/:picture", async (req, res) => {
-  var name = req.params.name;
-  var email = req.params.email;
-  var tel = req.params.tel;
-  var password = req.params.password;
-  var p_id = req.params.pid;
-  var picture = req.params.picture;
-  var adduser = await new User({
-    name: name,
-    email: email,
-    tel: tel,
-    password: password,
-    p_id: p_id,
-    picture: picture
-  }).save();
-  console.log("verify success");
-  res.send("verify success");
-});
+);
 
 //add place
 app.post("/addplace/:latitude/:longitude/:place/:node_ip", async (req, res) => {
@@ -215,8 +221,6 @@ app.get("/broken_place/:mac_address/:status", async (req, res) => {
     res.send("something wrong");
   }
 });
-
-
 
 app.get("/um_place", async (req, res) => {
   let place = await Place.find();
@@ -1128,7 +1132,35 @@ app.get("/get_door/:serialNumber", async (req, res) => {
 });
 
 //////////////////html test////////////////////
-const Create_pdf = require("./public/Create_pdf");
-app.get("/htmlTest", (req, res, next) => {
-  res.render('Create_pdf',{title: 'hello'});
+let http = require("http");
+let fs = require("fs");
+
+// let handleRequest = (request, response) => {
+//   response.writeHead(200, {
+//     "Content-Type": "text/html",
+//   });
+//   fs.readFile("./test.html", null, function (error, data) {
+//     if (error) {
+//       response.writeHead(404);
+//       respone.write("Whoops! File not found!");
+//     } else {
+//       response.write(data);
+//     }
+//     response.end();
+//   });
+// };
+
+app.get("/testpdf", async (req, res) => {
+  response.writeHead(200, {
+    "Content-Type": "text/html",
+  });
+  fs.readFile("./test.html", null, function (error, data) {
+    if (error) {
+      response.writeHead(404);
+      respone.write("Whoops! File not found!");
+    } else {
+      response.write(data);
+    }
+    response.end();
+  });
 });
