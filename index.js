@@ -1154,10 +1154,12 @@ app.get("/month", (req, res) => {
   const today = new Date()
   const aa = today.toLocaleString('default', { month: 'short' })
   var borrow = await Borrow.find();
+  console.log(borrow);
+  res.send(borrow);
   // const countBorrow = await Borrow.countDocuments({status:status});
-  for (let i = 0; i < borrow.length; i++) {
-    // const b_day = parseInt(borrow[i].borrow_time);
-    console.log(borrow[i].borrow_time);
-    res.send(borrow[i].borrow_time);
-  }
+  // for (let i = 0; i < borrow.length; i++) {
+  //   // const b_day = parseInt(borrow[i].borrow_time);
+  //   console.log(borrow[i].borrow_time);
+  //   res.send(borrow[i].borrow_time);
+  // }
 });
