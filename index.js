@@ -1151,16 +1151,16 @@ let fs = require("fs");
 // };
 
 app.get("/testpdf", async (req, res) => {
-  response.writeHead(200, {
+  res.writeHead(200, {
     "Content-Type": "text/html",
   });
   fs.readFile("./test.html", null, function (error, data) {
     if (error) {
-      response.writeHead(404);
-      respone.write("Whoops! File not found!");
+      res.writeHead(404);
+      resizeBy.write("Whoops! File not found!");
     } else {
-      response.write(data);
+      res.write(data);
     }
-    response.end();
+    res.end();
   });
 });
