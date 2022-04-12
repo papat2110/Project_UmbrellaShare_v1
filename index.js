@@ -1141,11 +1141,11 @@ app.get("/testpdf", (req, res) => {
 });
 
 app.get("/month", async (req, res) => {
-  let borrow = await Borrow.find();
+  let borrow = await Borrow.find({ status: "got" });
   const today = new Date();
   const aa = today.toLocaleString('default', { month: 'short' });
-  // console.log(borrow);
-  // res.send(borrow);
+  console.log(borrow);
+  res.send(borrow);
 
   for (let i = 0; i < borrow.length; i++){
     let b_day = new Date(parseInt(borrow[i].borrow_time));
