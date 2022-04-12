@@ -1143,7 +1143,7 @@ app.get("/testpdf", (req, res) => {
 });
 
 app.get("/testsent", (req, res) => {
-  let locker = await Locker.find().count();
+  let locker = await Locker.find();
   console.log(locker);
   res.send(locker);
 });
