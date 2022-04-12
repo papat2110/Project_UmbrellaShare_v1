@@ -1149,8 +1149,8 @@ app.get("/month", async (req, res) => {
 
   for (let i = 0; i < borrow.length; i++){
     let b_day = borrow[i].borrow_time;
-    console.log(b_day);
-    res.send(b_day);
+    console.log(borrow[i].borrow_time);
+    res.send(borrow[i].borrow_time);
   }
 
 });
