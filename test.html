@@ -1,13 +1,12 @@
 <script>
-    const Borrow = require("./models/Borrow");
-    let Borrow = await Borrow.find().count();
+document.getElementById("demo").innerHTML = "Hello JavaScript!";
 </script>
 <!DOCTYPE html>
 <html lang="en">
 <body>
     <h2>สรุปการใช้งานเครื่องยืมร่มประจำเดือน</h2>
     <div>
-        บริการยืมร่ม ทั้งหมด  <script>console.log(Borrow);</script> ครั้ง
+        บริการยืมร่ม ทั้งหมด  <div id="demo"></div> ครั้ง
         <table>
             <tr>
                 <th>ลำดับ</th>
