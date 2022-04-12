@@ -1142,7 +1142,7 @@ app.get("/testpdf", (req, res) => {
 
 app.get("/testsent", async (req, res) => {
   try{
-    let locker11 = await Locker.count();
+    let locker11 = await Locker.find().count();
     console.log(locker11);
     res.send(locker11);
   }catch (err) {
