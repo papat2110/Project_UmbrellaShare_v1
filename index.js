@@ -1153,6 +1153,11 @@ app.get("/testsent", async (req, res) => {
 app.get("/month", (req, res) => {
   const today = new Date()
   const aa = today.toLocaleString('default', { month: 'short' })
-  console.log(aa);
-  res.send(aa);
+  var borrow = await Borrow.find();
+  // const countBorrow = await Borrow.countDocuments({status:status});
+  for (let i = 0; i < borrow.length; i++) {
+    const b_day = parseInt(borrow[i].borrow_time);
+    console.log(b_day);
+    res.send(b_day);
+  }
 });
