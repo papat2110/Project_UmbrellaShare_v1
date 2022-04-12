@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <style>
+            table, td, th {  
+              border: 1px solid #ddd;
+              text-align: left;
+            }
+            
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            th, td {
+              padding: 15px;
+            }
+            </style>
         <title>JavaScript - read JSON from URL</title>
             <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         </head>
@@ -37,9 +52,9 @@
                         tr.append("<td>"+data[i].user_id+"</td>");
                         tr.append("<td>"+data[i].umbrella_id+"</td>");
                         tr.append("<td>"+data[i].borrow_place+"</td>");
-                        tr.append("<td>"+b_day+"</td>");
+                        tr.append("<td>"+b_day.toDateString()+"</td>");
                         tr.append("<td>"+data[i].getting_place+"</td>");
-                        tr.append("<td>"+g_day+"</td>");
+                        tr.append("<td>"+g_day.toDateString()+"</td>");
                         $('.table1').append(tr);
                     }
                 });
