@@ -1,12 +1,15 @@
 <script>
-document.getElementById("demo").innerHTML = "Hello JavaScript!";
-</script>
+    function myFunction() { 
+      document.getElementById("demo").innerHTML = "Hello JavaScript!";
+    }
+    </script>
 <!DOCTYPE html>
 <html lang="en">
 <body>
     <h2>สรุปการใช้งานเครื่องยืมร่มประจำเดือน</h2>
+    <button type="button" onclick="myFunction()">Click Me!</button>
     <div>
-        บริการยืมร่ม ทั้งหมด  <div id="demo"></div> ครั้ง
+        บริการยืมร่ม ทั้งหมด  <p id="demo">This is a demonstration.</p> ครั้ง
         <table>
             <tr>
                 <th>ลำดับ</th>
