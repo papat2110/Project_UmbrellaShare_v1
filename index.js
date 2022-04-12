@@ -1150,15 +1150,8 @@ app.get("/month", async (req, res) => {
   for (let i = 0; i < borrow.length; i++){
     let b_day = new Date(parseInt(borrow[i].borrow_time));
     const month = b_day.toLocaleString('default', { month: 'short' });
-    // console.log(month);
-    // res.send(month);
-    if(month == aa){
-      console.log("1");
-      res.send("1");
-    }else{
-      console.log("0");
-      res.send("0");
-    }
+    console.log(month+":"+aa);
+    res.send(month+":"+aa);
   }
 
 });
