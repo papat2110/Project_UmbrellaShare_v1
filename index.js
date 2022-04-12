@@ -1153,7 +1153,7 @@ app.get("/testsent", async (req, res) => {
 //borrow_sum
 app.get("/borrow_show", async (req, res) => {
   let borrow = await Borrow.find();
-  let d = Date.now();
+  const d = new Date();
   let month = d.getMonth();
   console.log(month);
   res.send(month);
