@@ -1151,8 +1151,8 @@ app.get("/testsent", async (req, res) => {
 });
 
 app.get("/month", (req, res) => {
-  const today = new Date();
-  const month = today.getMonth();
-  console.log(parseInt(month));
-  res.send(parseInt(month));
+  const today = new Date()
+  today.toLocaleString('default', { month: 'long' })
+  console.log(today);
+  res.send(today);
 });
