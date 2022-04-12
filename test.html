@@ -85,11 +85,6 @@
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
-                    const thai_month = ['มกราคม','กุมภาพันธุ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฏาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
-                    const b_m = new Date(parseInt(data[1].deposit_time));
-                    const currentMonth = b_m.getMonth(); 
-                    $('.month').append(thai_month[currentMonth]);
-
                     var tr = data.report
                     for (var i = 0; i < data.length; i++) {
                         const b_day = new Date(parseInt(data[i].deposit_time));
