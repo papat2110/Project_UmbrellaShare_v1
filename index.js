@@ -1140,26 +1140,10 @@ app.get("/testpdf", (req, res) => {
   res.sendFile(__dirname + "/test.html");
 });
 
-app.get("/testsent", async (req, res) => {
-  Borrow.count({ status: "got" }, function(err, result) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.json(result);
-    }
-  });
-});
-
-app.get("/month", (req, res) => {
+app.get("/month", async (req, res) => {
   let borrow11 = await User.find();
   const today = new Date();
   const aa = today.toLocaleString('default', { month: 'short' });
   console.log(borrow11);
   res.send(borrow11);
-  // const countBorrow = await Borrow.countDocuments({status:status});
-  // for (let i = 0; i < borrow.length; i++) {
-  //   // const b_day = parseInt(borrow[i].borrow_time);
-  //   console.log(borrow[i].borrow_time);
-  //   res.send(borrow[i].borrow_time);
-  // }
 });
