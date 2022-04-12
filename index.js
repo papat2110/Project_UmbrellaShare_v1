@@ -1151,8 +1151,8 @@ app.get("/testsent", async (req, res) => {
 });
 
 app.get("/month", (req, res) => {
-  const today = new Date()
-  const aa = today.toLocaleString('default', { month: 'short' })
+  const today = new Date();
+  const aa = today.toLocaleString('default', { month: 'short' });
   var borrow = await Borrow.find();
   console.log(borrow);
   res.send(borrow);
