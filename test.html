@@ -23,7 +23,7 @@
     <h2 class="month" >สรุปการใช้งานเครื่องยืมร่มประจำเดือน </h2>
     <!-- <button type="button" onclick="myFunction()">Click Me!</button> -->
     <div>
-        <h4>มีผู้ใช้บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง</h4><br>
+        <h4>จำนวนการใช้บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง</h4><br>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
                     $('.demo').append(data.length);
@@ -61,6 +61,50 @@
                         tr.append("<td>"+data[i].getting_place+"</td>");
                         tr.append("<td>"+g_day.toLocaleDateString()+"</td>");
                         $('.table1').append(tr);
+                    }
+                });
+            </script>
+        </table>
+    </div>
+    <div>
+        <h4>จำนวนการใช้บริการฝากร่ม ทั้งหมด  <b class="demo1"></b> ครั้ง</h4><br>
+        <Script>
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
+                    $('.demo1').append(data.length);
+                });
+        </Script>
+        <table class="table2" style="border-collapse: collapse;">
+            <tr>
+                <th>ลำดับ</th>
+                <th>รหัสผู้ฝาก</th>
+                <th>ช่องที่ฝาก</th>
+                <th>สถานที่ฝาก</th>
+                <th>วันที่ฝาก</th>
+                <th>สถานที่คืน</th>
+                <th>วันที่คืน</th>
+            </tr>
+            <script>
+                $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
+                    const thai_month = ['มกราคม','กุมภาพันธุ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฏาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+                    const b_m = new Date(parseInt(data[1].deposit_time));
+                    const currentMonth = b_m.getMonth(); 
+                    $('.month').append(thai_month[currentMonth]);
+
+                    var tr = data.report
+                    for (var i = 0; i < data.length; i++) {
+                        const b_day = new Date(parseInt(data[i].deposit_time));
+                        b_day.toDateString();
+                        const g_day = new Date(parseInt(data[i].return_time));
+                        g_day.toDateString();
+                        tr = $('<tr/>');
+                        tr.append("<td>"+(i+1)+"</td>");
+                        tr.append("<td>"+data[i].user_id+"</td>");
+                        tr.append("<td>"+data[i].locker+"</td>");
+                        tr.append("<td>"+data[i].deposit_place+"</td>");
+                        tr.append("<td>"+b_day.toLocaleDateString()+"</td>");
+                        tr.append("<td>"+data[i].return_place+"</td>");
+                        tr.append("<td>"+g_day.toLocaleDateString()+"</td>");
+                        $('.table2').append(tr);
                     }
                 });
             </script>
