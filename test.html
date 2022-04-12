@@ -53,8 +53,8 @@
                 <th>สถานที่คืน</th>
                 <th>วันที่คืน</th>
             </tr>
-            <div class="mypanel">
-            </div>
+            <!-- <div class="mypanel">
+            </div> -->
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
                     for (var i = 0; i < data.length; i++) {
@@ -67,7 +67,8 @@
                                 <td>${data[i].getting_place}</td>
                                 <td>${data[i].getting_time}</td>
                                 <tr>`
-                    $(".mypanel").html(text);
+                    // $(".mypanel").html(text);
+                    html(text);
                     }
                 });
             </script>
