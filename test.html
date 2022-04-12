@@ -41,11 +41,15 @@
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
+                    
+                    const b_m = new Date(parseInt(data[1].borrow_time));
+                    const currentMonth = b_m.getMonth(); 
+                    $('.month').append(currentMonth);
+                    
                     var tr = data.report
                     for (var i = 0; i < data.length; i++) {
                         const b_day = new Date(parseInt(data[i].borrow_time));
                         b_day.toDateString();
-                        const currentMonth = b_day.getMonth(); 
                         const g_day = new Date(parseInt(data[i].getting_time));
                         g_day.toDateString();
                         tr = $('<tr/>');
@@ -57,7 +61,6 @@
                         tr.append("<td>"+data[i].getting_place+"</td>");
                         tr.append("<td>"+g_day.toLocaleDateString()+"</td>");
                         $('.table1').append(tr);
-                        $('.month').append(currentMonth);
                     }
                 });
             </script>
