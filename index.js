@@ -1137,27 +1137,6 @@ app.get("/get_door/:serialNumber", async (req, res) => {
 });
 
 //////////////////html test////////////////////
-let http = require("http");
-let fs = require("fs");
-
-// let handleRequest = (request, response) => {
-//   response.writeHead(200, {
-//     "Content-Type": "text/html",
-//   });
-//   fs.readFile("./test.html", null, function (error, data) {
-//     if (error) {
-//       response.writeHead(404);
-//       respone.write("Whoops! File not found!");
-//     } else {
-//       response.write(data);
-//     }
-//     response.end();
-//   });
-// };
-
-router.get('/testpdf',function(req,res){
-  res.sendFile(path.join('/index.html'));
-  //__dirname : It will resolve to your project folder.
+app.get("/testpdf", (req, res) => {
+  res.send("<html> <head>server Response</head><body><h1> This page was render direcly from the server <p>Hello there welcome to my website</p></h1></body></html>");
 });
-
-app.get('/testpdf', router);
