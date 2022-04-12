@@ -66,8 +66,8 @@
     <script>
         $.getJSON('https://umbrellashareserver.herokuapp.com/user', function(data) {
     
-            var text = `Date: ${data.name}<br>
-                        Time: ${data.email}`
+            var text = `Date: ${data[1].name}<br>
+                        Time: ${data[1].email}`
             $(".mypanel").html(text);
         });
         </script>
