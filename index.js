@@ -1149,25 +1149,3 @@ app.get("/testsent", async (req, res) => {
     }
   });
 });
-
-//borrow_sum
-app.get("/borrow_show", async (req, res) => {
-  // let borrow = await Borrow.find();
-  const currentMonth = new Date().getMonth() + 1;
-  console.log(currentMonth);
-  res.send(currentMonth);
-  // let month = d.getMonth();
-  // for (let i = 0; i < borrow.length; i++){
-  //   let b = parseInt(borrow[i].borrow_time);
-  //   let b_month = b.getMonth();
-  //   // console.log(b);
-  //   // res.send(b);
-  //   // if(b_month == month){
-  //   //   console.log(borrow[i]);
-  //   //   res.send(borrow[i]);
-  //   // }else{
-  //   //   console.log("0");
-  //   //   console.log("0");
-  //   // }
-  // }
-});
