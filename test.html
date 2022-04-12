@@ -23,7 +23,7 @@
     <h2 class="month" >สรุปการใช้งานเครื่องยืมร่มประจำเดือน </h2>
     <!-- <button type="button" onclick="myFunction()">Click Me!</button> -->
     <div>
-        <h4>บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง</h4><br>
+        <h4>มีผู้ใช้บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง</h4><br>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
                     $('.demo').append(data.length);
