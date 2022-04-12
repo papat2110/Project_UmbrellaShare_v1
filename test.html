@@ -29,7 +29,9 @@
                     var tr = data.report
                     for (var i = 0; i < data.length; i++) {
                         const b_day = new Date(data[i].borrow_time);
+                        b_day.toDateString();
                         const g_day = new Date(data[i].getting_time);
+                        g_day.toDateString();
                         tr = $('<tr/>');
                         tr.append("<td>"+(i+1)+"</td>");
                         tr.append("<td>"+data[i].user_id+"</td>");
