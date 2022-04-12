@@ -1150,10 +1150,9 @@ app.get("/month", async (req, res) => {
   for (let i = 0; i < borrow.length; i++){
     let b_day = new Date(parseInt(borrow[i].borrow_time));
     const month = b_day.toLocaleString('default', { month: 'short' });
-    // console.log(month+":"+aa);
-    // res.send(month+":"+aa);
     responseArray.push(borrow[i]); 
   }
-  res.json(responseArray);
+  console.log(responseArray);
+  res.send(responseArray);
 
 });
