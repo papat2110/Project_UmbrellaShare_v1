@@ -42,7 +42,12 @@
     <h2>สรุปการใช้งานเครื่องยืมร่มประจำเดือน</h2>
     <!-- <button type="button" onclick="myFunction()">Click Me!</button> -->
     <div>
-        บริการยืมร่ม ทั้งหมด  <p id="demo">This is a demonstration.</p> ครั้ง
+        บริการยืมร่ม ทั้งหมด  <p class="demo"></p> ครั้ง
+        <Script>
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
+                    $('.demo').append(data.length);
+                });
+        </Script>
         <table class="table1">
             <tr>
                 <th>ลำดับ</th>
