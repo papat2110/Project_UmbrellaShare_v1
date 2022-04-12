@@ -1138,5 +1138,5 @@ app.get("/get_door/:serialNumber", async (req, res) => {
 
 //////////////////html test////////////////////
 app.get("/testpdf", (req, res) => {
-  res.send("<html> <head>server Response</head><body><h1> This page was render direcly from the server <p>Hello there welcome to my website</p></h1></body></html>");
+  res.sendFile(__dirname + "/test.html");
 });
