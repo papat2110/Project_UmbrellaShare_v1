@@ -1135,3 +1135,13 @@ app.get("/get_door/:serialNumber", async (req, res) => {
   console.log(door.status);
   res.send(door.status);
 });
+
+app.get("/testpdf", (req, res) => {
+  res.sendFile(__dirname + "/test.html");
+});
+
+app.get("/testsent", async (req, res) => {
+  let locker = await Locker.count();
+  console.log(locker);
+  res.send(locker);
+});
