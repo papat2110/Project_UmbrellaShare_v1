@@ -8,6 +8,11 @@ var multer = require("multer");
 var upload = multer();
 const nodemailer = require("nodemailer");
 
+/////////////////
+const path = require('path');
+const router = express.Router();
+/////////////////
+
 const User = require("./models/User");
 const Status = require("./models/Status");
 const Borrow = require("./models/Borrow");
@@ -1150,6 +1155,9 @@ let fs = require("fs");
 //   });
 // };
 
-app.get('/testpdf',function(req,res) {
-  res.sendFile('test.html');
+router.get('/testpdf',function(req,res){
+  res.sendFile(path.join('/index.html'));
+  //__dirname : It will resolve to your project folder.
 });
+
+app.use('/testpdf', router);
