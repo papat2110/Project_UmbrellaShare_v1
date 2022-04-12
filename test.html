@@ -108,7 +108,7 @@
     <div>
         <h4>จำนวนร่มที่ถูกยืมอยู่ ทั้งหมด  <b class="demo2"></b> คัน</h4><br>
         <Script>
-                            $.getJSON('https://umbrellashareserver.herokuapp.com//month_borrowing', function(data) {
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/month_borrowing', function(data) {
                     $('.demo2').append(data.length);
                 });
         </Script>
@@ -122,7 +122,7 @@
                 <th>วันกำหนดคืน</th>
             </tr>
             <script>
-                $.getJSON('https://umbrellashareserver.herokuapp.com//month_borrowing', function(data) {
+                $.getJSON('https://umbrellashareserver.herokuapp.com/month_borrowing', function(data) {
                     var tr = data.report
                     for (var i = 0; i < data.length; i++) {
                         const b_day = new Date(parseInt(data[i].borrow_time));
