@@ -1,10 +1,13 @@
 <!-- <script>
-    const Borrow = require("./models/Borrow");
+     src="https://umbrellashareserver.herokuapp.com/testsent"
 
+</script>
+
+<script>
     function myFunction() { 
       document.getElementById("demo").innerHTML = "Hello JavaScript!";
     }
-</script> -->
+</script>
 
 <script>
     fetch('https://umbrellashareserver.herokuapp.com/testsent')
@@ -27,7 +30,7 @@
         //     mainContainer.appendChild(div);
         // }
     }
-</script>
+</script> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,5 +60,16 @@
             </tr>
         </table>
     </div>
+    <div class="mypanel">
+
+    </div>
+    <script>
+        $.getJSON('https://umbrellashareserver.herokuapp.com/user', function(data) {
+    
+            var text = `Date: ${data.name}<br>
+                        Time: ${data.email}`
+            $(".mypanel").html(text);
+        });
+        </script>
 </body>
 </html>
