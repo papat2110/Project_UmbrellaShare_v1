@@ -40,7 +40,7 @@
                 <th>วันที่คืน</th>
             </tr>
             <script>
-                $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
+                $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
                     var tr = data.report
                     for (var i = 0; i < data.length; i++) {
                         const b_day = new Date(parseInt(data[i].borrow_time));
