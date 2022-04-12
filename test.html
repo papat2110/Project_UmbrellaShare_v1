@@ -1,37 +1,3 @@
-<!-- <script>
-     src="https://umbrellashareserver.herokuapp.com/testsent"
-
-</script>
-
-<script>
-    function myFunction() { 
-      document.getElementById("demo").innerHTML = "Hello JavaScript!";
-    }
-</script>
-
-<script>
-    fetch('https://umbrellashareserver.herokuapp.com/testsent')
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            appendData(data);
-        })
-        .catch(function (err) {
-            console.log('error: ' + err);
-        });
-    function appendData(data) {
-        var mainContainer = document.getElementById("demo");
-        p.innerHTML = 'Name: ' + data;
-        mainContainer.appendChild(p);
-        // for (var i = 0; i < data.length; i++) {
-        //     var div = document.createElement("div");
-        //     div.innerHTML = 'Name: ' + data[i].firstName + ' ' + data[i].lastName;
-        //     mainContainer.appendChild(div);
-        // }
-    }
-</script> -->
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -42,13 +8,13 @@
     <h2>สรุปการใช้งานเครื่องยืมร่มประจำเดือน</h2>
     <!-- <button type="button" onclick="myFunction()">Click Me!</button> -->
     <div>
-        บริการยืมร่ม ทั้งหมด  <p class="demo"></p> ครั้ง
+        บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
                     $('.demo').append(data.length);
                 });
         </Script>
-        <table class="table1">
+        <table class="table1" style="border-collapse: collapse;">
             <tr>
                 <th>ลำดับ</th>
                 <th>รหัสผู้ยืม</th>
@@ -58,45 +24,25 @@
                 <th>สถานที่คืน</th>
                 <th>วันที่คืน</th>
             </tr>
-            <!-- <div class="mypanel">
-            </div> -->
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
                     var tr = data.report
                     for (var i = 0; i < data.length; i++) {
+                        const b_day = new Date(data[i].borrow_time);
+                        const g_day = new Date(data[i].getting_time);
                         tr = $('<tr/>');
-                        tr.append("<td>"+i+"</td>");
+                        tr.append("<td>"+(i+1)+"</td>");
                         tr.append("<td>"+data[i].user_id+"</td>");
                         tr.append("<td>"+data[i].umbrella_id+"</td>");
                         tr.append("<td>"+data[i].borrow_place+"</td>");
-                        tr.append("<td>"+data[i].borrow_time+"</td>");
+                        tr.append("<td>"+b_day.toDateString()+"</td>");
                         tr.append("<td>"+data[i].getting_place+"</td>");
-                        tr.append("<td>"+data[i].getting_time+"</td>");
+                        tr.append("<td>"+g_day.toDateString()+"</td>");
                         $('.table1').append(tr);
-                    // $(".mypanel").html(text);
-                    // html(text);
                     }
                 });
             </script>
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-            </tr>
         </table>
     </div>
-    <!-- <script>
-        $.getJSON('https://umbrellashareserver.herokuapp.com/borrow', function(data) {
-            for (var i = 0; i < data.length; i++) {
-            var text = `Date: ${data[1].name}<br>
-                        Time: ${data[1].email}`
-            $(".mypanel").html(text);
-            }
-        });
-        </script> -->
 </body>
 </html>
