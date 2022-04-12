@@ -1149,3 +1149,9 @@ app.get("/testsent", async (req, res) => {
     }
   });
 });
+
+app.get("/month", (req, res) => {
+  const today = new Date();
+  console.log(today);
+  res.send(today);
+});
