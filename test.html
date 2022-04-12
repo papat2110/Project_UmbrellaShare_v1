@@ -6,7 +6,7 @@
     }
 </script> -->
 
-<!-- <script>
+<script>
     fetch('https://umbrellashareserver.herokuapp.com/testsent')
         .then(function (response) {
             return response.json();
@@ -19,6 +19,7 @@
         });
     function appendData(data) {
         var mainContainer = document.getElementById("demo");
+        p.innerHTML = 'Name: ' + data;
         mainContainer.appendChild(p);
         // for (var i = 0; i < data.length; i++) {
         //     var div = document.createElement("div");
@@ -26,7 +27,7 @@
         //     mainContainer.appendChild(div);
         // }
     }
-</script> -->
+</script>
 
 <!DOCTYPE html>
 <html lang="en">
