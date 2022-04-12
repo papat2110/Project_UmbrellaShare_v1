@@ -1139,16 +1139,3 @@ app.get("/get_door/:serialNumber", async (req, res) => {
 app.get("/testpdf", (req, res) => {
   res.sendFile(__dirname + "/test.html");
 });
-
-app.get("/testsent", async (req, res) => {
-  try{
-    let locker11 = await Locker.find().count();
-    console.log(locker11);
-    res.send(locker11);
-  }catch (err) {
-      // log ข้อมูลการส่งว่าส่งได้-ไม่ได้
-      console.log("error");
-      // console.log(adduser);
-      res.send("error");
-    }
-});
