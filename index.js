@@ -1160,4 +1160,4 @@ router.get('/testpdf',function(req,res){
   //__dirname : It will resolve to your project folder.
 });
 
-app.use('/testpdf', router);
+app.get('/testpdf', router);
