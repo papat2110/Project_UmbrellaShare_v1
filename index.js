@@ -1140,6 +1140,10 @@ app.get("/testpdf", (req, res) => {
   res.sendFile(__dirname + "/test.html");
 });
 
+app.get("/convertpdf", (req, res) => {
+  res.sendFile(__dirname + "/convertpdf.html");
+});
+
 app.get("/month", async (req, res) => {
   let borrow = await Borrow.find({ status: "got" });
   const today = new Date();
