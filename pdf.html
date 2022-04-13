@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div>
+      <p>Convert this text to PDF.</p>
+    </div>
+    <div id="hidden-element">This will not be printed</div>
+  </body>
+</html>
+
+<script>
+    var source = window.document.getElementsByTagName("body")[0];
+var specialElementHandlers = {
+  '#hidden-element': function (element, renderer) {
+      return true;
+  }
+};
+var doc = new jsPDF({
+  orientation: 'landscape'
+});
+doc.setFont("courier");
+doc.setFontType("normal");
+doc.setFontSize(24);
+doc.setTextColor(100);
+doc.fromHTML(elementHTML, 15, 15, {
+  'width': 170,
+  'elementHandlers': specialElementHandlers
+});
+</script>
+
