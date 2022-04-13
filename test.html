@@ -16,6 +16,10 @@
             th, td {
               padding: 15px;
             }
+            .D_style{
+                margin-top: 2px;
+                margin-bottom: 2px;
+            }
             </style>
         <title>JavaScript - read JSON from URL</title>
             <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -23,8 +27,8 @@
 <body>
     <h2 class="month" >สรุปการใช้งานเครื่องยืมร่มประจำเดือน </h2>
     <!-- <button type="button" onclick="myFunction()">Click Me!</button> -->
-    <div>
-        <h4>จำนวนการใช้บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง</h4><br>
+    <div class="D_style">
+        <h4>จำนวนการใช้บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง</h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
                     $('.demo').append(data.length);
@@ -68,7 +72,7 @@
         </table>
     </div>
     <div>
-        <h4>จำนวนร่มที่ถูกยืมอยู่ ทั้งหมด  <b class="demo2"></b> คัน</h4><br>
+        <h4>จำนวนร่มที่ถูกยืมอยู่ ทั้งหมด  <b class="demo2"></b> คัน</h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_borrowing', function(data) {
                     $('.demo2').append(data.length);
@@ -106,7 +110,7 @@
         </table>
     </div>
     <div>
-        <h4>จำนวนร่มที่ยืมเกินกำหนด ทั้งหมด  <b class="demo5"></b> คัน</h4><br>
+        <h4>จำนวนร่มที่ยืมเกินกำหนด ทั้งหมด  <b class="demo5"></b> คัน</h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_expired', function(data) {
                     $('.demo5').append(data.length);
@@ -148,7 +152,7 @@
         </table>
     </div>
     <div>
-        <h4>จำนวนการใช้บริการฝากร่ม ทั้งหมด  <b class="demo1"></b> ครั้ง</h4><br>
+        <h4>จำนวนการใช้บริการฝากร่ม ทั้งหมด  <b class="demo1"></b> ครั้ง</h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
                     $('.demo1').append(data.length);
