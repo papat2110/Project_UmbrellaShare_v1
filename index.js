@@ -1268,7 +1268,7 @@ app.get("/broken_check_umbrella", async (req, res) => {
       responseArray.push(umbrella[i]); 
     }
   }
-  console.log(umbrella);
-  res.send(umbrella);
+  console.log(responseArray);
+  res.send(responseArray);
 });
 
