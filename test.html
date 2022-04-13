@@ -78,7 +78,7 @@
                     $('.demo2').append(data.length);
                 });
         </Script>
-        <table class="table4" style="border-collapse: collapse;">
+        <table class="table2" style="border-collapse: collapse;">
             <tr>
                 <th>ลำดับ</th>
                 <th>รหัสผู้ยืม</th>
@@ -103,20 +103,20 @@
                         tr.append("<td>"+data[i].borrow_place+"</td>");
                         tr.append("<td>"+b_day.toLocaleDateString()+"</td>");
                         tr.append("<td>"+exp_day.toLocaleDateString()+"</td>");
-                        $('.table4').append(tr);
+                        $('.table2').append(tr);
                     }
                 });
             </script>
         </table>
     </div>
     <div class="D_style">
-        <h4>จำนวนร่มที่ยืมเกินกำหนด ทั้งหมด  <b class="demo5"></b> คัน</h4>
+        <h4>จำนวนร่มที่ยืมเกินกำหนด ทั้งหมด  <b class="demo3"></b> คัน</h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_expired', function(data) {
-                    $('.demo5').append(data.length);
+                    $('.demo3').append(data.length);
                 });
         </Script>
-        <table class="table5" style="border-collapse: collapse;">
+        <table class="table3" style="border-collapse: collapse;">
             <tr>
                 <th>ลำดับ</th>
                 <th>รหัสผู้ยืม</th>
@@ -145,20 +145,20 @@
                         tr.append("<td>"+b_day.toLocaleDateString()+"</td>");
                         tr.append("<td>"+exp_day.toLocaleDateString()+"</td>");
                         tr.append("<td>"+expired_day+"</td>");
-                        $('.table5').append(tr);
+                        $('.table3').append(tr);
                     }
                 });
             </script>
         </table>
     </div>
     <div class="D_style">
-        <h4>จำนวนการใช้บริการฝากร่ม ทั้งหมด  <b class="demo1"></b> ครั้ง</h4>
+        <h4>จำนวนการใช้บริการฝากร่ม ทั้งหมด  <b class="demo4"></b> ครั้ง</h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
-                    $('.demo1').append(data.length);
+                    $('.demo4').append(data.length);
                 });
         </Script>
-        <table class="table2" style="border-collapse: collapse;">
+        <table class="table4" style="border-collapse: collapse;">
             <tr>
                 <th>ลำดับ</th>
                 <th>รหัสผู้ฝาก</th>
@@ -184,7 +184,87 @@
                         tr.append("<td>"+b_day.toLocaleDateString()+"</td>");
                         tr.append("<td>"+data[i].return_place+"</td>");
                         tr.append("<td>"+g_day.toLocaleDateString()+"</td>");
+                        $('.table4').append(tr);
+                    }
+                });
+            </script>
+        </table>
+    </div>
+    <div class="D_style">
+        <h4>จำนวนร่มที่ถูกฝากอยู่ ทั้งหมด  <b class="demo2"></b> คัน</h4>
+        <Script>
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/month_depositing', function(data) {
+                    $('.demo2').append(data.length);
+                });
+        </Script>
+        <table class="table4" style="border-collapse: collapse;">
+            <tr>
+                <th>ลำดับ</th>
+                <th>รหัสผู้ฝาก</th>
+                <th>ช่องที่ฝาก</th>
+                <th>สถานที่ฝาก</th>
+                <th>วันที่ฝาก</th>
+                <th>วันกำหนดรับคืน</th>
+            </tr>
+            <script>
+                $.getJSON('https://umbrellashareserver.herokuapp.com/month_depositing', function(data) {
+                    var tr = data.report
+                    for (var i = 0; i < data.length; i++) {
+                        const b_day = new Date(parseInt(data[i].deposit_time));
+                        b_day.toDateString();
+                        const exp_day = new Date(parseInt(data[i].deposit_time));
+                        exp_day.setDate(exp_day.getDate()+3);
+                        // expired_date.toDateString();
+                        tr = $('<tr/>');
+                        tr.append("<td>"+(i+1)+"</td>");
+                        tr.append("<td>"+data[i].user_id+"</td>");
+                        tr.append("<td>"+data[i].locker+"</td>");
+                        tr.append("<td>"+data[i].deposit_place+"</td>");
+                        tr.append("<td>"+b_day.toLocaleDateString()+"</td>");
+                        tr.append("<td>"+exp_day+"</td>");
                         $('.table2').append(tr);
+                    }
+                });
+            </script>
+        </table>
+    </div>
+    <div class="D_style">
+        <h4>จำนวนร่มที่ฝากเกินกำหนด ทั้งหมด  <b class="demo5"></b> คัน</h4>
+        <Script>
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/deposit_expired', function(data) {
+                    $('.demo5').append(data.length);
+                });
+        </Script>
+        <table class="table5" style="border-collapse: collapse;">
+            <tr>
+                <th>ลำดับ</th>
+                <th>รหัสผู้ฝาก</th>
+                <th>ช่องที่ฝาก</th>
+                <th>สถานที่ฝาก</th>
+                <th>วันที่ฝาก</th>
+                <th>วันกำหนดรับคืน</th>
+                <th>วันที่่เกินกำหนด</th>
+            </tr>
+            <script>
+                $.getJSON('https://umbrellashareserver.herokuapp.com/deposit_expired', function(data) {
+                    var tr = data.report
+                    for (var i = 0; i < data.length; i++) {
+                        const b_day = new Date(parseInt(data[i].deposit_time));
+                        b_day.toDateString();
+                        const exp_day = new Date(parseInt(data[i].deposit_time));
+                        exp_day.setDate(exp_day.getDate()+3);
+                        // expired_date.toDateString();
+                        const current_day = new Date();
+                        const expired_day = Math.floor((current_day - parseInt(data[i].deposit_time))/(1000 * 60 * 60 * 24));
+                        tr = $('<tr/>');
+                        tr.append("<td>"+(i+1)+"</td>");
+                        tr.append("<td>"+data[i].user_id+"</td>");
+                        tr.append("<td>"+data[i].locker+"</td>");
+                        tr.append("<td>"+data[i].deposit_place+"</td>");
+                        tr.append("<td>"+b_day.toLocaleDateString()+"</td>");
+                        tr.append("<td>"+exp_day.toLocaleDateString()+"</td>");
+                        tr.append("<td>"+expired_day+"</td>");
+                        $('.table5').append(tr);
                     }
                 });
             </script>

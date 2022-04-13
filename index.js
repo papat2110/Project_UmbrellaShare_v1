@@ -1211,3 +1211,39 @@ app.get("/month_deposit", async (req, res) => {
   console.log(responseArray);
   res.send(responseArray);
 });
+
+app.get("/month_depositing", async (req, res) => {
+  let deposit = await Deposit.find({ status: "depositing" });
+  const today = new Date();
+  const aa = today.toLocaleString('default', { month: 'short' });
+  // console.log(borrow);
+  // res.send(borrow);
+  const responseArray = [];
+  for (let i = 0; i < deposit.length; i++){
+    let d_day = new Date(parseInt(deposit[i].deposit_time));
+    const month = d_day.toLocaleString('default', { month: 'short' });
+    if(month == aa){
+      responseArray.push(deposit[i]); 
+    }
+  }
+  console.log(responseArray);
+  res.send(responseArray);
+});
+
+app.get("/deposit_expired", async (req, res) => {
+  let deposit = await Deposit.find({ status: "expired" });
+  const today = new Date();
+  const aa = today.toLocaleString('default', { month: 'short' });
+  // console.log(borrow);
+  // res.send(borrow);
+  const responseArray = [];
+  for (let i = 0; i < deposit.length; i++){
+    let r_day = new Date(parseInt(deposit[i].deposit_time));
+    const month = r_day.toLocaleString('default', { month: 'short' });
+    if(month == aa){
+      responseArray.push(deposit[i]); 
+    }
+  }
+  console.log(responseArray);
+  res.send(responseArray);
+});
