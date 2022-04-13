@@ -102,7 +102,7 @@
                         //! If we're on anything other than the first page,
                         // add another page
                         if (i > 0) {
-                            pdf.addPage(595.28, 841.89); //8.5" x 11" in pts (in*72)
+                            pdf.addPage(612, 791); //8.5" x 11" in pts (in*72)
                          }
                         //! now we declare that we're working on that page
                         pdf.setPage(i+1);
@@ -120,10 +120,10 @@
 <body>
     <input type="button" id="create_pdf" value="Generate PDF"> 
     <form class="form" id="container-fluid">
-    <h2 class="month" >สรุปการใช้งานเครื่องยืมร่มประจำเดือน </h2>
+    <h2 class="month" >Umbrellshare Report for </h2>
     <!-- <button type="button" onclick="myFunction()">Click Me!</button> -->
     <div class="D_style">
-        <h4>จำนวนการใช้บริการยืมร่ม ทั้งหมด  <b class="demo"></b> ครั้ง</h4>
+        <h4>All Borrow Service  <b class="demo"></b></h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
                     $('.demo').append(data.length);
@@ -131,13 +131,13 @@
         </Script>
         <table class="table1" style="border-collapse: collapse;">
             <tr>
-                <th>ลำดับ</th>
-                <th>รหัสผู้ยืม</th>
-                <th>รหัสร่ม</th>
-                <th>สถานที่ยืม</th>
-                <th>วันที่ยืม</th>
-                <th>สถานที่คืน</th>
-                <th>วันที่คืน</th>
+                <th>#</th>
+                <th>user</th>
+                <th>umbrella id</th>
+                <th>borrow place</th>
+                <th>borrow date</th>
+                <th>got place</th>
+                <th>got date</th>
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/month', function(data) {
@@ -168,7 +168,7 @@
         </table>
     </div>
     <div class="D_style">
-        <h4>จำนวนร่มที่ถูกยืมอยู่ ทั้งหมด  <b class="demo2"></b> คัน</h4>
+        <h4> All Borrowing Umbrella  <b class="demo2"></b></h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_borrowing', function(data) {
                     $('.demo2').append(data.length);
@@ -176,12 +176,12 @@
         </Script>
         <table class="table2" style="border-collapse: collapse;">
             <tr>
-                <th>ลำดับ</th>
-                <th>รหัสผู้ยืม</th>
-                <th>รหัสร่ม</th>
-                <th>สถานที่ยืม</th>
-                <th>วันที่ยืม</th>
-                <th>วันกำหนดคืน</th>
+                <th>#</th>
+                <th>user</th>
+                <th>umbrella id</th>
+                <th>borrow place</th>
+                <th>borrow date</th>
+                <th>expire date</th>
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/month_borrowing', function(data) {
@@ -206,7 +206,7 @@
         </table>
     </div>
     <div class="D_style">
-        <h4>จำนวนร่มที่ยืมเกินกำหนด ทั้งหมด  <b class="demo3"></b> คัน</h4>
+        <h4>All Expired Borrow Umbrella  <b class="demo3"></b></h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_expired', function(data) {
                     $('.demo3').append(data.length);
@@ -214,13 +214,13 @@
         </Script>
         <table class="table3" style="border-collapse: collapse;">
             <tr>
-                <th>ลำดับ</th>
-                <th>รหัสผู้ยืม</th>
-                <th>รหัสร่ม</th>
-                <th>สถานที่ยืม</th>
-                <th>วันที่ยืม</th>
-                <th>วันกำหนดคืน</th>
-                <th>วันที่่เกินกำหนด</th>
+                <th>#</th>
+                <th>user</th>
+                <th>umbrella id</th>
+                <th>borrow place</th>
+                <th>borrow date</th>
+                <th>expire date</th>
+                <th>over date</th>
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/month_expired', function(data) {
@@ -248,7 +248,7 @@
         </table>
     </div>
     <div class="D_style">
-        <h4>จำนวนการใช้บริการฝากร่ม ทั้งหมด  <b class="demo4"></b> ครั้ง</h4>
+        <h4>All Deposit Umbrella <b class="demo4"></b></h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
                     $('.demo4').append(data.length);
@@ -256,13 +256,13 @@
         </Script>
         <table class="table4" style="border-collapse: collapse;">
             <tr>
-                <th>ลำดับ</th>
-                <th>รหัสผู้ฝาก</th>
-                <th>ช่องที่ฝาก</th>
-                <th>สถานที่ฝาก</th>
-                <th>วันที่ฝาก</th>
-                <th>สถานที่คืน</th>
-                <th>วันที่คืน</th>
+                <th>#</th>
+                <th>user</th>
+                <th>locker</th>
+                <th>deposit place</th>
+                <th>deposit date</th>
+                <th>return place</th>
+                <th>return date</th>
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/month_deposit', function(data) {
@@ -287,7 +287,7 @@
         </table>
     </div>
     <div class="D_style">
-        <h4>จำนวนร่มที่ถูกฝากอยู่ ทั้งหมด  <b class="demo5"></b> คัน</h4>
+        <h4>All Depositing Umbrella  <b class="demo5"></b></h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/month_depositing', function(data) {
                     $('.demo5').append(data.length);
@@ -295,12 +295,12 @@
         </Script>
         <table class="table5" style="border-collapse: collapse;">
             <tr>
-                <th>ลำดับ</th>
-                <th>รหัสผู้ฝาก</th>
-                <th>ช่องที่ฝาก</th>
-                <th>สถานที่ฝาก</th>
-                <th>วันที่ฝาก</th>
-                <th>วันกำหนดรับคืน</th>
+                <th>#</th>
+                <th>user</th>
+                <th>locker</th>
+                <th>deposit place</th>
+                <th>deposit date</th>
+                <th>expire date</th>
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/month_depositing', function(data) {
@@ -325,7 +325,7 @@
         </table>
     </div>
     <div class="D_style">
-        <h4>จำนวนร่มที่ฝากเกินกำหนด ทั้งหมด  <b class="demo6"></b> คัน</h4>
+        <h4>All Expired Deposit Umbrella<b class="demo6"></b></h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/deposit_expired', function(data) {
                     $('.demo6').append(data.length);
@@ -333,13 +333,13 @@
         </Script>
         <table class="table6" style="border-collapse: collapse;">
             <tr>
-                <th>ลำดับ</th>
-                <th>รหัสผู้ฝาก</th>
-                <th>ช่องที่ฝาก</th>
-                <th>สถานที่ฝาก</th>
-                <th>วันที่ฝาก</th>
-                <th>วันกำหนดรับคืน</th>
-                <th>วันที่่เกินกำหนด</th>
+                <th>#</th>
+                <th>user</th>
+                <th>locker</th>
+                <th>deposit place</th>
+                <th>deposit date</th>
+                <th>expire date</th>
+                <th>over date</th>
             </tr>
             <script>
                 $.getJSON('https://umbrellashareserver.herokuapp.com/deposit_expired', function(data) {
