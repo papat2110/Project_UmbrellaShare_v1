@@ -29,8 +29,7 @@
         $(document).ready(function () {  
             var form = $('.form'),  
             cache_width = form.width(),  
-            cache_height = form.height(),
-            a4 = [595.28, 841.89]; // for a4 size paper width and height  
+            a4 = [595.28, (841.89*3)]; // for a4 size paper width and height  
         
             $('#create_pdf').on('click', function () {  
                 $('body').scrollTop(0);  
@@ -48,14 +47,12 @@
                      });  
                     doc.addImage(img, 'JPEG', 20, 20);  
                     doc.save('UmbrellaShareReport.pdf');  
-                    form.width(cache_width);  
-                    form.height(cache_height);  
+                    form.width(cache_width);   
                 });  
             }  
               
             function getCanvas() {  
                 form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
-                form.height(a4[1]).css('max-height', 'none'); 
                 return html2canvas(form, {  
                     imageTimeout: 2000,  
                     removeContainer: true  
