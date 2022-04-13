@@ -33,28 +33,27 @@
         
             $('#create_pdf').on('click', function () {  
                 $('body').scrollTop(0);  
-                createPDF(); 
-                // makePDF(); 
+                // createPDF(); 
+                makePDF(); 
             });  
             
             function createPDF() {  
                 getCanvas().then(function (canvas) {  
-                    var quotes = document.getElementById('container-fluid');
                     var img = canvas.toDataURL("image/png");
                     var doc = new jsPDF({  
                         unit: 'px',  
                         format: 'a4'  
                      });
                     // var doc = new jsPDF('p', 'pt', 'letter');
-                    for (var i = 0; i <= quotes.clientHeight/980; i++){
-                        if (i > 0) {
-                            doc.addPage(595.28, 841.89); //8.5" x 11" in pts (in*72)
-                         }
-                        //! now we declare that we're working on that page
-                        doc.setPage(i+1);
-                        doc.addImage(img, 'JPEG', 20, 20); 
-                     } 
-                    // doc.addImage(img, 'JPEG', 20, 20);  
+                    // for (var i = 0; i <= quotes.clientHeight/980; i++){
+                    //     if (i > 0) {
+                    //         doc.addPage(595.28, 841.89); //8.5" x 11" in pts (in*72)
+                    //      }
+                    //     //! now we declare that we're working on that page
+                    //     doc.setPage(i+1);
+                    //     doc.addImage(img, 'JPEG', 20, 20); 
+                    //  } 
+                    doc.addImage(img, 'JPEG', 20, 20);  
                     doc.save('UmbrellaShareReport.pdf');  
                     form.width(cache_width);   
                 });  
@@ -66,20 +65,6 @@
                     imageTimeout: 2000,  
                     removeContainer: true  
                 });  
-            }
-
-            function aa(){
-                doc = new jsPdf();
-                pageHeight= doc.internal.pageSize.height;
-
-                // Before adding new content
-                y = 500 // Height position of new content
-                if (y >= pageHeight)
-                {
-                    doc.addPage();
-                    y = 0 // Restart height position
-                }
-                doc.text(x, y, "value");
             }
 
             function makePDF() {
