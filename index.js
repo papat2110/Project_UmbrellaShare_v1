@@ -1272,3 +1272,11 @@ app.get("/broken_check_umbrella", async (req, res) => {
   res.send(umbrella);
 });
 
+//get place broken
+app.get("/broken_check_place", async (req, res) => {
+  let place = await Place.find({status: "broken"});
+  console.log(place);
+  res.send(place);
+});
+
+

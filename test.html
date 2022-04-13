@@ -398,6 +398,40 @@
             </script>
         </table>
     </div>
+
+    <div class="D_style">
+        <h4>Broken Place <b class="demo8"></b></h4>
+        <Script>
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/broken_check_place', function(data) {
+                    $('.demo8').append(data.length);
+                });
+        </Script>
+        <table class="table8" style="border-collapse: collapse;">
+            <tr>
+                <th>#</th>
+                <th>latitude</th>
+                <th>longitude</th>
+                <th>place</th>
+                <th>mac address</th>
+                <th>status</th>
+            </tr>
+            <script>
+                $.getJSON('https://umbrellashareserver.herokuapp.com/broken_check_place', function(data) {
+                    var tr = data.report
+                    for (var i = 0; i < data.length; i++) {
+                        tr = $('<tr/>');
+                        tr.append("<td>"+(i+1)+"</td>");
+                        tr.append("<td>"+data[i].latitude+"</td>");
+                        tr.append("<td>"+data[i].longitude+"</td>");
+                        tr.append("<td>"+data[i].place+"</td>");
+                        tr.append("<td>"+data[i].node_ip+"</td>");
+                        tr.append("<td>"+data[i].status+"</td>");
+                        $('.table8').append(tr);
+                    }
+                });
+            </script>
+        </table>
+    </div>
 </form> 
 </body>
 </html>
