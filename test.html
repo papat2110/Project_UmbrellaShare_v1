@@ -22,14 +22,46 @@
             }
             </style>
         <title>JavaScript - read JSON from URL</title>
-            <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-            <!-- html2canvas library -->
-            <script src="js/html2canvas.min.js"></script>
-
-            <!-- jsPDF library -->
-            <script src="js/jsPDF/dist/jspdf.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>  
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script>
+        $(document).ready(function () {  
+            var form = $('.form'),  
+            cache_width = form.width(),  
+            a4 = [595.28, 841.89]; // for a4 size paper width and height  
+        
+            $('#create_pdf').on('click', function () {  
+                $('body').scrollTop(0);  
+                createPDF();  
+            });  
+            
+            function createPDF() {  
+                getCanvas().then(function (canvas) {  
+                    var  
+                     img = canvas.toDataURL("image/png"),  
+                     doc = new jsPDF({  
+                         unit: 'px',  
+                         format: 'a4'  
+                     });  
+                    doc.addImage(img, 'JPEG', 20, 20);  
+                    doc.save('Bhavdip-html-to-pdf.pdf');  
+                    form.width(cache_width);  
+                });  
+            }  
+              
+            function getCanvas() {  
+                form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
+                return html2canvas(form, {  
+                    imageTimeout: 2000,  
+                    removeContainer: true  
+                });  
+            }
+        });
+        </script>
         </head>
 <body>
+    <form class="form">
     <h2 class="month" >สรุปการใช้งานเครื่องยืมร่มประจำเดือน </h2>
     <!-- <button type="button" onclick="myFunction()">Click Me!</button> -->
     <div class="D_style">
@@ -275,5 +307,7 @@
             </script>
         </table>
     </div>
+</form>
+<input type="button" id="create_pdf" value="Generate PDF">  
 </body>
 </html>
