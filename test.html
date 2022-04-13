@@ -29,6 +29,7 @@
         $(document).ready(function () {  
             var form = $('.form'),  
             cache_width = form.width(),  
+            cache_height = form.height(),
             a4 = [595.28, 841.89]; // for a4 size paper width and height  
         
             $('#create_pdf').on('click', function () {  
@@ -48,11 +49,13 @@
                     doc.addImage(img, 'JPEG', 20, 20);  
                     doc.save('UmbrellaShareReport.pdf');  
                     form.width(cache_width);  
+                    form.height(cache_height);  
                 });  
             }  
               
             function getCanvas() {  
                 form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
+                form.height(a4[0]).css('max-height', 'none'); 
                 return html2canvas(form, {  
                     imageTimeout: 2000,  
                     removeContainer: true  
@@ -99,7 +102,7 @@
                         //! now we declare that we're working on that page
                         pdf.setPage(i+1);
                         //! now we add content to that page!
-                        pdf.addImage(canvasDataURL, 'PNG', 20, 40, (width*.62), (height*.70));
+                        pdf.addImage(canvasDataURL, 'PNG', 20, 40, (width*.62), (height*.62));
 
                     }
                     //! after the for loop is finished running, we save the pdf.
