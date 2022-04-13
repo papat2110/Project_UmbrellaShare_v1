@@ -34,8 +34,8 @@
         
             $('#create_pdf').on('click', function () {  
                 $('body').scrollTop(0);  
-                // createPDF(); 
-                makePDF(); 
+                createPDF(); 
+                // makePDF(); 
             });  
             
             function createPDF() {  
@@ -55,7 +55,7 @@
               
             function getCanvas() {  
                 form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');  
-                form.height(a4[0]).css('max-height', 'none'); 
+                form.height(a4[1]).css('max-height', 'none'); 
                 return html2canvas(form, {  
                     imageTimeout: 2000,  
                     removeContainer: true  
