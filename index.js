@@ -1251,3 +1251,24 @@ app.get("/deposit_expired", async (req, res) => {
   console.log(responseArray);
   res.send(responseArray);
 });
+
+//get umbrella normal
+app.get("/normal_umbrella", async (req, res) => {
+  let umbrella = await Umbrella.find({status: "fine"});
+  console.log(umbrella);
+  res.send(umbrella);
+});
+
+//get umbrella broken
+app.get("/broken_check_umbrella", async (req, res) => {
+  let umbrella = await Umbrella.find();
+  const responseArray = [];
+  for (let i = 0; i < umbrella.length; i++){
+    if(umbrella.status != "fine"){
+      responseArray.push(umbrella[i]); 
+    }
+  }
+  console.log(umbrella);
+  res.send(umbrella);
+});
+

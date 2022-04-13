@@ -325,7 +325,7 @@
         </table>
     </div>
     <div class="D_style">
-        <h4>All Expired Deposit Umbrella<b class="demo6"></b></h4>
+        <h4>All Expired Deposit Umbrella <b class="demo6"></b></h4>
         <Script>
                             $.getJSON('https://umbrellashareserver.herokuapp.com/deposit_expired', function(data) {
                     $('.demo6').append(data.length);
@@ -361,6 +361,38 @@
                         tr.append("<td>"+exp_day.toLocaleDateString()+"</td>");
                         tr.append("<td>"+expired_day+"</td>");
                         $('.table6').append(tr);
+                    }
+                });
+            </script>
+        </table>
+    </div>
+
+    <div class="D_style">
+        <h4>Broken Umbrella <b class="demo7"></b></h4>
+        <Script>
+                            $.getJSON('https://umbrellashareserver.herokuapp.com/broken_check_umbrella', function(data) {
+                    $('.demo7').append(data.length);
+                });
+        </Script>
+        <table class="table7" style="border-collapse: collapse;">
+            <tr>
+                <th>#</th>
+                <th>umbrella id</th>
+                <th>broken point</th>
+                <th>broken place</th>
+                <th>user</th>
+            </tr>
+            <script>
+                $.getJSON('https://umbrellashareserver.herokuapp.com/broken_check_umbrella', function(data) {
+                    var tr = data.report
+                    for (var i = 0; i < data.length; i++) {
+                        tr = $('<tr/>');
+                        tr.append("<td>"+(i+1)+"</td>");
+                        tr.append("<td>"+data[i].rfid+"</td>");
+                        tr.append("<td>"+data[i].status+"</td>");
+                        tr.append("<td>"+data[i].place+"</td>");
+                        tr.append("<td>"+data[i].user+"</td>");
+                        $('.table7').append(tr);
                     }
                 });
             </script>
